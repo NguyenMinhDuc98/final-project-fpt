@@ -46,7 +46,6 @@ function InputField(props) {
                 invalid={showError}
             />
 
-            {/* { showError && <FormFeedback>{errors[name]}</FormFeedback>} */}
             <ErrorMessage name={name} component={FormFeedback} />
         </FormGroup>
     )

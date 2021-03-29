@@ -2,11 +2,24 @@ import { FastField, Form, Formik } from "formik";
 import InputField from "../../../custom-field/inputField";
 import * as Yup from 'yup';
 import { Button } from "reactstrap";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import { loggingIn } from "../loginSlice";
+
+LoginForm.propTypes = {
+    onSubmit: PropTypes.func
+}
+
+LoginForm.defaultProps = {
+    onSubmit: null
+}
 
 function LoginForm(props) {
     const initialValues = {
         phoneNumber: '',
-        password:''
+        password: ''
     }
 
     const validationSchema = Yup.object().shape({
@@ -16,20 +29,20 @@ function LoginForm(props) {
     })
 
     return (
-        <Formik 
+        <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={values => console.log('Submit: ', values)}
+            onSubmit={onSubmit.props}
         >
             {formikProps => {
                 const { values, errors, touched } = formikProps;
-                console.log({values, errors, touched});
+                console.log({ values, errors, touched });
 
                 return (
                     <Form>
                         <p>Welcome back</p>
                         <h2>Login to your account</h2>
-                        <FastField 
+                        <FastField
                             //Props cua FastField
                             name='phoneNumber'
                             component={InputField}
@@ -38,7 +51,7 @@ function LoginForm(props) {
                             label="Phone Number"
                             placeholder="Enter your phone number"
                         />
-                        <FastField 
+                        <FastField
                             //Props cua FastField
                             name='password'
                             component={InputField}
@@ -48,7 +61,7 @@ function LoginForm(props) {
                             label="Password"
                             placeholder="Enter your password"
                         />
-                        <Button type='submit'>Login</Button>
+                        <Button type="submit">Login</Button>
                     </Form>
                 )
             }}
