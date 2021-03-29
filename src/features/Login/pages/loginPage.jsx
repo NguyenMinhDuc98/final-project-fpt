@@ -1,22 +1,28 @@
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router";
 import LoginForm from "../components/loginForm";
-import { getToken, loggingIn } from "../loginSlice";
+import { getToken } from "../loginSlice";
 import './loginPage.scss';
 
 LoginPage.propTypes = {};
 
 function LoginPage() {
+    const userState = useSelector(state => state.login)
     const dispatch = useDispatch();
     const history = useHistory()
 
     const handleSubmit = (values) => {
-        console.log('Submit: ', values);
-        // dispatch(loggingIn(values));
-        dispatch(getToken(values));
-        console.log('getToken: ', getToken(values));
+        return new Promise(resolve => {
+            console.log('Submit: ', values);
 
-        history.push('/');
+            setTimeout(() => {
+                const login = getToken(values);
+                dispatch(login);
+                console.log('userState: ', userState.isLoggedIn);
+                history.push('/');
+                resolve(true);
+            }, 2000);
+        })
     }
 
     return (
