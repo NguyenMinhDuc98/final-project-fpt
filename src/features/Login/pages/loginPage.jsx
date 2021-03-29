@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import LoginForm from "../components/loginForm";
-import { loggingIn } from "../loginSlice";
+import { getToken, loggingIn } from "../loginSlice";
 import './loginPage.scss';
 
 LoginPage.propTypes = {};
@@ -12,7 +12,9 @@ function LoginPage() {
 
     const handleSubmit = (values) => {
         console.log('Submit: ', values);
-        dispatch(loggingIn(values));
+        // dispatch(loggingIn(values));
+        dispatch(getToken(values));
+        console.log('getToken: ', getToken(values));
 
         history.push('/');
     }
