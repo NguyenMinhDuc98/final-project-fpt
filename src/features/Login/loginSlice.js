@@ -5,7 +5,7 @@ const login = createSlice({
     initialState: [
         {phoneNumber: '0987654321', password: '123'},
     ],
-    reducer: {
+    reducers: {
         loggingIn: (state, action) => {
             state.push(action.payload);
         }

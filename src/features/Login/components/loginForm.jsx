@@ -4,9 +4,6 @@ import * as Yup from 'yup';
 import { Button } from "reactstrap";
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import { loggingIn } from "../loginSlice";
 
 LoginForm.propTypes = {
     onSubmit: PropTypes.func
@@ -32,7 +29,7 @@ function LoginForm(props) {
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit.props}
+            onSubmit={props.onSubmit}
         >
             {formikProps => {
                 const { values, errors, touched } = formikProps;
