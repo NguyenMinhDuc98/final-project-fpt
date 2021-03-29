@@ -1,7 +1,7 @@
 import { FastField, Form, Formik } from "formik";
 import InputField from "../../../custom-field/inputField";
 import * as Yup from 'yup';
-import { Button } from "reactstrap";
+import { Button, Spinner } from "reactstrap";
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -32,7 +32,7 @@ function LoginForm(props) {
             onSubmit={props.onSubmit}
         >
             {formikProps => {
-                const { values, errors, touched } = formikProps;
+                const { values, errors, touched, isSubmitting } = formikProps;
                 console.log({ values, errors, touched });
 
                 return (
@@ -58,7 +58,10 @@ function LoginForm(props) {
                             label="Password"
                             placeholder="Enter your password"
                         />
-                        <Button type="submit">Login</Button>
+                        <Button type="submit">
+                            {isSubmitting && <Spinner size='sm'/>}
+                            Login
+                        </Button>
                     </Form>
                 )
             }}
