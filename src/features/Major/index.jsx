@@ -1,20 +1,22 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import NotFound from "../../components/NotFound";
-import LoginPage from "./pages/loginPage";
+import MajorsPage from "./pages/majorsPage";
 
-Login.propTypes = {};
+Major.propTypes = {};
 
- function Login(props) {
+ function Major(props) {
     const match = useRouteMatch();
     console.log('match: ', match);
 
     return (
         <Switch>
-            <Route exact path={match.url} component={LoginPage} />
+            <Route path={match.url} component={MajorsPage} />
+
+            {/* <Route path={`${match.url}/majors`} component={ListMajorPage} /> */}
 
             <Route component={NotFound} />
         </Switch>
     )
 }
 
-export default Login;
+export default Major;

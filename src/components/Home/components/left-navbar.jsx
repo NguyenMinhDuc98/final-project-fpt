@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router';
 import {
     Navbar,
     Nav,
@@ -8,6 +9,12 @@ import {
 import './left-navbar.scss';
 
 function LeftNavbar() {
+    const history = useHistory();
+
+    const handle = () => {
+        history.push('/majors');
+    }
+
     return (
         <div className='left-navbar'>
             <Navbar color="light" light expand="md">
@@ -28,7 +35,7 @@ function LeftNavbar() {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">
+                        <NavLink onClickCapture={handle}>
                             <FontAwesomeIcon icon="clipboard-list" /> Majors
                         </NavLink>
                     </NavItem>

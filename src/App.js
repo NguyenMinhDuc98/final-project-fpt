@@ -6,6 +6,7 @@ import './assets/fontawesome/icon';
 
 const Login = React.lazy(() => import('./features/Login'));
 const Home = React.lazy(() => import('./components/Home'));
+const Majors = React.lazy(() => import('./features/Major'));
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/login' component={Login} />
+          <Route path='/majors' component={Majors} />
 
           <Route component={NotFound} />
         </Switch>
