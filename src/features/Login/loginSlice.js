@@ -4,10 +4,15 @@ import { apiCallBegan } from "../../store/api";
 const login = createSlice({
     name: 'login',
     initialState: {
+        user: [],
         token: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        loading: false
     },
     reducers: {
+        loginRequest: (state, action) => {
+            state.loading = true;
+        },
         logout: (state, action) => {
             state.isLoggedIn = false;
             state.token = null
@@ -15,8 +20,11 @@ const login = createSlice({
         loginSuccess: (state, action) => {
             state.token = action.payload.token;
             state.isLoggedIn = true;
+            state.user = action.payload;
+            state.loading = false;
         },
         loginFailed: (state, action) => {
+            state.loading = false;
             console.log('failed: ', action)
         }
     }
@@ -30,10 +38,11 @@ export const getToken = (props) => apiCallBegan({
         role_id: "1"
     },
     method: "POST",
+    onStart: loginRequest.type,
     onSuccess: loginSuccess.type,
     onError: loginFailed.type
 })
 
 const { reducer, actions } = login;
-export const { loginSuccess, loginFailed, logout } = actions;
+export const { loginRequest, loginSuccess, loginFailed, logout } = actions;
 export default reducer;
