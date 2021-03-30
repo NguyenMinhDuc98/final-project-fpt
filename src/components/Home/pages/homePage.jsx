@@ -3,6 +3,7 @@ import Footer from "../../Footer";
 import Header from "../../Header";
 import LeftNavbar from "../components/left-navbar";
 import Statistics from "../components/statistic";
+import Chart from '../components/chart';
 import './homePage.scss';
 
 function HomePage() {
@@ -17,6 +18,8 @@ function HomePage() {
                 </Col>
                 <Col lg={9}>
                     <Statistics />
+                    <Chart />
+                    <Chart />
                 </Col>
             </Row>
         </div>
