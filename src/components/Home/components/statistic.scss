@@ -1,0 +1,45 @@
+.statistic {
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+
+    // h3{
+    //     margin-top: 10px;
+    // }
+
+    svg {
+        height: 50px !important;
+        width: 50px !important;
+        padding: 14px;
+        border-radius: 50%;
+    }
+
+    .row {
+        text-align: center;
+
+        .col {
+            margin: 20px 0;
+        }
+    }
+
+    .services {
+        background-color: #e0c1ff;
+        color: #887fe4;
+    }
+
+    .users {
+        background-color: #baf5fc;
+        color: #00e5ee;
+    }
+
+    .repairers {
+        color: #e75757;
+        background-color: #e9cdca;
+    }
+
+    .revenue {
+        background-color: rgb(201, 236, 201);
+        color: rgb(0, 252, 13);
+    }
+}
