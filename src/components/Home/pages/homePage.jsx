@@ -12,12 +12,11 @@ function HomePage() {
             <Row>
                 <Col lg={3}>
                     <LeftNavbar />
+                    <Footer />
                 </Col>
                 <Col lg={9}>
                 </Col>
             </Row>
-
-            {/* <Footer /> */}
         </div>
     )
 }
