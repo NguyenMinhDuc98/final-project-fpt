@@ -1,0 +1,20 @@
+.left-navbar {
+    margin-top: 20px;
+
+    nav {
+        border-radius: 10px;
+    }
+
+    ul {
+        width: 100%;
+
+        li {
+            margin: 10px;
+        }
+
+        svg {
+            margin-right: 10px;
+            width: 1rem !important;
+        }
+    }
+}

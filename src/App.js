@@ -2,6 +2,7 @@ import './App.css';
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import './assets/fontawesome/icon';
 
 const Login = React.lazy(() => import('./features/Login'));
 const Home = React.lazy(() => import('./components/Home'));
