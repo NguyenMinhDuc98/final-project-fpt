@@ -10,7 +10,6 @@ const api = ({ dispatch }) => next => async action => {
 
     next(action);
 
-
     try {
         const response = await axios.request({
             baseURL: 'https://fixit-back-end.herokuapp.com',
@@ -26,8 +25,8 @@ const api = ({ dispatch }) => next => async action => {
         //Specific
         if (onSuccess) dispatch({ type: onSuccess, payload: response.data.results });
     } catch (error) {
-        dispatch(actions.apiCallFailed(error));
-        if (onError) dispatch({ type: onError, payload: error });
+        dispatch(actions.apiCallFailed(error.message));
+        if (onError) dispatch({ type: onError, payload: error.message });
     }
 
 };

@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import LoginForm from "../components/loginForm";
 import { getToken } from "../loginSlice";
 import './loginPage.scss';
@@ -7,7 +7,6 @@ import './loginPage.scss';
 LoginPage.propTypes = {};
 
 function LoginPage() {
-    const userState = useSelector(state => state.login)
     const dispatch = useDispatch();
     const history = useHistory()
 
@@ -16,13 +15,12 @@ function LoginPage() {
             console.log('Submit: ', values);
 
             setTimeout(() => {
-                const login = getToken(values);
-                dispatch(login);
-                console.log('userState: ', userState.isLoggedIn);
+                dispatch(getToken(values));
                 history.push('/');
                 resolve(true);
-            }, 2000);
-        })
+            }, 3000);
+        });
+
     }
 
     return (
