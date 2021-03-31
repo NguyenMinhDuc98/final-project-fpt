@@ -54,6 +54,7 @@ function AddMajorForm(props) {
 
                             //Props truyen vao trong InputField
                             label="Image"
+                            type="file"
                             placeholder="Upload image"
                         />
                         <Button type="submit">
