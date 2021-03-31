@@ -11,8 +11,12 @@ import './left-navbar.scss';
 function LeftNavbar() {
     const history = useHistory();
 
-    const handle = () => {
+    const toMajors = () => {
         history.push('/majors');
+    }
+    
+    const toVerify = () => {
+        history.push('/verify');
     }
 
     return (
@@ -35,7 +39,12 @@ function LeftNavbar() {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink onClickCapture={handle}>
+                        <NavLink onClick={toVerify}>
+                            <FontAwesomeIcon icon="bell" /> Verify Repairers
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink onClickCapture={toMajors}>
                             <FontAwesomeIcon icon="clipboard-list" /> Majors
                         </NavLink>
                     </NavItem>

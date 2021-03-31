@@ -12,8 +12,10 @@ import { faSearch,
     faDollarSign,
     faCheck,
     faEllipsisH,
-    faPlusCircle
+    faPlusCircle,
+    faThumbsUp,
+    faBell
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faSearch, faChartLine, faUsers, faTools, faClipboardList, faPen, faTasks, faBan, faUser, faWrench, 
-    faDollarSign, faCheck, faEllipsisH, faPlusCircle)
+    faDollarSign, faCheck, faEllipsisH, faPlusCircle, faThumbsUp, faBell)
