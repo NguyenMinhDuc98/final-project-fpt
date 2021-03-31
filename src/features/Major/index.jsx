@@ -1,18 +1,19 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import NotFound from "../../components/NotFound";
 import MajorsPage from "./pages/majorsPage";
+import AddMajorPage from './pages/addMajorPage';
 
 Major.propTypes = {};
 
- function Major(props) {
+function Major(props) {
     const match = useRouteMatch();
     console.log('match: ', match);
 
     return (
         <Switch>
-            <Route path={match.url} component={MajorsPage} />
+            <Route exact path={match.url} component={MajorsPage} />
 
-            {/* <Route path={`${match.url}/majors`} component={ListMajorPage} /> */}
+            <Route path={`${match.url}/addMajor`} component={AddMajorPage} />
 
             <Route component={NotFound} />
         </Switch>

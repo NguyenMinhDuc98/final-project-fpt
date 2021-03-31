@@ -10,10 +10,7 @@ function ListMajor() {
     const user = useSelector(state => state.login);
     const dispatch = useDispatch();
     const mList = major.list;
-    
     const token = user.token;
-
-    console.log('mList: ', mList);
 
     useEffect(() => {
         dispatch(getListMajor(token))

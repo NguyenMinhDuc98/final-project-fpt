@@ -1,0 +1,17 @@
+.major-form-page{
+    .major-form{
+        background-color: white;
+        border-radius: 5px;
+        // margin-top: 20px;
+
+        form{
+            margin: 20px auto 1rem auto;
+            width: 25rem;
+        }
+        button{
+            width: 50%;
+            background-color: rgb(104, 179, 223);
+            border: none
+        }
+    }
+}
