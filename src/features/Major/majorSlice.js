@@ -12,6 +12,7 @@ const major = createSlice({
             console.log('start: ', action);
         },
         majorReceived: (state, action) => {
+            if(action.payload != undefined)
             state.list = action.payload;
         },
         majorRequestFailed: (state, action) => {
