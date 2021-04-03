@@ -1,33 +1,31 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
-import './listMajor.scss';
-import { getListMajor } from "../majorSlice";
+import './listService.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getListService } from "../serviceSlice";
 import { useRouteMatch } from "react-router";
-import { NavLink } from "react-router-dom";
 
-function ListMajor() {
+function ListService(props) {
     const major = useSelector(state => state.major);
     const user = useSelector(state => state.login);
     const dispatch = useDispatch();
-    const mList = major.list;
-    const token = user.token;
     const match = useRouteMatch();
-    console.log('match: ', match);
+    const sList = major.list;
+    const token = user.token;
+    const sIndex = parseInt(match.params.id);
 
     useEffect(() => {
-        dispatch(getListMajor(token))
+        dispatch(getListService(token));
     }, []);
 
-    const majors = mList.map((major, index) =>
-        <tr key={major.id}>
-            <th>
-                <NavLink to={`${match.url}/${index}`}>
-                    {major.name}
-                </NavLink>
-            </th>
-            <th><img src={major.image} alt="logo" /></th>
+    console.log('match: ', match.id);
+    console.log('index: ', sIndex);
+    console.log('List service: ', major);
+
+    const services = sList[sIndex].services.map((service) =>
+        <tr key={service.id}>
+            <th>{service.name}</th>
             <th className="action-col">
                 <UncontrolledDropdown>
                     <DropdownToggle variant="secondary" size="sm" id="dropdown-custom-components">
@@ -41,24 +39,25 @@ function ListMajor() {
                 </UncontrolledDropdown>
             </th>
         </tr>
-    )
+    );
 
     return (
-        <div className='majorsList'>
+        <div className='servicesList'>
+            <h3>{sList[sIndex].name}</h3>
             <Table>
                 <thead>
                     <tr>
-                        <th>Major</th>
-                        <th>Image</th>
+                        <th>Service</th>
+                        {/* <th>Image</th> */}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {majors}
+                    {services}
                 </tbody>
             </Table>
         </div>
     )
 }
 
-export default ListMajor;
+export default ListService;

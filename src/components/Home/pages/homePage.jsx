@@ -17,7 +17,9 @@ function HomePage() {
 
             <Row>
                 <Col lg={3}>
-                    <LeftNavbar />
+                    <LeftNavbar 
+                        token = {user.token}
+                    />
                     <Footer />
                 </Col>
                 <Col lg={9}>

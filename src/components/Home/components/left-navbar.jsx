@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import './left-navbar.scss';
 
-function LeftNavbar() {
+function LeftNavbar(props) {
     const history = useHistory();
 
     const toMajors = () => {
@@ -17,6 +17,10 @@ function LeftNavbar() {
     
     const toVerify = () => {
         history.push('/verify');
+    }
+
+    const toServices = ()=>{
+        history.push('/services');
     }
 
     return (
@@ -44,12 +48,12 @@ function LeftNavbar() {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink onClickCapture={toMajors}>
+                        <NavLink onClick={toMajors}>
                             <FontAwesomeIcon icon="clipboard-list" /> Majors
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">
+                        <NavLink onClick={toServices}>
                             <FontAwesomeIcon icon="tasks" /> Services
                         </NavLink>
                     </NavItem>
