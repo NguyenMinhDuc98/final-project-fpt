@@ -13,7 +13,9 @@ const notVerifiedList = createSlice({
             console.log('start: ', action);
         },
         verifyListReceived: (state, action) => {
-            state.list = action.payload;
+            if (action.payload != undefined) {
+                state.list = action.payload;
+            }
         },
         verifyListRequestFailed: (state, action) => {
             console.log('failed: ', action);

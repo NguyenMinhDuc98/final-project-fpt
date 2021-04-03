@@ -12,6 +12,7 @@ const major = createSlice({
             console.log('start: ', action);
         },
         majorReceived: (state, action) => {
+            // eslint-disable-next-line
             if(action.payload != undefined)
             state.list = action.payload;
         },
