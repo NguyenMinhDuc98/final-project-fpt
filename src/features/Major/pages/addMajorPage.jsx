@@ -6,12 +6,31 @@ import '../../../assets/styles/style.scss';
 import './addMajorPage.scss';
 import { useHistory } from "react-router";
 import AddMajorForm from "../components/addMajorForm";
+import { useDispatch, useSelector } from "react-redux";
+import { createMajor } from "../majorSlice";
 
 function AddMajorPage() {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const user = useSelector(state=>state.login);
+    const token = user.token;
 
-    const handleSubmit = () => {
+    const handleSubmit = (values) => {
+        console.log('aaaaa');
+        return new Promise(resolve => {
+            setTimeout(() => {
+                console.log('values: ', values);
+                console.log('token: ', token);
 
+                dispatch(createMajor({
+                    token: token,
+                    name: values.name,
+                    image: values.image
+                }));
+                history.push('/majors');
+                resolve(true);
+            }, 3000);
+        });
     }
 
     return (
@@ -25,7 +44,7 @@ function AddMajorPage() {
                 </Col>
                 <Col lg={9}>
                     <div className='major-form'>
-                        <AddMajorForm 
+                        <AddMajorForm
                             onSubmit={handleSubmit}
                         />
                     </div>
