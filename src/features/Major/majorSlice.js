@@ -19,6 +19,9 @@ const major = createSlice({
         majorRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
+        createMajorSuccessful: (state, action) => {
+            alert('Create major successful');
+        }
     }
 });
 
@@ -32,6 +35,21 @@ export const getListMajor = (props) => apiCallBegan({
     onStart: majorRequestStart.type
 });
 
+export const createMajor = (props) => apiCallBegan({
+    url: '/api/admin/createMajor',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        name: props.name,
+        image: props.image
+    },
+    method: "POST",
+    onSuccess: createMajorSuccessful.type,
+    onError: majorRequestFailed.type,
+    onStart: majorRequestStart.type
+});
+
 const { reducer, actions } = major;
-export const { majorReceived, majorRequestFailed, majorRequestStart } = actions;
+export const { majorReceived, majorRequestFailed, majorRequestStart, createMajorSuccessful } = actions;
 export default reducer;

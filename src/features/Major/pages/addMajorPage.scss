@@ -1,17 +1,29 @@
-.major-form-page{
-    .major-form{
-        background-color: white;
+.major-form {
+    background-color: white;
         border-radius: 5px;
-        // margin-top: 20px;
 
-        form{
-            margin: 20px auto 1rem auto;
-            width: 25rem;
+    img{
+        float: left;
+        height: 400px;
+        width: 400px;
+    }
+
+    form {
+        margin: 20px 40px 0 auto;
+        width: 30rem;
+        height: 43rem;
+
+        h2 {
+            margin-bottom: 2rem;
         }
-        button{
-            width: 50%;
-            background-color: rgb(104, 179, 223);
-            border: none
+
+        .form-group {
+            margin-bottom: 3rem;
         }
+    }
+    button {
+        width: 100%;
+        background-color: rgb(104, 179, 223);
+        border: none;
     }
 }
