@@ -8,7 +8,6 @@ function Header() {
     const user = useSelector(state => state.login.user);
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log('userName: ', user);
 
     const handleLogout = () => {
         dispatch(logout());

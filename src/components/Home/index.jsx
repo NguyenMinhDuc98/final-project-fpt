@@ -4,7 +4,6 @@ import HomePage from "./pages/homePage";
 
 function Home(props) {
     const match = useRouteMatch();
-    console.log('match: ', match);
 
     return (
         <Switch>

@@ -4,32 +4,79 @@ import { apiCallBegan } from "../../store/api";
 const service = createSlice({
     name: 'service',
     initialState: {
-        list: []
+        list: [],
     },
     reducers: {
         serviceRequestStart: (state, action) => {
             console.log('start: ', action);
         },
         serviceReceived: (state, action) => {
-            if (action.payload !== undefined) state.list = action.payload;
-            console.log('success: ', action);
+            if (action.payload !== undefined)
+                state.list = action.payload;
         },
-        serviceRequeFailed: (state, action) => {
+        serviceRequestFailed: (state, action) => {
             console.log('failed: ', action);
-        }
+        },
+        createServiceSuccessful: (state, action) => {
+            alert('Create service successful');
+        },
+        editServiceSuccessful: (state, action) => {
+            alert('Edit service successful');
+        },
+        deleteServiceSuccessful: (state, action) => {
+            alert('Delete service successful');
+            console.log('payload: ', action.payload);
+        },
     }
 });
 
-export const getListService = (props) => apiCallBegan({
-    url: 'api/getMajor',
-    headers:{
-        Authorization: props
+export const createService = (props) => apiCallBegan({
+    url: '/api/admin/createService',
+    headers: {
+        Authorization: props.token
     },
-    onSuccess: serviceReceived.type,
-    onError: serviceRequeFailed.type,
+    data: {
+        name: props.name,
+        major_id: props.id
+    },
+    method: "POST",
+    onSuccess: createServiceSuccessful.type,
+    onError: serviceRequestFailed.type,
     onStart: serviceRequestStart.type
 });
 
+export const editService = (props) => apiCallBegan({
+    url: '/api/admin/updateService',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        name: props.name,
+        major_id: props.major_id,
+        id: props.id
+    },
+    method: "POST",
+    onSuccess: editServiceSuccessful.type,
+    onError: serviceRequestFailed.type,
+    onStart: serviceRequestStart.type
+});
+
+export const deleteService = (props) => apiCallBegan({
+    url: '/api/admin/deleteService',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        id: props.id
+    },
+    method: "POST",
+    onSuccess: deleteServiceSuccessful.type,
+    onError: serviceRequestFailed.type,
+    onStart: serviceRequestStart.type
+})
+
 const { reducer, actions } = service;
-export const { serviceReceived, serviceRequeFailed, serviceRequestStart } = actions;
+export const { serviceReceived, serviceRequestFailed, serviceRequestStart, createServiceSuccessful, editServiceSuccessful,
+    deleteServiceSuccessful
+} = actions;
 export default reducer;

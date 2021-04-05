@@ -1,0 +1,29 @@
+.service-form {
+    background-color: white;
+        border-radius: 5px;
+
+    img{
+        float: left;
+        height: 400px;
+        width: 400px;
+    }
+
+    form {
+        margin: 20px 40px 0 auto;
+        width: 30rem;
+        height: 46rem;
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 3rem;
+        }
+    }
+    button {
+        width: 100%;
+        background-color: rgb(104, 179, 223);
+        border: none;
+    }
+}

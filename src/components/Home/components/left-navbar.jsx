@@ -14,13 +14,13 @@ function LeftNavbar(props) {
     const toMajors = () => {
         history.push('/majors');
     }
-    
+
     const toVerify = () => {
         history.push('/verify');
     }
 
-    const toServices = ()=>{
-        history.push('/services');
+    const toHome = () => {
+        history.push('/');
     }
 
     return (
@@ -28,8 +28,8 @@ function LeftNavbar(props) {
             <Navbar color="light" light expand="md">
                 <Nav className="flex-column" navbar tabs pills>
                     <NavItem>
-                        <NavLink href="#">
-                            <FontAwesomeIcon icon='chart-line'/> Dashboard
+                        <NavLink onClick={toHome}>
+                            <FontAwesomeIcon icon='chart-line' /> Dashboard
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -50,16 +50,6 @@ function LeftNavbar(props) {
                     <NavItem>
                         <NavLink onClick={toMajors}>
                             <FontAwesomeIcon icon="clipboard-list" /> Majors
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={toServices}>
-                            <FontAwesomeIcon icon="tasks" /> Services
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">
-                            <FontAwesomeIcon icon="pen" /> Issues
                         </NavLink>
                     </NavItem>
                     <NavItem>

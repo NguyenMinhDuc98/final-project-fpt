@@ -1,49 +1,72 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
 import './listService.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getListService } from "../serviceSlice";
 import { useRouteMatch } from "react-router";
+import { NavLink } from "react-router-dom";
+import { Confirm } from 'react-st-modal';
+import { useDispatch } from "react-redux";
+import { deleteService } from "../serviceSlice";
 
 function ListService(props) {
-    const major = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
+
     const dispatch = useDispatch();
     const match = useRouteMatch();
-    const sList = major.list;
-    const token = user.token;
-    const sIndex = parseInt(match.params.id);
 
-    useEffect(() => {
-        dispatch(getListService(token));
-    },[]);
+    const index = match.params.id;
+    const majorList = props.list;
+    const serviceList = majorList[index].services;
 
-    console.log('match: ', match.id);
-    console.log('index: ', sIndex);
-    console.log('List service: ', major);
+    console.log('log: ', serviceList);
 
-    const services = sList[sIndex].services.map((service) =>
+    const onClick = async (id) => {
+        const isConfirm = await Confirm(
+            'You cannot undo this action',
+            'Are you sure you want to delete the entry?'
+        );
+
+        if (isConfirm) {
+            handleDelete(id);
+        }
+    };
+
+    const handleDelete = (id) => {
+        dispatch(deleteService({
+            token: props.token,
+            id: id
+        }));
+    };
+
+    const services = serviceList.map((service, index) =>
         <tr key={service.id}>
-            <th>{service.name}</th>
+            <th>
+                <NavLink to={`${match.url}/services/${index}`}>
+                    {service.name}
+                </NavLink>
+            </th>
+            {/* <th><img src={service.image} alt="logo" /></th> */}
             <th className="action-col">
                 <UncontrolledDropdown>
                     <DropdownToggle variant="secondary" size="sm" id="dropdown-custom-components">
                         <FontAwesomeIcon icon="ellipsis-h" />
                     </DropdownToggle>
-
                     <DropdownMenu>
-                        <DropdownItem href="#/action-1">EDIT</DropdownItem>
-                        <DropdownItem href="#/action-2">DELETE</DropdownItem>
+                        <DropdownItem>
+                            <NavLink to={`${match.url}/edit/${index}`}>
+                                Edit
+                            </NavLink>
+                        </DropdownItem>
+                        <DropdownItem onClick={() => onClick(service.id)}>
+                            DELETE
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
             </th>
         </tr>
-    );
+    )
 
     return (
         <div className='servicesList'>
-            <h3>{sList[sIndex].name}</h3>
+            <h3>{majorList[index].name}</h3>
             <Table>
                 <thead>
                     <tr>
