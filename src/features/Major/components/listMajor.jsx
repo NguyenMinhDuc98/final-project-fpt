@@ -1,19 +1,34 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
 import './listMajor.scss';
-import { getListMajor } from "../majorSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
+import { Confirm } from 'react-st-modal';
+import { useDispatch } from "react-redux";
+import { deleteMajor } from "../majorSlice";
 
 function ListMajor(props) {
     const majorList = props.list;
-    // const token = props.token;
+    const dispatch = useDispatch();
     const match = useRouteMatch();
-    console.log('match: ', match);
 
-    
+    const onClick = async (id) => {
+        const isConfirm = await Confirm(
+            'You cannot undo this action',
+            'Are you sure you want to delete the entry?'
+        );
+
+        if (isConfirm) {
+            handleDelete(id);
+        }
+    };
+
+    const handleDelete = (id) => {
+        dispatch(deleteMajor({
+            token: props.token,
+            id: id
+        }));
+    };
 
     const majors = majorList.map((major, index) =>
         <tr key={major.id}>
@@ -34,7 +49,9 @@ function ListMajor(props) {
                                 Edit
                             </NavLink>
                         </DropdownItem>
-                        <DropdownItem href="#/action-2">DELETE</DropdownItem>
+                        <DropdownItem onClick={() => onClick(major.id)}>
+                            DELETE
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
             </th>
