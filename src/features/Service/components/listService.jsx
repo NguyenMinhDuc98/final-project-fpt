@@ -17,7 +17,7 @@ function ListService(props) {
 
     useEffect(() => {
         dispatch(getListService(token));
-    }, []);
+    },[]);
 
     console.log('match: ', match.id);
     console.log('index: ', sIndex);

@@ -13,7 +13,7 @@ const notVerifiedList = createSlice({
             console.log('start: ', action);
         },
         verifyListReceived: (state, action) => {
-            if (action.payload != undefined) {
+            if (action.payload !== undefined) {
                 state.list = action.payload;
             }
         },
@@ -21,7 +21,7 @@ const notVerifiedList = createSlice({
             console.log('failed: ', action);
         },
         activeRepairerSuccessful: (state, action) => {
-            if (action.payload != undefined) {
+            if (action.payload !== undefined) {
                 state.list = action.payload;
             }
             console.log('success: ', action);

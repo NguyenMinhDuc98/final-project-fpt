@@ -6,12 +6,24 @@ import LeftNavbar from "../../../components/Home/components/left-navbar";
 import '../../../assets/styles/style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './majorsPage.scss';
-import { useHistory } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getListMajor } from "../majorSlice";
 
 function MajorsPage() {
+    const dispatch = useDispatch();
     const history = useHistory();
+    const major = useSelector(state => state.major);
+    const user = useSelector(state => state.login);
+    const match = useRouteMatch();
+    console.log('match: ', match);
 
-    const handleRedirect = () => {
+    useEffect(() => {
+        dispatch(getListMajor(user.token))
+    },[]);
+
+    const toAddMajor = () => {
         history.push('/majors/addMajor')
     }
 
@@ -26,10 +38,13 @@ function MajorsPage() {
                 </Col>
                 <Col lg={9}>
                     <div className='list-major'>
-                        <Button onClick={handleRedirect} className="add-major-button">
+                        <Button onClick={toAddMajor} className="add-major-button">
                             <FontAwesomeIcon icon="plus-circle" className="major-add" /> Add
                         </Button>
-                        <ListMajor />
+                        <ListMajor 
+                            list= {major.list}
+                            token={user.token}
+                        />
                     </div>
                 </Col>
             </Row>

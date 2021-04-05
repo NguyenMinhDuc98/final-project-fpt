@@ -15,7 +15,7 @@ function ListVerifyRepairer() {
 
     useEffect(() => {
         dispatch(getNotVerifiedList(token))
-    }, []);
+    },[]);
 
     const handleApprove = (id, token) => {
         dispatch(activeRepairer({

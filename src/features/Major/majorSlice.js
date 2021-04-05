@@ -21,7 +21,10 @@ const major = createSlice({
         },
         createMajorSuccessful: (state, action) => {
             alert('Create major successful');
-        }
+        },
+        editMajorSuccessful: (state, action) => {
+            alert('Edit major successful');
+        },
     }
 });
 
@@ -50,6 +53,22 @@ export const createMajor = (props) => apiCallBegan({
     onStart: majorRequestStart.type
 });
 
+export const editMajor = (props) => apiCallBegan({
+    url: '/api/admin/updateMajor',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        name: props.name,
+        image: props.image,
+        id: props.id
+    },
+    method: "POST",
+    onSuccess: editMajorSuccessful.type,
+    onError: majorRequestFailed.type,
+    onStart: majorRequestStart.type
+})
+
 const { reducer, actions } = major;
-export const { majorReceived, majorRequestFailed, majorRequestStart, createMajorSuccessful } = actions;
+export const { majorReceived, majorRequestFailed, majorRequestStart, createMajorSuccessful, editMajorSuccessful } = actions;
 export default reducer;
