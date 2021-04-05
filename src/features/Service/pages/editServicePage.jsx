@@ -1,39 +1,37 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
 import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Home/components/left-navbar";
-import '../../../assets/styles/style.scss';
-import './addServicePage.scss';
-import { useHistory, useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { createService } from "../serviceSlice";
-import ServiceForm from "../components/serviceForm";
+import MajorForm from "../components/serviceForm";
+import { editService } from "../serviceSlice";
 
-function AddServicePage() {
-    const user = useSelector(state => state.login);
+function EditServicePage() {
     const majors = useSelector(state => state.major);
+    const user = useSelector(state => state.login);
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const listMajor = majors.list;
     const match = useParams();
-
-    const major = majors.list[match.id];
+    const major = listMajor[match.majorId];
     const token = user.token;
-
-    console.log('match: ', match);
-    console.log('major: ', major.id);
+    const service = major.services[match.serviceId];
 
     const initialValues = {
-        name: '',
-        image: ''
+        name: service.name,
     }
+    console.log('log: ', major, service);
 
     const handleSubmit = (values) => {
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(createService({
+                dispatch(editService({
                     token: token,
                     name: values.name,
-                    id: major.id
+                    id: service.id,
+                    major_id: major.id
                 }));
                 history.push('/majors');
                 resolve(true);
@@ -52,7 +50,7 @@ function AddServicePage() {
                 </Col>
                 <Col lg={9}>
                     <div className='major-form'>
-                        <ServiceForm
+                        <MajorForm
                             initialValues={initialValues}
                             onSubmit={handleSubmit}
                         />
@@ -61,6 +59,6 @@ function AddServicePage() {
             </Row>
         </div>
     )
-}
+};
 
-export default AddServicePage;
+export default EditServicePage;
