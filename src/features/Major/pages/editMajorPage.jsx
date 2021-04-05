@@ -1,33 +1,37 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
 import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Home/components/left-navbar";
-import '../../../assets/styles/style.scss';
-import './addMajorPage.scss';
-import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { createMajor } from "../majorSlice";
 import MajorForm from "../components/majorForm";
+import { editMajor } from "../majorSlice";
 
-function AddMajorPage() {
+function EditMajorPage() {
+    const majors = useSelector(state => state.major);
+    const user = useSelector(state => state.login);
     const history = useHistory();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.login);
+    const listMajor = majors.list;
+    const { id } = useParams();
+    const major = listMajor[id];
     const token = user.token;
 
+    console.log('major: ', major.image);
+
     const initialValues = {
-        name: '',
-        image: ''
+        name: major.name,
+        image: ""
     }
 
     const handleSubmit = (values) => {
-        console.log('aaaaa');
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(createMajor({
+                dispatch(editMajor({
                     token: token,
                     name: values.name,
-                    image: values.image
+                    image: values.image,
+                    id: major.id
                 }));
                 history.push('/majors');
                 resolve(true);
@@ -55,6 +59,6 @@ function AddMajorPage() {
             </Row>
         </div>
     )
-}
+};
 
-export default AddMajorPage;
+export default EditMajorPage;

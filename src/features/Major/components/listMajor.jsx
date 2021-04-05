@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
 import './listMajor.scss';
 import { getListMajor } from "../majorSlice";
@@ -7,23 +7,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
 
-function ListMajor() {
-    const major = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
-    const dispatch = useDispatch();
-    const mList = major.list;
-    const token = user.token;
+function ListMajor(props) {
+    const majorList = props.list;
+    // const token = props.token;
     const match = useRouteMatch();
     console.log('match: ', match);
 
-    useEffect(() => {
-        dispatch(getListMajor(token))
-    }, []);
+    
 
-    const majors = mList.map((major, index) =>
+    const majors = majorList.map((major, index) =>
         <tr key={major.id}>
             <th>
-                <NavLink to={`${match.url}/${index}`}>
+                <NavLink to={`${match.url}/services/${index}`}>
                     {major.name}
                 </NavLink>
             </th>
@@ -33,9 +28,12 @@ function ListMajor() {
                     <DropdownToggle variant="secondary" size="sm" id="dropdown-custom-components">
                         <FontAwesomeIcon icon="ellipsis-h" />
                     </DropdownToggle>
-
                     <DropdownMenu>
-                        <DropdownItem href="#/action-1">EDIT</DropdownItem>
+                        <DropdownItem>
+                            <NavLink to={`${match.url}/edit/${index}`}>
+                                Edit
+                            </NavLink>
+                        </DropdownItem>
                         <DropdownItem href="#/action-2">DELETE</DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>

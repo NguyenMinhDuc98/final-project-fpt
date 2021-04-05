@@ -5,19 +5,15 @@ import * as Yup from 'yup';
 import InputField from '../../../custom-field/inputField';
 import logo from '../../../assets/images/logo-fixit.png';
 
-AddMajorForm.propTypes = {
+MajorForm.propTypes = {
     onSubmit: PropTypes.func
 }
 
-AddMajorForm.defaultProps = {
+MajorForm.defaultProps = {
     onSubmit: null
 }
 
-function AddMajorForm(props) {
-    const initialValues = {
-        name: '',
-        image: ''
-    }
+function MajorForm(props) {
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('This field is required'),
@@ -32,7 +28,7 @@ function AddMajorForm(props) {
             </div>
             <div className='form'>
                 <Formik
-                    initialValues={initialValues}
+                    initialValues={props.initialValues}
                     validationSchema={validationSchema}
                     onSubmit={props.onSubmit}
                 >
@@ -52,6 +48,10 @@ function AddMajorForm(props) {
                                     label="Major name"
                                     placeholder="Enter major name"
                                 />
+                                <div className='major-image'>
+                                    <img src={values.image} />
+                                    {console.log('image: ', values)}
+                                </div>
                                 <FastField
                                     //Props cua FastField
                                     name='image'
@@ -64,8 +64,8 @@ function AddMajorForm(props) {
                                 />
                                 <Button type="submit">
                                     {isSubmitting && <Spinner size='sm' />}
-                            Submit
-                        </Button>
+                                    Submit
+                                </Button>
                             </Form>
                         )
                     }}
@@ -75,4 +75,4 @@ function AddMajorForm(props) {
     )
 }
 
-export default AddMajorForm;
+export default MajorForm;

@@ -11,7 +11,7 @@ const service = createSlice({
             console.log('start: ', action);
         },
         serviceReceived: (state, action) => {
-            if (action.payload != undefined) state.list = action.payload;
+            if (action.payload !== undefined) state.list = action.payload;
             console.log('success: ', action);
         },
         serviceRequeFailed: (state, action) => {
