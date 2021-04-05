@@ -12,9 +12,8 @@ const major = createSlice({
             console.log('start: ', action);
         },
         majorReceived: (state, action) => {
-            // eslint-disable-next-line
-            if(action.payload != undefined)
-            state.list = action.payload;
+            if (action.payload !== undefined)
+                state.list = action.payload;
         },
         majorRequestFailed: (state, action) => {
             console.log('failed: ', action);
@@ -24,6 +23,10 @@ const major = createSlice({
         },
         editMajorSuccessful: (state, action) => {
             alert('Edit major successful');
+        },
+        deleteMajorSuccessful: (state, action) => {
+            alert('Delete major successful');
+            console.log('payload: ', action.payload);
         },
     }
 });
@@ -67,8 +70,24 @@ export const editMajor = (props) => apiCallBegan({
     onSuccess: editMajorSuccessful.type,
     onError: majorRequestFailed.type,
     onStart: majorRequestStart.type
+});
+
+export const deleteMajor = (props) => apiCallBegan({
+    url: '/api/admin/deleteMajor',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        id: props.id
+    },
+    method: "POST",
+    onSuccess: deleteMajorSuccessful.type,
+    onError: majorRequestFailed.type,
+    onStart: majorRequestStart.type
 })
 
 const { reducer, actions } = major;
-export const { majorReceived, majorRequestFailed, majorRequestStart, createMajorSuccessful, editMajorSuccessful } = actions;
+export const { majorReceived, majorRequestFailed, majorRequestStart, createMajorSuccessful, editMajorSuccessful,
+    deleteMajorSuccessful
+} = actions;
 export default reducer;
