@@ -15,6 +15,10 @@ function Header() {
         history.push('/login');
     }
 
+    const toChangePassword=()=>{
+        history.push('/login/changePassword');
+    }
+
     return (
         <div className='header'>
             <UncontrolledDropdown nav inNavbar>
@@ -24,6 +28,9 @@ function Header() {
                 <DropdownMenu>
                     <DropdownItem>
                         Profile
+                    </DropdownItem>
+                    <DropdownItem onClick={toChangePassword}>
+                        Change password
                     </DropdownItem>
                     <DropdownItem onClick={handleLogout}>
                         Logout

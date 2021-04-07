@@ -49,7 +49,7 @@ function MajorForm(props) {
                                     placeholder="Enter major name"
                                 />
                                 <div className='major-image'>
-                                    <img src={values.image} />
+                                    <img src={values.image} alt='major'/>
                                     {console.log('image: ', values)}
                                 </div>
                                 <FastField
