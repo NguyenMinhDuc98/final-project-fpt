@@ -1,23 +1,22 @@
 import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
-import './listService.scss';
+import './listIssue.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
 import { Confirm } from 'react-st-modal';
 import { useDispatch } from "react-redux";
-import { deleteService } from "../serviceSlice";
+import { deleteIssue } from "../issueSlice";
 
-function ListService(props) {
+function ListIssue(props) {
 
     const dispatch = useDispatch();
     const match = useRouteMatch();
 
-    const index = match.params.id;
+    const index = match.params.issueId;
     const majorList = props.list;
-    const serviceList = majorList[index].services;
-
-    console.log('log: ', serviceList);
-
+    const serviceList = majorList[match.params.serviceId].services;
+    const issueList = serviceList[index].issues;
+    
     const onClick = async (id) => {
         const isConfirm = await Confirm(
             'You cannot undo this action',
@@ -30,18 +29,16 @@ function ListService(props) {
     };
 
     const handleDelete = (id) => {
-        dispatch(deleteService({
+        dispatch(deleteIssue({
             token: props.token,
             id: id
         }));
     };
 
-    const services = serviceList.map((service, index) =>
-        <tr key={service.id}>
+    const issues = issueList.map((issue, index) =>
+        <tr key={issue.id}>
             <th>
-                <NavLink to={`${match.url}/issues/${index}`}>
-                    {service.name}
-                </NavLink>
+                {issue.name}
             </th>
             {/* <th><img src={service.image} alt="logo" /></th> */}
             <th className="action-col">
@@ -55,7 +52,7 @@ function ListService(props) {
                                 Edit
                             </NavLink>
                         </DropdownItem>
-                        <DropdownItem onClick={() => onClick(service.id)}>
+                        <DropdownItem onClick={() => onClick(issue.id)}>
                             DELETE
                         </DropdownItem>
                     </DropdownMenu>
@@ -66,21 +63,21 @@ function ListService(props) {
 
     return (
         <div className='servicesList'>
-            <h3>{majorList[index].name}</h3>
+            <h3>{serviceList[index].name}</h3>
             <Table>
                 <thead>
                     <tr>
-                        <th>Service</th>
+                        <th>Issue</th>
                         {/* <th>Image</th> */}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {services}
+                    {issues}
                 </tbody>
             </Table>
         </div>
     )
 }
 
-export default ListService;
+export default ListIssue;

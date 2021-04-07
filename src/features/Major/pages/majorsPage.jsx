@@ -14,13 +14,16 @@ import { useState } from "react";
 
 function MajorsPage() {
     var data = null;
-
-    useEffect(() => {
-        dispatch(getListMajor(user.token));
-    }, [data]);
-
     const major = useSelector(state => state.major);
     data = major.list;
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const user = useSelector(state => state.login);
+
+    const [majorList, setMajorList] = useState([]);
+    useEffect(() => {
+        dispatch(getListMajor(user.token));
+    }, [major]);
 
     useEffect(() => {
         async function fetchMajorList() {
@@ -31,15 +34,11 @@ function MajorsPage() {
                 console.log('error: ', error.message)
             }
         }
-        
+
         fetchMajorList();
     }, [data]);
 
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const user = useSelector(state => state.login);
 
-    const [majorList, setMajorList] = useState([]);
 
     const toAddMajor = () => {
         history.push('/majors/add-major')
