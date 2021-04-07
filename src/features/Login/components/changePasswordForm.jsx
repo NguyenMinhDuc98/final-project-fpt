@@ -4,26 +4,24 @@ import * as Yup from 'yup';
 import { Button, Spinner } from "reactstrap";
 import PropTypes from 'prop-types';
 import React from 'react';
-import { NavLink } from "react-router-dom";
 
-LoginForm.propTypes = {
+ChangePasswordForm.propTypes = {
     onSubmit: PropTypes.func
 }
 
-LoginForm.defaultProps = {
+ChangePasswordForm.defaultProps = {
     onSubmit: null
 }
 
-function LoginForm(props) {
+function ChangePasswordForm(props) {
     const initialValues = {
-        phoneNumber: '',
-        password: ''
+        old_password: '',
+        new_password: ''
     }
 
     const validationSchema = Yup.object().shape({
-        phoneNumber: Yup.number('You must enter number').required('This field is required!'),
-
-        password: Yup.string().required('This field is required!'),
+        old_password: Yup.string().required('This field is required!'),
+        new_password: Yup.string().required('This field is required!'),
     })
 
     return (
@@ -38,33 +36,30 @@ function LoginForm(props) {
 
                 return (
                     <Form>
-                        <p>Welcome back</p>
-                        <h2>Login to your account</h2>
+                        <h2>Change Password</h2>
                         <FastField
                             //Props cua FastField
-                            name='phoneNumber'
+                            name='old_password'
                             component={InputField}
 
                             //Props truyen vao trong InputField
-                            label="Phone Number"
-                            placeholder="Enter your phone number"
+                            label="Old password"
+                            type="password"
+                            placeholder="Enter your old password"
                         />
                         <FastField
                             //Props cua FastField
-                            name='password'
+                            name='new_password'
                             component={InputField}
 
                             //Props truyen vao trong InputField
                             type="password"
-                            label="Password"
-                            placeholder="Enter your password"
+                            label="New password"
+                            placeholder="Enter your new password"
                         />
-                        <NavLink to='/login/changePassword'>
-                            Change password
-                        </NavLink>
                         <Button type="submit">
                             {isSubmitting && <Spinner size='sm'/>}
-                            Login
+                            Change Password
                         </Button>
                     </Form>
                 )
@@ -73,4 +68,4 @@ function LoginForm(props) {
     )
 }
 
-export default LoginForm;
+export default ChangePasswordForm;

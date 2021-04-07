@@ -26,6 +26,9 @@ const login = createSlice({
         loginFailed: (state, action) => {
             state.loading = false;
             console.log('failed: ', action)
+        },
+        changePasswordSuccessful: (state, action) => {
+            alert('Change password successful');
         }
     }
 });
@@ -41,8 +44,25 @@ export const getToken = (props) => apiCallBegan({
     onStart: loginRequest.type,
     onSuccess: loginSuccess.type,
     onError: loginFailed.type
+});
+
+export const changePassword = (props) => apiCallBegan({
+    url: '/api/changePassword',
+    headers:{
+        Authorization: props.token
+    },
+    data: {
+        phone_number: props.phoneNumber,
+        role_id: '1',
+        old_password: props.old_password,
+        new_password: props.new_password
+    },
+    method: 'POST',
+    onStart: loginRequest.type,
+    onSuccess: changePasswordSuccessful.type,
+    onError: loginFailed.type
 })
 
 const { reducer, actions } = login;
-export const { loginRequest, loginSuccess, loginFailed, logout } = actions;
+export const { loginRequest, loginSuccess, loginFailed, logout, changePasswordSuccessful } = actions;
 export default reducer;

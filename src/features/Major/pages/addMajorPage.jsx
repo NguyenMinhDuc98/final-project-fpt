@@ -21,7 +21,6 @@ function AddMajorPage() {
     }
 
     const handleSubmit = (values) => {
-        console.log('aaaaa');
         return new Promise(resolve => {
             setTimeout(() => {
                 dispatch(createMajor({

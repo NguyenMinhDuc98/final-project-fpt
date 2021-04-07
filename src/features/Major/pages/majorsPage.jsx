@@ -10,16 +10,36 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getListMajor } from "../majorSlice";
+import { useState } from "react";
 
 function MajorsPage() {
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const major = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
+    var data = null;
 
     useEffect(() => {
         dispatch(getListMajor(user.token));
-    }, []);
+    }, [data]);
+
+    const major = useSelector(state => state.major);
+    data = major.list;
+
+    useEffect(() => {
+        async function fetchMajorList() {
+            try {
+                console.log('data: ', data);
+                setMajorList(data);
+            } catch (error) {
+                console.log('error: ', error.message)
+            }
+        }
+        
+        fetchMajorList();
+    }, [data]);
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const user = useSelector(state => state.login);
+
+    const [majorList, setMajorList] = useState([]);
 
     const toAddMajor = () => {
         history.push('/majors/add-major')
@@ -40,7 +60,7 @@ function MajorsPage() {
                             <FontAwesomeIcon icon="plus-circle" className="major-add" /> Add
                         </Button>
                         <ListMajor
-                            list={major.list}
+                            list={majorList}
                             token={user.token}
                         />
                     </div>
