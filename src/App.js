@@ -8,8 +8,10 @@ const Login = React.lazy(() => import('./features/Login'));
 const Home = React.lazy(() => import('./components/Home'));
 const Majors = React.lazy(() => import('./features/Major'));
 const Verify = React.lazy(() => import('./features/VerifyRepairer'));
+const Admin = React.lazy(() => import('./features/Admin'));
 
 function App() {
+
   return (
     <Suspense fallback={<div>Loading ...</div>}>
       <BrowserRouter>
@@ -18,6 +20,7 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/majors' component={Majors} />
           <Route path='/verify' component={Verify} />
+          <Route path='/admin' component={Admin} />
 
           <Route component={NotFound} />
         </Switch>

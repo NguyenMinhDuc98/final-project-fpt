@@ -15,8 +15,12 @@ function Header() {
         history.push('/login');
     }
 
-    const toChangePassword=()=>{
+    const toChangePassword = () => {
         history.push('/login/changePassword');
+    }
+
+    const toProfile = () => {
+        history.push('/admin');
     }
 
     return (
@@ -26,7 +30,7 @@ function Header() {
                     {user.name}
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem>
+                    <DropdownItem onClick={toProfile}>
                         Profile
                     </DropdownItem>
                     <DropdownItem onClick={toChangePassword}>
