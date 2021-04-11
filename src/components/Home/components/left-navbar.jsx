@@ -22,6 +22,10 @@ function LeftNavbar(props) {
     const toHome = () => {
         history.push('/');
     }
+    
+    const toCus = () => {
+        history.push('/customers');
+    }
 
     return (
         <div className='left-navbar'>
@@ -33,7 +37,7 @@ function LeftNavbar(props) {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">
+                        <NavLink onClick={toCus}>
                             <FontAwesomeIcon icon="users" /> Customers
                         </NavLink>
                     </NavItem>
