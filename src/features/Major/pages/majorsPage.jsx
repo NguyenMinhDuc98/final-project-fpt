@@ -23,7 +23,7 @@ function MajorsPage() {
     const [majorList, setMajorList] = useState([]);
     useEffect(() => {
         dispatch(getListMajor(user.token));
-    }, [major]);
+    }, [data]);
 
     useEffect(() => {
         async function fetchMajorList() {

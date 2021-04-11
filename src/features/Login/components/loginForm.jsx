@@ -59,9 +59,6 @@ function LoginForm(props) {
                             label="Password"
                             placeholder="Enter your password"
                         />
-                        <NavLink to='/login/changePassword'>
-                            Change password
-                        </NavLink>
                         <Button type="submit">
                             {isSubmitting && <Spinner size='sm'/>}
                             Login
