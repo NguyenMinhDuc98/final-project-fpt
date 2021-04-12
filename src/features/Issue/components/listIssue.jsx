@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { deleteIssue } from "../issueSlice";
 
 function ListIssue(props) {
-
     const dispatch = useDispatch();
     const match = useRouteMatch();
 

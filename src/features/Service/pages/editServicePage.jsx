@@ -9,14 +9,13 @@ import { editService } from "../serviceSlice";
 
 function EditServicePage() {
     const majors = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
     const history = useHistory();
     const dispatch = useDispatch();
 
     const listMajor = majors.list;
     const match = useParams();
     const major = listMajor[match.majorId];
-    const token = user.token;
+    const token = localStorage.getItem('token');
     const service = major.services[match.serviceId];
 
     const initialValues = {

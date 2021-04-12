@@ -10,18 +10,15 @@ import { createIssue } from "../issueSlice";
 import IssueForm from "../components/issueForm";
 
 function AddIssuePage() {
-    const user = useSelector(state => state.login);
     const majors = useSelector(state => state.major);
     const history = useHistory();
     const dispatch = useDispatch();
     const match = useParams();
 
-    console.log('match: ', match);
-    console.log('majors: ', majors.list[match.serviceId].services[match.issueId]);
 
     const major = majors.list[match.serviceId];
     const service = major.services[match.issueId];
-    const token = user.token;
+    const token = localStorage.getItem('token');
 
     const initialValues = {
         name: '',

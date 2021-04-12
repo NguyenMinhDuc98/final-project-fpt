@@ -11,19 +11,16 @@ import { useSelector } from "react-redux";
 
 function ServicesPage() {
     const majors = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
     const history = useHistory();
-
-    const services = majors.list;
     const match = useRouteMatch();
 
-    // console.log('services: ', services);
-    // console.log('match: ', match);
+    const token = localStorage.getItem('token');
+    const services = majors.list;
 
     const toAddService = () => {
         history.push(`${match.url}/add-service`)
     }
-
+    console.log('token: ', token);
     return (
         <div className='service-page'>
             <Header />
@@ -41,7 +38,7 @@ function ServicesPage() {
                         </Button>
                         <ListService
                             list={services}
-                            token={user.token}
+                            token={token}
                         />
                     </div>
                 </Col>

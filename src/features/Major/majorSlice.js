@@ -19,7 +19,10 @@ const major = createSlice({
             console.log('failed: ', action);
         },
         createMajorSuccessful: (state, action) => {
-            alert('Create major successful');
+            if (action.payload !== undefined){
+                state.list.push(action.payload)
+            };
+            console.log('log: ', action.payload);
         },
         editMajorSuccessful: (state, action) => {
             alert('Edit major successful');

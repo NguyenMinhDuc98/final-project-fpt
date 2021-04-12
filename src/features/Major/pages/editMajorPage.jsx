@@ -9,13 +9,12 @@ import { editMajor } from "../majorSlice";
 
 function EditMajorPage() {
     const majors = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
     const history = useHistory();
     const dispatch = useDispatch();
     const listMajor = majors.list;
     const { id } = useParams();
     const major = listMajor[id];
-    const token = user.token;
+    const token = localStorage.getItem('token');
 
     console.log('major: ', major.image);
 

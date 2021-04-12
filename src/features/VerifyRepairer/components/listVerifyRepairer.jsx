@@ -5,13 +5,12 @@ import { activeRepairer, getNotVerifiedList } from "../verifySlice";
 import './listVerifyRepairer.scss';
 
 function ListVerifyRepairer() {
-    const user = useSelector(state => state.login);
     const nvRepairer = useSelector(state => state.notVerifiedList);
     const dispatch = useDispatch();
-    const token = user.token;
+    const token = localStorage.getItem('token');
     const nvRepairersList = nvRepairer.list;
 
-    console.log('list repairer: ', nvRepairersList);
+    // console.log('token: ', token);
 
     useEffect(() => {
         dispatch(getNotVerifiedList(token))

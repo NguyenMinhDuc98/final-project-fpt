@@ -5,7 +5,6 @@ const login = createSlice({
     name: 'login',
     initialState: {
         user: [],
-        token: null,
         isLoggedIn: false,
         loading: false
     },
@@ -15,13 +14,15 @@ const login = createSlice({
         },
         logout: (state, action) => {
             state.isLoggedIn = false;
-            state.token = null
+            localStorage.setItem('token', '');
         },
         loginSuccess: (state, action) => {
             state.token = action.payload.token;
             state.isLoggedIn = true;
             state.user = action.payload;
             state.loading = false;
+            // localStorage.setItem('user', action.payload);
+            localStorage.setItem('token', action.payload.token);
         },
         loginFailed: (state, action) => {
             state.loading = false;

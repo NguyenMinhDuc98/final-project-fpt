@@ -12,20 +12,19 @@ const Admin = React.lazy(() => import('./features/Admin'));
 const Customer = React.lazy(() => import('./features/Customer'));
 
 function App() {
-
   return (
     <Suspense fallback={<div>Loading ...</div>}>
       <BrowserRouter>
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/majors' component={Majors} />
-          <Route path='/verify' component={Verify} />
-          <Route path='/admin' component={Admin} />
-          <Route path='/customers' component={Customer} />
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='/majors' component={Majors} />
+            <Route path='/verify' component={Verify} />
+            <Route path='/admin' component={Admin} />
+            <Route path='/customers' component={Customer} />
 
-          <Route component={NotFound} />
-        </Switch>
+            <Route component={NotFound} />
+          </Switch>
       </BrowserRouter>
     </Suspense>
   );
