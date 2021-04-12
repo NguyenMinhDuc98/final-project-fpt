@@ -10,8 +10,7 @@ function ChangePasswordPage() {
     const user = useSelector(state=> state.login);
     const dispatch = useDispatch();
     const history = useHistory();
-
-    console.log('user: ', user.user.phone);
+    const token = localStorage.getItem('token');
 
     const handleSubmit = (values) => {
         return new Promise(resolve => {
@@ -19,7 +18,7 @@ function ChangePasswordPage() {
 
             setTimeout(() => {
                 dispatch(changePassword({
-                    token: user.token,
+                    token: token,
                     phoneNumber: user.user.phone,
                     old_password: values.old_password,
                     new_password: values.new_password

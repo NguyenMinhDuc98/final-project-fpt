@@ -11,14 +11,11 @@ import { useSelector } from "react-redux";
 
 function IssuesPage() {
     const majors = useSelector(state => state.major);
-    const user = useSelector(state => state.login);
     const history = useHistory();
-
-    const listMajor = majors.list;
     const match = useRouteMatch();
 
-    // console.log('issues: ', issues);
-    // console.log('match: ', match);
+    const listMajor = majors.list;
+    const token = localStorage.getItem('token');
 
     const toAddIssue = () => {
         history.push(`${match.url}/add-issue`)
@@ -35,13 +32,13 @@ function IssuesPage() {
                 </Col>
                 <Col lg={9}>
                     <div className='list-issue'>
-                        
+
                         <Button onClick={toAddIssue} className="add-issue-button">
                             <FontAwesomeIcon icon="plus-circle" className="issue-add" /> Add
                         </Button>
                         <ListIssue
                             list={listMajor}
-                            token={user.token}
+                            token={token}
                         />
                     </div>
                 </Col>

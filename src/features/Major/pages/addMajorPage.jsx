@@ -12,8 +12,7 @@ import MajorForm from "../components/majorForm";
 function AddMajorPage() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.login);
-    const token = user.token;
+    const token = localStorage.getItem('token');
 
     const initialValues = {
         name: '',

@@ -10,17 +10,13 @@ import { createService } from "../serviceSlice";
 import ServiceForm from "../components/serviceForm";
 
 function AddServicePage() {
-    const user = useSelector(state => state.login);
     const majors = useSelector(state => state.major);
     const history = useHistory();
     const dispatch = useDispatch();
     const match = useParams();
 
     const major = majors.list[match.id];
-    const token = user.token;
-
-    console.log('match: ', match);
-    console.log('major: ', major.id);
+    const token = localStorage.getItem('token');
 
     const initialValues = {
         name: '',

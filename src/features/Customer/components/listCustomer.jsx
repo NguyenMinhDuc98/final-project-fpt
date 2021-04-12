@@ -10,14 +10,16 @@ import { useEffect } from "react";
 
 function ListCustomer() {
     const customer = useSelector(state => state.customer);
-    const user = useSelector(state => state.login);
     const dispatch = useDispatch();
     const match = useRouteMatch();
-    const token = user.token;
+    const token = localStorage.getItem('token');
+
+    console.log('customer: ', customer);
 
     useEffect(() => {
         dispatch(getListCustomer(token));
-    },[]);
+        console.log('token: ', token);
+    }, []);
 
     const customerList = customer.list;
 

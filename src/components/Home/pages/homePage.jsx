@@ -7,6 +7,7 @@ import Chart from '../components/chart';
 import '../../../assets/styles/style.scss';
 
 function HomePage() {
+    console.log(localStorage.getItem('token'));
 
     return (
         <div>

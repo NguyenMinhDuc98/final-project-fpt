@@ -9,13 +9,12 @@ import { editCustomer } from "../customerSlice";
 
 function EditCustomerPage() {
     const customers = useSelector(state => state.customer);
-    const user = useSelector(state => state.login);
     const history = useHistory();
     const dispatch = useDispatch();
     const listCustomer = customers.list;
     const { id } = useParams();
     const customer = listCustomer[id];
-    const token = user.token;
+    const token = localStorage.getItem('token');
 
     console.log('customer: ', customer);
 
