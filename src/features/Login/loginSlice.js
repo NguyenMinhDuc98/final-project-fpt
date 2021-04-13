@@ -17,12 +17,12 @@ const login = createSlice({
             localStorage.setItem('token', '');
         },
         loginSuccess: (state, action) => {
-            state.token = action.payload.token;
+            localStorage.setItem('token', action.payload.token);
+
+            state.token = localStorage.getItem('token');
             state.isLoggedIn = true;
             state.user = action.payload;
             state.loading = false;
-            // localStorage.setItem('user', action.payload);
-            localStorage.setItem('token', action.payload.token);
         },
         loginFailed: (state, action) => {
             state.loading = false;

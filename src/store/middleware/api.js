@@ -18,12 +18,17 @@ const api = ({ dispatch }) => next => async action => {
             method,
             data
         });
+        console.log({headers})
 
         //General
         dispatch(actions.apiCallSuccess(response.data.results));
 
         //Specific
-        if (onSuccess) dispatch({ type: onSuccess, payload: response.data.results });
+        if (onSuccess) {
+            dispatch({ type: onSuccess, payload: response.data.results });
+            console.log('response: ', response.data);
+        }
+        
     } catch (error) {
         dispatch(actions.apiCallFailed(error.message));
         if (onError) dispatch({ type: onError, payload: error.message });

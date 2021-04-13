@@ -13,10 +13,9 @@ const notVerifiedList = createSlice({
             console.log('start: ', action);
         },
         verifyListReceived: (state, action) => {
-            if (action.payload !== undefined) {
-                state.list = action.payload;
-            }
-            console.log('log: ', action.payload);
+            localStorage.setItem('verifyList', action.payload);
+
+            state.list = action.payload;
         },
         verifyListRequestFailed: (state, action) => {
             console.log('failed: ', action);
@@ -53,7 +52,7 @@ export const activeRepairer = (props) => apiCallBegan({
         Authorization: props.token
     },
     data: {
-        id: props.repairer_id
+        id: props.verify_id
     },
     method: 'POST',
     onSuccess: activeRepairerSuccessful.type,
