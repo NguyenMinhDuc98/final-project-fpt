@@ -1,21 +1,23 @@
-import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
+import { Table } from "reactstrap";
 import './listRepairer.scss';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import '../../../assets/styles/style.scss';
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
 import { Confirm } from 'react-st-modal';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteRepairer, getListRepairer } from "../repairerSlice";
 import { useEffect } from "react";
+import Toggle from 'react-toggle'
 
 function ListRepairer() {
     const repairer = useSelector(state => state.repairer);
     const dispatch = useDispatch();
     const match = useRouteMatch();
-    const token = localStorage.getItem('token');
 
-    console.log('repairer: ', repairer);
-    console.log('repairer: ', repairer.list[0].is_active.data);
+    const token = localStorage.getItem('token');
+    let checked = null;
+
+    // console.log('log: ', repairer.list[0].is_active.data == 0);
 
     useEffect(() => {
         dispatch(getListRepairer(token));
@@ -42,6 +44,14 @@ function ListRepairer() {
         }));
     };
 
+    const handleActive = () => {
+
+    }
+
+    const handleInActive = () => {
+
+    }
+
     const repairers = repairerList.map((repairer, index) =>
         <tr key={repairer.id}>
             <th>
@@ -51,9 +61,15 @@ function ListRepairer() {
             </th>
             <th>{repairer.phone_number}</th>
             <th>{repairer.email}</th>
-            {/* <th>
-                {repairer}
-            </th> */}
+            <th>
+                {
+                    repairer.is_active.data == 0 ? checked = false : checked = true
+                }
+                <Toggle
+                    defaultChecked={checked}
+                    onChange={checked ? handleInActive : handleActive}
+                />
+            </th>
         </tr>
     )
 

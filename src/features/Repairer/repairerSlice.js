@@ -12,8 +12,6 @@ const repairer = createSlice({
         },
         repairerReceived: (state, action) => {
             state.list = action.payload;
-            console.log('action: ', action );
-            console.log('payload: ', action.payload );
         },
         repairerRequestFailed: (state, action) => {
             console.log('failed: ', action);
