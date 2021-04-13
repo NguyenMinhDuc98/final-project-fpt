@@ -12,8 +12,7 @@ const customer = createSlice({
             console.log('start: ', action);
         },
         customerReceived: (state, action) => {
-            if (action.payload !== undefined)
-                state.list = action.payload;
+            state.list = action.payload;
 
             console.log('start: ', action);
             console.log('payload: ', action.payload);
@@ -37,7 +36,7 @@ const customer = createSlice({
 export const getListCustomer = (props) => apiCallBegan({
     url: 'api/admin/getAllCus',
     headers: {
-        Authorization: props.token
+        Authorization: props
     },
     onSuccess: customerReceived.type,
     onError: customerRequestFailed.type,
@@ -47,7 +46,7 @@ export const getListCustomer = (props) => apiCallBegan({
 export const editCustomer = (props) => apiCallBegan({
     url: '/api/admin/updateCustomer',
     headers: {
-        Authorization: props.token
+        Authorization: props
     },
     data: {
         name: props.name,

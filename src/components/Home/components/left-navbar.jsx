@@ -26,6 +26,9 @@ function LeftNavbar(props) {
     const toCus = () => {
         history.push('/customers');
     }
+    const toRep = () => {
+        history.push('/repairers');
+    }
 
     return (
         <div className='left-navbar'>
@@ -42,7 +45,7 @@ function LeftNavbar(props) {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">
+                        <NavLink onClick={toRep}>
                             <FontAwesomeIcon icon="tools" /> Repairers
                         </NavLink>
                     </NavItem>

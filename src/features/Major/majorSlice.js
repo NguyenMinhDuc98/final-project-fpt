@@ -12,14 +12,14 @@ const major = createSlice({
             console.log('start: ', action);
         },
         majorReceived: (state, action) => {
-            if (action.payload !== undefined)
-                state.list = action.payload;
+            console.log(JSON.stringify(action))
+            state.list = action.payload;
         },
         majorRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
         createMajorSuccessful: (state, action) => {
-            if (action.payload !== undefined){
+            if (action.payload !== undefined) {
                 state.list.push(action.payload)
             };
             console.log('log: ', action.payload);
@@ -39,6 +39,10 @@ export const getListMajor = (props) => apiCallBegan({
     headers: {
         Authorization: props
     },
+    data: {
+        role_id: 1
+    },
+    method: 'POST',
     onSuccess: majorReceived.type,
     onError: majorRequestFailed.type,
     onStart: majorRequestStart.type

@@ -14,14 +14,14 @@ function ListCustomer() {
     const match = useRouteMatch();
     const token = localStorage.getItem('token');
 
-    console.log('customer: ', customer);
-
     useEffect(() => {
         dispatch(getListCustomer(token));
         console.log('token: ', token);
     }, []);
 
     const customerList = customer.list;
+
+    console.log('customerList: ', customer)
 
     const onClick = async (id) => {
         const isConfirm = await Confirm(

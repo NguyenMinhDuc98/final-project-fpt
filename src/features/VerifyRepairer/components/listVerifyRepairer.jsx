@@ -10,7 +10,7 @@ function ListVerifyRepairer() {
     const token = localStorage.getItem('token');
     const nvRepairersList = nvRepairer.list;
 
-    // console.log('token: ', token);
+    console.log('token: ', token)
 
     useEffect(() => {
         dispatch(getNotVerifiedList(token))

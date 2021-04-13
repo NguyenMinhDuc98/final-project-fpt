@@ -17,6 +17,9 @@ function MajorsPage() {
     const history = useHistory();
     const token = localStorage.getItem('token');
 
+    console.log('major: ', major);
+    console.log('token: ', token);
+
     useEffect(() => {
         dispatch(getListMajor(token));
     }, []);

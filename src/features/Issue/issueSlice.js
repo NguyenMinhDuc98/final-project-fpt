@@ -11,8 +11,9 @@ const issue = createSlice({
             console.log('start: ', action);
         },
         issueReceived: (state, action) => {
-            if (action.payload !== undefined)
-                state.list = action.payload;
+            localStorage.setItem('issueList', action.payload);
+
+            state.list = action.payload;
         },
         issueRequestFailed: (state, action) => {
             console.log('failed: ', action);
