@@ -5,6 +5,7 @@ import LeftNavbar from "../../../components/Home/components/left-navbar";
 import '../../../assets/styles/style.scss';
 import './repairersPage.scss';
 import RepairerForm from "../components/repairerForm";
+import RepairerProfile from "../components/repairerProfile";
 
 function RepairerProfilePage() {
     return (
@@ -18,7 +19,7 @@ function RepairerProfilePage() {
                 </Col>
                 <Col lg={9}>
                     <div className='list-repairer'>
-                        <RepairerForm
+                        <RepairerProfile
 
                         />
                     </div>
