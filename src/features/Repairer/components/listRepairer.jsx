@@ -57,6 +57,7 @@ function ListRepairer() {
             <th>
                 <NavLink to={`${match.url}/profile/${index}`}>
                     {repairer.name}
+                    {console.log({repairer})}
                 </NavLink>
             </th>
             <th>{repairer.phone_number}</th>
