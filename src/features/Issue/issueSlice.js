@@ -11,21 +11,37 @@ const issue = createSlice({
             console.log('start: ', action);
         },
         issueReceived: (state, action) => {
-            localStorage.setItem('issueList', action.payload);
-
-            state.list = action.payload;
+            if (action.payload !== undefined) {
+                state.list = action.payload
+            };
         },
         issueRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
         createIssueSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload
+            };
             alert('Create issue successful');
         },
         editIssueSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload
+            };
             alert('Edit issue successful');
         },
-        deleteIssueSuccessful: (state, action) => {
-            alert('Delete issue successful');
+        activeIssueSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
+            alert('Active issue successful');
+            console.log('payload: ', action.payload);
+        },
+        deActivateIssueSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
+            alert('Deactivate issue successful');
             console.log('payload: ', action.payload);
         },
     }
@@ -38,7 +54,7 @@ export const createIssue = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        service_id: props.id,
+        issue_id: props.id,
         estimate_fix_duration: props.estimate_fix_duration,
         estimate_price: props.estimate_price
     },
@@ -55,7 +71,7 @@ export const editIssue = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        service_id: props.id,
+        issue_id: props.id,
         estimate_fix_duration: props.estimate_fix_duration,
         estimate_price: props.estimate_price
     },
@@ -65,22 +81,38 @@ export const editIssue = (props) => apiCallBegan({
     onStart: issueRequestStart.type
 });
 
-export const deleteIssue = (props) => apiCallBegan({
-    url: '/api/admin/deleteIssue',
+export const activeIssue = (props) => apiCallBegan({
+    url: '/api/admin/activeIssue',
     headers: {
         Authorization: props.token
     },
     data: {
-        id: props.id
+        id: props.id,
+        service_id: props.service_id
     },
     method: "POST",
-    onSuccess: deleteIssueSuccessful.type,
+    onSuccess: activeIssueSuccessful.type,
     onError: issueRequestFailed.type,
     onStart: issueRequestStart.type
-})
+});
+
+export const deActivateIssue = (props) => apiCallBegan({
+    url: '/api/admin/deactivateIssue',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        id: props.id,
+        service_id: props.service_id
+    },
+    method: "POST",
+    onSuccess: deActivateIssueSuccessful.type,
+    onError: issueRequestFailed.type,
+    onStart: issueRequestStart.type
+});
 
 const { reducer, actions } = issue;
 export const { issueReceived, issueRequestFailed, issueRequestStart, createIssueSuccessful, editIssueSuccessful,
-    deleteIssueSuccessful
+    activeIssueSuccessful, deActivateIssueSuccessful
 } = actions;
 export default reducer;

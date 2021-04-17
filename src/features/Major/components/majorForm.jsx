@@ -38,7 +38,7 @@ function MajorForm(props) {
 
                         return (
                             <Form>
-                                <h2>New Major</h2>
+                                <h2>Major</h2>
                                 <FastField
                                     //Props cua FastField
                                     name='name'
@@ -48,10 +48,10 @@ function MajorForm(props) {
                                     label="Major name"
                                     placeholder="Enter major name"
                                 />
-                                <div className='major-image'>
+                                {/* <div className='major-image'>
                                     <img src={values.image} alt='major'/>
                                     {console.log('image: ', values)}
-                                </div>
+                                </div> */}
                                 <FastField
                                     //Props cua FastField
                                     name='image'

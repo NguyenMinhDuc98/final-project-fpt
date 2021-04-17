@@ -11,21 +11,38 @@ const service = createSlice({
             console.log('start: ', action);
         },
         serviceReceived: (state, action) => {
-            localStorage.setItem('serviceList', action.payload);
-
-            state.list = action.payload;
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+                localStorage.setItem('services', action.payload);
+            };
         },
         serviceRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
         createServiceSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload
+            };
             alert('Create service successful');
         },
         editServiceSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload
+            };
             alert('Edit service successful');
         },
-        deleteServiceSuccessful: (state, action) => {
-            alert('Delete service successful');
+        activeServiceSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
+            alert('Active service successful');
+            console.log('payload: ', action.payload);
+        },
+        deActivateServiceSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
+            alert('Deactivate service successful');
             console.log('payload: ', action.payload);
         },
     }
@@ -38,7 +55,7 @@ export const createService = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        major_id: props.id
+        service_id: props.id
     },
     method: "POST",
     onSuccess: createServiceSuccessful.type,
@@ -53,7 +70,7 @@ export const editService = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        major_id: props.major_id,
+        service_id: props.service_id,
         id: props.id
     },
     method: "POST",
@@ -62,8 +79,8 @@ export const editService = (props) => apiCallBegan({
     onStart: serviceRequestStart.type
 });
 
-export const deleteService = (props) => apiCallBegan({
-    url: '/api/admin/deleteService',
+export const activeService = (props) => apiCallBegan({
+    url: '/api/admin/activeService',
     headers: {
         Authorization: props.token
     },
@@ -71,13 +88,28 @@ export const deleteService = (props) => apiCallBegan({
         id: props.id
     },
     method: "POST",
-    onSuccess: deleteServiceSuccessful.type,
+    onSuccess: activeServiceSuccessful.type,
     onError: serviceRequestFailed.type,
     onStart: serviceRequestStart.type
-})
+});
+
+export const deActivateService = (props) => apiCallBegan({
+    url: '/api/admin/deactivateService',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        id: props.id,
+        major_id: props.major_id
+    },
+    method: "POST",
+    onSuccess: deActivateServiceSuccessful.type,
+    onError: serviceRequestFailed.type,
+    onStart: serviceRequestStart.type
+});
 
 const { reducer, actions } = service;
 export const { serviceReceived, serviceRequestFailed, serviceRequestStart, createServiceSuccessful, editServiceSuccessful,
-    deleteServiceSuccessful
+    activeServiceSuccessful, deActivateServiceSuccessful
 } = actions;
 export default reducer;

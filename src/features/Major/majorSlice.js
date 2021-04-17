@@ -5,30 +5,43 @@ const major = createSlice({
     name: 'major',
     initialState: {
         list: [],
-
     },
     reducers: {
         majorRequestStart: (state, action) => {
             console.log('start: ', action);
         },
         majorReceived: (state, action) => {
-            console.log(JSON.stringify(action))
-            state.list = action.payload;
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+                localStorage.setItem('majors', action.payload);
+            };
         },
         majorRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
         createMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
-                state.list.push(action.payload)
+                state.list = action.payload
             };
-            console.log('log: ', action.payload);
         },
         editMajorSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
             alert('Edit major successful');
         },
-        deleteMajorSuccessful: (state, action) => {
-            alert('Delete major successful');
+        activeMajorSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
+            alert('Active major successful');
+            console.log('payload: ', action.payload);
+        },
+        deActivateMajorSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
+            alert('Deactivate major successful');
             console.log('payload: ', action.payload);
         },
     }
@@ -79,8 +92,8 @@ export const editMajor = (props) => apiCallBegan({
     onStart: majorRequestStart.type
 });
 
-export const deleteMajor = (props) => apiCallBegan({
-    url: '/api/admin/deleteMajor',
+export const activeMajor = (props) => apiCallBegan({
+    url: '/api/admin/activeMajor',
     headers: {
         Authorization: props.token
     },
@@ -88,13 +101,27 @@ export const deleteMajor = (props) => apiCallBegan({
         id: props.id
     },
     method: "POST",
-    onSuccess: deleteMajorSuccessful.type,
+    onSuccess: activeMajorSuccessful.type,
     onError: majorRequestFailed.type,
     onStart: majorRequestStart.type
-})
+});
+
+export const deActivateMajor = (props) => apiCallBegan({
+    url: '/api/admin/deactivateMajor',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        id: props.id
+    },
+    method: "POST",
+    onSuccess: deActivateMajorSuccessful.type,
+    onError: majorRequestFailed.type,
+    onStart: majorRequestStart.type
+});
 
 const { reducer, actions } = major;
 export const { majorReceived, majorRequestFailed, majorRequestStart, createMajorSuccessful, editMajorSuccessful,
-    deleteMajorSuccessful
+    activeMajorSuccessful, deActivateMajorSuccessful
 } = actions;
 export default reducer;

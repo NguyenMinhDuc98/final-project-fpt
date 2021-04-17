@@ -1,36 +1,35 @@
-import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import './listIssue.scss';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouteMatch } from "react-router";
+import { useParams, useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
-import { Confirm } from 'react-st-modal';
 import { useDispatch } from "react-redux";
-import { deleteIssue } from "../issueSlice";
+import { activeIssue, deActivateIssue } from '../issueSlice';
+import Toggle from 'react-toggle';
+import '../../../assets/styles/style.scss';
 
 function ListIssue(props) {
     const dispatch = useDispatch();
     const match = useRouteMatch();
+    const param = useParams();
 
-    const index = match.params.issueId;
-    const majorList = props.list;
-    const serviceList = majorList[match.params.serviceId].services;
-    const issueList = serviceList[index].issues;
-    
-    const onClick = async (id) => {
-        const isConfirm = await Confirm(
-            'You cannot undo this action',
-            'Are you sure you want to delete the entry?'
-        );
+    const token = localStorage.getItem('token');
+    const majors = props.list;
+    const service = majors[param.serviceId].services[param.issueId];
+    const issueList = majors[param.serviceId].services[param.issueId].issues;
 
-        if (isConfirm) {
-            handleDelete(id);
-        }
+    const handleActive = (id, token, service_id) => {
+        dispatch(activeIssue({
+            token: token,
+            id: id,
+            service_id: service_id
+        }));
     };
 
-    const handleDelete = (id) => {
-        dispatch(deleteIssue({
-            token: props.token,
-            id: id
+    const handleDeActive = (id, token, service_id) => {
+        dispatch(deActivateIssue({
+            token: token,
+            id: id,
+            service_id: service_id
         }));
     };
 
@@ -39,35 +38,40 @@ function ListIssue(props) {
             <th>
                 {issue.name}
             </th>
-            {/* <th><img src={service.image} alt="logo" /></th> */}
+            <th>
+                {issue.estimate_fix_duration}
+            </th>
+            <th>
+                {issue.estimate_price}
+            </th>
             <th className="action-col">
-                <UncontrolledDropdown>
-                    <DropdownToggle variant="secondary" size="sm" id="dropdown-custom-components">
-                        <FontAwesomeIcon icon="ellipsis-h" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>
-                            <NavLink to={`${match.url}/edit/${index}`}>
-                                Edit
-                            </NavLink>
-                        </DropdownItem>
-                        <DropdownItem onClick={() => onClick(issue.id)}>
-                            DELETE
-                        </DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown>
+                <Toggle
+                    defaultChecked={issue.is_active.data == 0 ? false : true}
+                    onChange={() => {
+                        issue.is_active.data == 0 ? handleActive(issue.id, token, service.id) : handleDeActive(issue.id, token, service.id)
+                    }}
+                />
+            </th>
+            <th>
+                <Button>
+                    <NavLink to={`${match.url}/edit/${index}`}>
+                        Edit
+                    </NavLink>
+                </Button>
             </th>
         </tr>
     )
 
     return (
         <div className='servicesList'>
-            <h3>{serviceList[index].name}</h3>
+            <h3>{}</h3>
             <Table>
                 <thead>
                     <tr>
                         <th>Issue</th>
-                        {/* <th>Image</th> */}
+                        <th>Estimate fix duration</th>
+                        <th>Estimate price</th>
+                        <th>Active</th>
                         <th>Action</th>
                     </tr>
                 </thead>
