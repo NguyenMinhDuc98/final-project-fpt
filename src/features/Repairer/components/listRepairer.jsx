@@ -1,13 +1,12 @@
 import { Table } from "reactstrap";
 import './listRepairer.scss';
-import '../../../assets/styles/style.scss';
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
-import { Confirm } from 'react-st-modal';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRepairer, getListRepairer } from "../repairerSlice";
+import { getListRepairer, activeRepairer, deActivateRepairer } from "../repairerSlice";
 import { useEffect } from "react";
-import Toggle from 'react-toggle'
+import '../../../assets/styles/style.scss';
+import Toggle from 'react-toggle';
 
 function ListRepairer() {
     const repairer = useSelector(state => state.repairer);
@@ -26,31 +25,19 @@ function ListRepairer() {
 
     const repairerList = repairer.list;
 
-    const onClick = async (id) => {
-        const isConfirm = await Confirm(
-            'You cannot undo this action',
-            'Are you sure you want to delete the entry?'
-        );
-
-        if (isConfirm) {
-            handleDelete(id);
-        }
-    };
-
-    const handleDelete = (id) => {
-        dispatch(deleteRepairer({
+    const handleActive = (id, token) => {
+        dispatch(activeRepairer({
             token: token,
             id: id
         }));
     };
 
-    const handleActive = () => {
-
-    }
-
-    const handleInActive = () => {
-
-    }
+    const handleInActive = (id, token) => {
+        dispatch(deActivateRepairer({
+            token: token,
+            id: id
+        }));
+    };
 
     const repairers = repairerList.map((repairer, index) =>
         <tr key={repairer.id}>
@@ -68,7 +55,9 @@ function ListRepairer() {
                 }
                 <Toggle
                     defaultChecked={checked}
-                    onChange={checked ? handleInActive : handleActive}
+                    onChange={() => {
+                        checked ? handleInActive(repairer.id, token) : handleActive(repairer.id, token)
+                    }}
                 />
             </th>
         </tr>
@@ -76,6 +65,7 @@ function ListRepairer() {
 
     return (
         <div className='repairersList'>
+            <h2>Repairer List</h2>
             <Table>
                 <thead>
                     <tr>

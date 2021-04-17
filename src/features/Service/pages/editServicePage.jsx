@@ -21,7 +21,7 @@ function EditServicePage() {
     const initialValues = {
         name: service.name,
     }
-    console.log('log: ', major, service);
+    console.log('log: ', match);
 
     const handleSubmit = (values) => {
         return new Promise(resolve => {
@@ -32,7 +32,7 @@ function EditServicePage() {
                     id: service.id,
                     major_id: major.id
                 }));
-                history.push('/majors');
+                history.push(`/majors/services/${match.majorId}`);
                 resolve(true);
             }, 3000);
         });

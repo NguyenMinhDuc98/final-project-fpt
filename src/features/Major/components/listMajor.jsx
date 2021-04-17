@@ -1,31 +1,29 @@
-import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import './listMajor.scss';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
-import { Confirm } from 'react-st-modal';
 import { useDispatch } from "react-redux";
-import { deleteMajor } from "../majorSlice";
+import { activeMajor, deActivateMajor } from "../majorSlice";
+import '../../../assets/styles/style.scss';
+import Toggle from 'react-toggle'
 
 function ListMajor(props) {
     const majorList = props.list;
     const dispatch = useDispatch();
     const match = useRouteMatch();
 
-    const onClick = async (id) => {
-        const isConfirm = await Confirm(
-            'You cannot undo this action',
-            'Are you sure you want to delete the entry?'
-        );
+    const token = localStorage.getItem('token');
 
-        if (isConfirm) {
-            handleDelete(id);
-        }
+    const handleActive = (id, token) => {
+        dispatch(activeMajor({
+            token: token,
+            id: id
+        }));
     };
 
-    const handleDelete = (id) => {
-        dispatch(deleteMajor({
-            token: props.token,
+    const handleDeActive = (id, token) => {
+        dispatch(deActivateMajor({
+            token: token,
             id: id
         }));
     };
@@ -39,32 +37,32 @@ function ListMajor(props) {
             </th>
             <th><img src={major.image} alt="logo" /></th>
             <th className="action-col">
-                <UncontrolledDropdown>
-                    <DropdownToggle variant="secondary" size="sm" id="dropdown-custom-components">
-                        <FontAwesomeIcon icon="ellipsis-h" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>
-                            <NavLink to={`${match.url}/edit/${index}`}>
-                                Edit
-                            </NavLink>
-                        </DropdownItem>
-                        <DropdownItem onClick={() => onClick(major.id)}>
-                            DELETE
-                        </DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown>
+                <Toggle
+                    defaultChecked={major.is_active.data == 0 ? false : true}
+                    onChange={() => {
+                        major.is_active.data == 0 ? handleActive(major.id, token) : handleDeActive(major.id, token)
+                    }}
+                />
+            </th>
+            <th>
+                <Button >
+                    <NavLink to={`${match.url}/edit/${index}`}>
+                        Edit
+                    </NavLink>
+                </Button>
             </th>
         </tr>
     )
 
     return (
         <div className='majorsList'>
+            <h2>Major list</h2>
             <Table>
                 <thead>
                     <tr>
                         <th>Major</th>
                         <th>Image</th>
+                        <th>Active</th>
                         <th>Action</th>
                     </tr>
                 </thead>

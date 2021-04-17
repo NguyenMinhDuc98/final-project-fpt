@@ -36,7 +36,7 @@ function MajorForm(props) {
 
                         return (
                             <Form>
-                                <h2>New Service</h2>
+                                <h2>Service</h2>
                                 <FastField
                                     //Props cua FastField
                                     name='name'

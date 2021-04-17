@@ -1,12 +1,12 @@
-import { DropdownItem, DropdownMenu, DropdownToggle, Table, UncontrolledDropdown } from "reactstrap";
+import { Table } from "reactstrap";
 import './listCustomer.scss';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
-import { Confirm } from 'react-st-modal';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCustomer, getListCustomer } from "../customerSlice";
 import { useEffect } from "react";
+import '../../../assets/styles/style.scss';
+import Toggle from 'react-toggle';
 
 function ListCustomer() {
     const customer = useSelector(state => state.customer);
@@ -20,21 +20,16 @@ function ListCustomer() {
     }, []);
 
     const customerList = customer.list;
+    let checked = null;
 
-    console.log('customerList: ', customer)
-
-    const onClick = async (id) => {
-        const isConfirm = await Confirm(
-            'You cannot undo this action',
-            'Are you sure you want to delete the entry?'
-        );
-
-        if (isConfirm) {
-            handleDelete(id);
-        }
+    const handleActive = (id) => {
+        dispatch(deleteCustomer({
+            token: token,
+            id: id
+        }));
     };
-
-    const handleDelete = (id) => {
+    
+    const handleInActive = (id) => {
         dispatch(deleteCustomer({
             token: token,
             id: id
@@ -51,27 +46,22 @@ function ListCustomer() {
             <th>{customer.phone_number}</th>
             <th>{customer.email}</th>
             <th className="action-col">
-                <UncontrolledDropdown>
-                    <DropdownToggle variant="secondary" size="sm" id="dropdown-custom-components">
-                        <FontAwesomeIcon icon="ellipsis-h" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>
-                            <NavLink to={`${match.url}/edit/${index}`}>
-                                Edit
-                            </NavLink>
-                        </DropdownItem>
-                        <DropdownItem type='button' onClick={() => onClick(customer.id)}>
-                            DELETE
-                        </DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown>
+            {
+                    customer.is_active.data == 0 ? checked = false : checked = true
+                }
+                <Toggle
+                    defaultChecked={checked}
+                    onChange={() => {
+                        checked ? handleInActive(customer.id, token) : handleActive(customer.id, token)
+                    }}
+                />
             </th>
         </tr>
     )
 
     return (
         <div className='customersList'>
+            <h2>Customer list</h2>
             <Table>
                 <thead>
                     <tr>

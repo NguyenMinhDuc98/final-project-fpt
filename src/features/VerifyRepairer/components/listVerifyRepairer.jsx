@@ -18,7 +18,7 @@ function ListVerifyRepairer() {
 
     const handleApprove = (id, token) => {
         dispatch(activeRepairer({
-            repairer_id: id,
+            id: id,
             token: token
         }));
     };

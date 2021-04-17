@@ -52,7 +52,7 @@ export const activeRepairer = (props) => apiCallBegan({
         Authorization: props.token
     },
     data: {
-        id: props.verify_id
+        id: props.id
     },
     method: 'POST',
     onSuccess: activeRepairerSuccessful.type,

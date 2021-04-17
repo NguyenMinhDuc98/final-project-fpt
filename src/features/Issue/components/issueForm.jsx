@@ -38,14 +38,14 @@ function IssueForm(props) {
 
                         return (
                             <Form>
-                                <h2>New Issue</h2>
+                                <h2>Issue</h2>
                                 <FastField
                                     //Props cua FastField
                                     name='name'
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
-                                    label="Service name"
+                                    label="Issue name"
                                     placeholder="Enter major name"
                                 />
                                 <FastField
