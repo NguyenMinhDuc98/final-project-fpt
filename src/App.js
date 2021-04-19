@@ -11,6 +11,7 @@ const Verify = React.lazy(() => import('./features/VerifyRepairer'));
 const Admin = React.lazy(() => import('./features/Admin'));
 const Customer = React.lazy(() => import('./features/Customer'));
 const Repairer = React.lazy(() => import('./features/Repairer'));
+const Request = React.lazy(() => import('./features/Request'));
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/admin' component={Admin} />
             <Route path='/customers' component={Customer} />
             <Route path='/repairers' component={Repairer} />
+            <Route path='/requests' component={Request} />
 
             <Route component={NotFound} />
           </Switch>

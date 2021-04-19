@@ -18,7 +18,6 @@ const api = ({ dispatch }) => next => async action => {
             method,
             data
         });
-        console.log({headers})
 
         //General
         dispatch(actions.apiCallSuccess(response.data.results));
