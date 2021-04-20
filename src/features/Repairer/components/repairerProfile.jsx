@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import { getListRepairer } from "../repairerSlice";
 import RepairerForm from "./repairerForm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function RepairerProfile() {
     const match = useParams();
@@ -41,7 +42,7 @@ function RepairerProfile() {
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <img src={repairer.image} />
+                    <FontAwesomeIcon icon='user'  className='repairer-image'/>
                 </Col>
             </Row>
         </div>
