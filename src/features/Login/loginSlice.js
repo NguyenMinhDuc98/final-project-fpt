@@ -14,6 +14,7 @@ const login = createSlice({
         },
         logout: (state, action) => {
             state.isLoggedIn = false;
+            state.user = []
             localStorage.setItem('token', '');
         },
         loginSuccess: (state, action) => {
