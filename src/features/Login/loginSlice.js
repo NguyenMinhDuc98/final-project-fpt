@@ -68,7 +68,7 @@ export const changePassword = (props) => apiCallBegan({
     onError: loginFailed.type
 })
 export const resetPassword = (props) => apiCallBegan({
-    url: '/api/resetPassword',
+    url: '/resetPassword',
     data: {
         phone_number: props.phoneNumber,
         role_id: '1',

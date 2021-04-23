@@ -12,7 +12,7 @@ const api = ({ dispatch }) => next => async action => {
 
     try {
         const response = await axios.request({
-            baseURL: 'http://fixit-back-end.herokuapp.com',
+            baseURL: 'https://fixit-back-end.herokuapp.com',
             url,
             headers,
             method,
