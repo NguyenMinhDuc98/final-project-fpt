@@ -4,7 +4,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
-// import './getVerifyCodePage.scss';
+import './getVerifyCodePage.scss';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCO9iCxOUz22RWWA4VgTcCQTw2bm74bjKs",
