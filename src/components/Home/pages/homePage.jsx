@@ -11,18 +11,15 @@ import { getListRepairer } from "../../../features/Request/requestSlice";
 
 function HomePage() {
     const dispatch = useDispatch();
-    const repairer = useSelector(state=>state.repairer);
 
     const token = localStorage.getItem('token');
-    localStorage.setItem('repairerList', JSON.stringify(repairer.list));
     
     useEffect(()=>{
         dispatch(getListRepairer(token))
     },[token])
 
     console.log('token: ', localStorage.getItem('token'));
-    // console.log('log: ', localStorage.getItem('repairerList'))
-    console.log('log: ', repairer.list)
+    console.log('user: ', JSON.parse(localStorage.getItem('user')));
 
     return (
         <div>

@@ -3,6 +3,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import './assets/fontawesome/icon';
+import PrivateRoute from './privateRoute';
 
 const Login = React.lazy(() => import('./features/Login'));
 const Home = React.lazy(() => import('./components/Home'));
@@ -17,18 +18,19 @@ function App() {
   return (
     <Suspense fallback={<div>Loading ...</div>}>
       <BrowserRouter>
-          <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/login' component={Login} />
-            <Route path='/majors' component={Majors} />
-            <Route path='/verify' component={Verify} />
-            <Route path='/admin' component={Admin} />
-            <Route path='/customers' component={Customer} />
-            <Route path='/repairers' component={Repairer} />
-            <Route path='/requests' component={Request} />
+        <Switch>
+          <Route path='/login' component={Login} />
 
-            <Route component={NotFound} />
-          </Switch>
+          <PrivateRoute path='/' exact component={Home} />
+          <PrivateRoute path='/majors' component={Majors} />
+          <PrivateRoute path='/verify' component={Verify} />
+          <PrivateRoute path='/admin' component={Admin} />
+          <PrivateRoute path='/customers' component={Customer} />
+          <PrivateRoute path='/repairers' component={Repairer} />
+          <PrivateRoute path='/requests' component={Request} />
+
+          <Route component={NotFound} />
+        </Switch>
       </BrowserRouter>
     </Suspense>
   );

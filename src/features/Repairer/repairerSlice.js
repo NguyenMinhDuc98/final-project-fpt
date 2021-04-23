@@ -12,6 +12,7 @@ const repairer = createSlice({
         },
         repairerReceived: (state, action) => {
             state.list = action.payload;
+            localStorage.setItem('repairerList', JSON.stringify(action.payload));
         },
         repairerRequestFailed: (state, action) => {
             console.log('failed: ', action);
