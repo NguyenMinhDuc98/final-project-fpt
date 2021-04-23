@@ -20,9 +20,12 @@ function LoginForm(props) {
     }
 
     const validationSchema = Yup.object().shape({
-        phoneNumber: Yup.number('You must enter number').required('This field is required!'),
+        phoneNumber: Yup.number()
+            .required('This field is required!')
+            .positive(),
 
-        password: Yup.string().required('This field is required!'),
+        password: Yup.string()
+            .required('This field is required!')
     })
 
     return (
@@ -38,6 +41,9 @@ function LoginForm(props) {
                 return (
                     <Form>
                         <h2>Login to your account</h2>
+                        {/* <p>{
+                            errors ? errors : ''
+                        }</p> */}
                         <FastField
                             //Props cua FastField
                             name='phoneNumber'

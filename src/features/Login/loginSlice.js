@@ -9,9 +9,6 @@ const login = createSlice({
         loading: false
     },
     reducers: {
-        loginRequest: (state, action) => {
-            state.loading = true;
-        },
         logout: (state, action) => {
             state.isLoggedIn = false;
             state.user = []
@@ -20,13 +17,15 @@ const login = createSlice({
         loginSuccess: (state, action) => {
             localStorage.setItem('token', action.payload.token);
 
-            state.token = localStorage.getItem('token');
+            localStorage.setItem('user', JSON.stringify(action.payload));
+
             state.isLoggedIn = true;
             state.user = action.payload;
             state.loading = false;
         },
         loginFailed: (state, action) => {
             state.loading = false;
+            alert('Phone number or password incorrect')
             console.log('failed: ', action)
         },
         changePasswordSuccessful: (state, action) => {
@@ -38,7 +37,7 @@ const login = createSlice({
     }
 });
 
-export const getToken = (props) => apiCallBegan({
+export const loginRequest = (props) => apiCallBegan({
     url: '/login',
     data: {
         phone_number: props.phoneNumber,
@@ -81,5 +80,5 @@ export const resetPassword = (props) => apiCallBegan({
 })
 
 const { reducer, actions } = login;
-export const { loginRequest, loginSuccess, loginFailed, logout, changePasswordSuccessful, resetPasswordSuccessful } = actions;
+export const { loginSuccess, loginFailed, logout, changePasswordSuccessful, resetPasswordSuccessful } = actions;
 export default reducer;
