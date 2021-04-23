@@ -1,0 +1,53 @@
+.get-verify-code-page {
+    #firebaseui-auth-container {
+        background-color: white;
+        margin: 5rem auto;
+        padding: 5rem;
+        width: 50%;
+        border-radius: 10px;
+        box-shadow: 3px 3px 3px 3px gray;
+
+        .firebaseui-card-header {
+            h1 {
+                margin-bottom: 20px;
+            }
+        }
+
+        .firebaseui-card-content {
+            button {
+                border: 1px solid black;
+                border-radius: 5px;
+                transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+                margin-bottom: 10px;
+            }
+
+            button:hover {
+                background-color: rgb(180, 178, 178);
+            }
+
+            label {
+                width: 100%;
+            }
+            input {
+                width: 100%;
+            }
+            iframe{
+                float: right;
+            }
+        }
+
+        .firebaseui-card-actions {
+            text-align: center;
+
+            button {
+                width: 50%;
+                margin: 20px 0;
+                border-radius: 5px;
+            }
+
+            button:hover {
+                background-color: rgb(180, 178, 178);
+            }
+        }
+    }
+}

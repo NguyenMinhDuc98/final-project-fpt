@@ -30,6 +30,9 @@ const login = createSlice({
         },
         changePasswordSuccessful: (state, action) => {
             alert('Change password successful');
+        },
+        resetPasswordSuccessful: (state, action) => {
+            alert('Reset password successful');
         }
     }
 });
@@ -63,7 +66,19 @@ export const changePassword = (props) => apiCallBegan({
     onSuccess: changePasswordSuccessful.type,
     onError: loginFailed.type
 })
+export const resetPassword = (props) => apiCallBegan({
+    url: '/api/resetPassword',
+    data: {
+        phone_number: props.phoneNumber,
+        role_id: '1',
+        new_password: props.new_password
+    },
+    method: 'POST',
+    onStart: loginRequest.type,
+    onSuccess: resetPasswordSuccessful.type,
+    onError: loginFailed.type
+})
 
 const { reducer, actions } = login;
-export const { loginRequest, loginSuccess, loginFailed, logout, changePasswordSuccessful } = actions;
+export const { loginRequest, loginSuccess, loginFailed, logout, changePasswordSuccessful, resetPasswordSuccessful } = actions;
 export default reducer;

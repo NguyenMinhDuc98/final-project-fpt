@@ -37,7 +37,6 @@ function LoginForm(props) {
 
                 return (
                     <Form>
-                        <p>Welcome back</p>
                         <h2>Login to your account</h2>
                         <FastField
                             //Props cua FastField
@@ -58,8 +57,9 @@ function LoginForm(props) {
                             label="Password"
                             placeholder="Enter your password"
                         />
+                        <a href='/login/getVerifyCode'>Forgot password</a>
                         <Button type="submit">
-                            {isSubmitting && <Spinner size='sm'/>}
+                            {isSubmitting && <Spinner size='sm' />}
                             Login
                         </Button>
                     </Form>
