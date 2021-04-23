@@ -5,23 +5,21 @@ import { Button, Spinner } from "reactstrap";
 import PropTypes from 'prop-types';
 import React from 'react';
 
-ChangePasswordForm.propTypes = {
+ResetPasswordForm.propTypes = {
     onSubmit: PropTypes.func
 }
 
-ChangePasswordForm.defaultProps = {
+ResetPasswordForm.defaultProps = {
     onSubmit: null
 }
 
-function ChangePasswordForm(props) {
+function ResetPasswordForm(props) {
     const initialValues = {
-        old_password: '',
         new_password: '',
         confirm_password: ''
     }
 
     const validationSchema = Yup.object().shape({
-        old_password: Yup.string().required('This field is required!'),
         new_password: Yup.string().required('This field is required!'),
         confirm_password: Yup.string().required('This field is required!'),
     })
@@ -38,17 +36,7 @@ function ChangePasswordForm(props) {
 
                 return (
                     <Form>
-                        <h2>Change Password</h2>
-                        <FastField
-                            //Props cua FastField
-                            name='old_password'
-                            component={InputField}
-
-                            //Props truyen vao trong InputField
-                            label="Old password"
-                            type="password"
-                            placeholder="Enter your old password"
-                        />
+                        <h2>Reset Password</h2>
                         <FastField
                             //Props cua FastField
                             name='new_password'
@@ -70,8 +58,8 @@ function ChangePasswordForm(props) {
                             placeholder="Confirm your password"
                         />
                         <Button type="submit">
-                            {isSubmitting && <Spinner size='sm' />}
-                            Change Password
+                            {isSubmitting && <Spinner size='sm'/>}
+                            Reset Password
                         </Button>
                     </Form>
                 )
@@ -80,4 +68,4 @@ function ChangePasswordForm(props) {
     )
 }
 
-export default ChangePasswordForm;
+export default ResetPasswordForm;
