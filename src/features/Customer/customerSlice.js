@@ -13,6 +13,7 @@ const customer = createSlice({
         },
         customerReceived: (state, action) => {
             state.list = action.payload;
+            localStorage.setItem('customer', JSON.stringify(action.payload));
 
             console.log('start: ', action);
             console.log('payload: ', action.payload);

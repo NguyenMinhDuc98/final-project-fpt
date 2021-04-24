@@ -40,7 +40,7 @@ function CustomerForm(props) {
 
                         return (
                             <Form>
-                                <h2>New Customer</h2>
+                                <h2>Edit Customer</h2>
                                 <FastField
                                     //Props cua FastField
                                     name='name'
@@ -70,7 +70,7 @@ function CustomerForm(props) {
                                 />
                                 <Button type="submit">
                                     {isSubmitting && <Spinner size='sm' />}
-                                    Submit
+                                    Save
                                 </Button>
                             </Form>
                         )

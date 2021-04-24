@@ -6,12 +6,12 @@ import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Home/components/left-navbar";
 import CustomerForm from "../components/customerForm";
 import { editCustomer } from "../customerSlice";
+import './editCustomerPage.scss';
 
 function EditCustomerPage() {
-    const customers = useSelector(state => state.customer);
+    const listCustomer = JSON.parse(localStorage.getItem('customer'));
     const history = useHistory();
     const dispatch = useDispatch();
-    const listCustomer = customers.list;
     const { id } = useParams();
     const customer = listCustomer[id];
     const token = localStorage.getItem('token');
