@@ -41,7 +41,7 @@ function EditIssuePage() {
     }
 
     return (
-        <div className='major-form-page'>
+        <div className='major-form-page container-fluid'>
             <Header />
 
             <Row>

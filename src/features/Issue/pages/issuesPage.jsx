@@ -22,7 +22,7 @@ function IssuesPage() {
     }
 
     return (
-        <div className='issue-page'>
+        <div className='issue-page container-fluid'>
             <Header />
 
             <Row>

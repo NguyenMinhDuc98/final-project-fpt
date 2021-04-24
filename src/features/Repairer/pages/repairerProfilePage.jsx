@@ -10,7 +10,7 @@ import Wallet from "../components/wallet";
 
 function RepairerProfilePage() {
     return (
-        <div className='repairer-page'>
+        <div className='repairer-page container-fluid'>
             <Header />
 
             <Row>

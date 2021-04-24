@@ -29,7 +29,7 @@ function MajorsPage() {
     }
 
     return (
-        <div className='major-page'>
+        <div className='major-page container-fluid'>
             <Header />
 
             <Row>

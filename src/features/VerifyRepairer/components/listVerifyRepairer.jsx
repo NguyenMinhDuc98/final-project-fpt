@@ -5,16 +5,15 @@ import { activeRepairer, getNotVerifiedList } from "../verifySlice";
 import './listVerifyRepairer.scss';
 
 function ListVerifyRepairer() {
-    const nvRepairer = useSelector(state => state.notVerifiedList);
     const dispatch = useDispatch();
     const token = localStorage.getItem('token');
-    const nvRepairersList = nvRepairer.list;
+    const nvRepairersList = JSON.parse(localStorage.getItem('verifyList'));
 
-    console.log('token: ', token)
+    console.log({nvRepairersList});
 
-    useEffect(() => {
-        dispatch(getNotVerifiedList(token))
-    },[]);
+    // useEffect(() => {
+    //     // window.location.reload(true)
+    // },[nvRepairersList]);
 
     const handleApprove = (id, token) => {
         dispatch(activeRepairer({
@@ -37,6 +36,7 @@ function ListVerifyRepairer() {
 
     return (
         <div className='nvRepairersList'>
+            <h2>Not verified repairers</h2>
             <Table>
                 <thead>
                     <tr>
