@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "reactstrap";
+import { Button, Col, Row, Spinner } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import ListMajor from "../components/listMajor";
@@ -28,27 +28,35 @@ function MajorsPage() {
         history.push('/majors/add-major')
     }
 
-    return (
-        <div className='major-page container-fluid'>
-            <Header />
+    const {isLoading} = major;
 
-            <Row>
-                <Col lg={3}>
-                    <LeftNavbar />
-                    <Footer />
-                </Col>
-                <Col lg={9}>
-                    <div className='list-major'>
-                        <Button onClick={toAddMajor} className="add-major-button">
-                            <FontAwesomeIcon icon="plus-circle" className="major-add" /> Add
-                        </Button>
-                        <ListMajor
-                            list={major.list}
-                            token={token}
-                        />
-                    </div>
-                </Col>
-            </Row>
+    return (
+        <div>
+            {
+                isLoading
+                    ? <div className='spinner'><Spinner size='xxl'/></div>
+                    : (<div className='major-page container-fluid'>
+                        <Header />
+
+                        <Row>
+                            <Col lg={3}>
+                                <LeftNavbar />
+                                <Footer />
+                            </Col>
+                            <Col lg={9}>
+                                <div className='list-major'>
+                                    <Button onClick={toAddMajor} className="add-major-button">
+                                        <FontAwesomeIcon icon="plus-circle" className="major-add" /> Add
+                            </Button>
+                                    <ListMajor
+                                        list={major.list}
+                                        token={token}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>)
+            }
         </div>
     )
 }

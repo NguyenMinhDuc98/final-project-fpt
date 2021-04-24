@@ -36,7 +36,7 @@ function LeftNavbar(props) {
     return (
         <div className='left-navbar'>
             <Navbar color="light" light expand="md">
-                <Nav className="flex-column" navbar tabs pills>
+                <Nav className="flex-column nav-pills" navbar tabs>
                     <NavItem>
                         <NavLink onClick={toHome}>
                             <FontAwesomeIcon icon='chart-line' /> Dashboard

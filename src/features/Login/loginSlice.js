@@ -5,12 +5,11 @@ const login = createSlice({
     name: 'login',
     initialState: {
         user: [],
-        isLoggedIn: false,
-        loading: false
+        loading: false,
+        error: null
     },
     reducers: {
         logout: (state, action) => {
-            state.isLoggedIn = false;
             state.user = []
             localStorage.setItem('token', '');
         },
@@ -19,7 +18,6 @@ const login = createSlice({
 
             localStorage.setItem('user', JSON.stringify(action.payload));
 
-            state.isLoggedIn = true;
             state.user = action.payload;
             state.loading = false;
         },
@@ -29,10 +27,22 @@ const login = createSlice({
             console.log('failed: ', action)
         },
         changePasswordSuccessful: (state, action) => {
-            alert('Change password successful');
+            if (action.payload == "Incorrect password") {
+                alert("Incorrect old password");
+                state.error = action.payload
+            } else {
+                alert('Change password successful');
+            }
+        },
+        changePasswordFailed: (state, action) => {
+            alert('Change password failed');
         },
         resetPasswordSuccessful: (state, action) => {
             alert('Reset password successful');
+        },
+        actionStart: (state, action) => {
+            state.error = null;
+            console.log({ action })
         }
     }
 });
@@ -45,14 +55,14 @@ export const loginRequest = (props) => apiCallBegan({
         role_id: "1"
     },
     method: "POST",
-    onStart: loginRequest.type,
+    onStart: actionStart.type,
     onSuccess: loginSuccess.type,
     onError: loginFailed.type
 });
 
 export const changePassword = (props) => apiCallBegan({
     url: '/api/changePassword',
-    headers:{
+    headers: {
         Authorization: props.token
     },
     data: {
@@ -62,9 +72,9 @@ export const changePassword = (props) => apiCallBegan({
         new_password: props.new_password
     },
     method: 'POST',
-    onStart: loginRequest.type,
+    onStart: actionStart.type,
     onSuccess: changePasswordSuccessful.type,
-    onError: loginFailed.type
+    onError: changePasswordFailed.type
 })
 export const resetPassword = (props) => apiCallBegan({
     url: '/resetPassword',
@@ -74,11 +84,12 @@ export const resetPassword = (props) => apiCallBegan({
         new_password: props.new_password
     },
     method: 'POST',
-    onStart: loginRequest.type,
+    onStart: actionStart.type,
     onSuccess: resetPasswordSuccessful.type,
     onError: loginFailed.type
 })
 
 const { reducer, actions } = login;
-export const { loginSuccess, loginFailed, logout, changePasswordSuccessful, resetPasswordSuccessful } = actions;
+export const { loginSuccess, loginFailed, logout, changePasswordSuccessful,
+    changePasswordFailed, resetPasswordSuccessful, actionStart } = actions;
 export default reducer;

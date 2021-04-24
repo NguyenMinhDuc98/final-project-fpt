@@ -5,18 +5,21 @@ const major = createSlice({
     name: 'major',
     initialState: {
         list: [],
+        isLoading: false
     },
     reducers: {
         majorRequestStart: (state, action) => {
+            state.isLoading = true;
             console.log('start: ', action);
         },
         majorReceived: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                localStorage.setItem('majors', action.payload);
+                state.isLoading = false;
             };
         },
         majorRequestFailed: (state, action) => {
+            state.isLoading = false;
             console.log('failed: ', action);
         },
         createMajorSuccessful: (state, action) => {
