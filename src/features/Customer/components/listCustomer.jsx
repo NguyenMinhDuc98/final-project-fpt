@@ -9,17 +9,19 @@ import '../../../assets/styles/style.scss';
 import Toggle from 'react-toggle';
 
 function ListCustomer() {
-    const customer = useSelector(state => state.customer);
     const dispatch = useDispatch();
     const match = useRouteMatch();
     const token = localStorage.getItem('token');
+
+    const customersList = JSON.parse(localStorage.getItem('customer'));
+
+    console.log({customersList})
 
     useEffect(() => {
         dispatch(getListCustomer(token));
         console.log('token: ', token);
     }, []);
 
-    const customerList = customer.list;
     let checked = null;
 
     const handleActive = (id) => {
@@ -36,7 +38,7 @@ function ListCustomer() {
         }));
     };
 
-    const customers = customerList.map((customer, index) =>
+    const customers = customersList.map((customer, index) =>
         <tr key={customer.id}>
             <th>
                 <NavLink to={`${match.url}/edit/${index}`}>

@@ -9,7 +9,7 @@ import './customersPage.scss';
 function CustomersPage() {
 
     return (
-        <div className='customer-page'>
+        <div className='customer-page container-fluid'>
             <Header />
 
             <Row>
