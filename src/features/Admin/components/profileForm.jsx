@@ -14,12 +14,6 @@ ProfileForm.defaultProps = {
 }
 
 function ProfileForm(props) {
-    const initialValues = {
-        phoneNumber: '',
-        name: '',
-        email:''
-    }
-
     const validationSchema = Yup.object().shape({
         phoneNumber: Yup.number('You must enter number').required('This field is required!'),
 
@@ -28,7 +22,7 @@ function ProfileForm(props) {
 
     return (
         <Formik
-            initialValues={initialValues}
+            initialValues={props.initialValues}
             validationSchema={validationSchema}
             onSubmit={props.onSubmit}
         >
@@ -39,15 +33,7 @@ function ProfileForm(props) {
                 return (
                     <Form>
                         <h2>Admin profile</h2>
-                        <FastField
-                            //Props cua FastField
-                            name='phoneNumber'
-                            component={InputField}
 
-                            //Props truyen vao trong InputField
-                            label="Phone Number"
-                            placeholder="Enter your phone number"
-                        />
                         <FastField
                             //Props cua FastField
                             name='name'
@@ -55,6 +41,15 @@ function ProfileForm(props) {
 
                             //Props truyen vao trong InputField
                             label="Name"
+                            placeholder="Enter your phone number"
+                        />
+                        <FastField
+                            //Props cua FastField
+                            name='phoneNumber'
+                            component={InputField}
+
+                            //Props truyen vao trong InputField
+                            label="Phone Number"
                             placeholder="Enter your phone number"
                         />
                         <FastField
@@ -67,7 +62,7 @@ function ProfileForm(props) {
                             placeholder="Enter your phone number"
                         />
                         <Button type="submit">
-                            {isSubmitting && <Spinner size='sm'/>}
+                            {isSubmitting && <Spinner size='sm' />}
                             Edit
                         </Button>
                     </Form>
