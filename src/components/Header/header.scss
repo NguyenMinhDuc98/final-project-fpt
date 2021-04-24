@@ -1,9 +1,12 @@
 .header {
     background-color: white;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+
     li {
         list-style-type: none;
 
-        .show{
+        .show {
             min-width: 20rem;
         }
     }

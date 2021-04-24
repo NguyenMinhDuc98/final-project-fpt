@@ -5,14 +5,21 @@ import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Home/components/left-navbar";
 import { editAdmin } from "../adminSlice";
 import ProfileForm from "../components/profileForm";
+import './adminProfile.scss';
+import '../../../assets/styles/style.scss';
 
 function AdminProfile() {
     const dispatch = useDispatch();
 
+    const user = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token');
 
+    console.log({user})
+
     const initialValues = {
-        name: 'service.name',
+        name: user.name,
+        phoneNumber: user.phone,
+        email: user.email,
     }
     const handleSubmit = (values) => {
         return new Promise(resolve => {
@@ -28,7 +35,7 @@ function AdminProfile() {
     }
 
     return (
-        <div>
+        <div className='container-fluid'>
             <Header />
 
             <Row>
@@ -37,10 +44,12 @@ function AdminProfile() {
                     <Footer />
                 </Col>
                 <Col lg={9}>
-                    <ProfileForm
-                        initialValues={initialValues}
-                        onSubmit={handleSubmit}
-                    />
+                    <div className='admin-profile container'>
+                        <ProfileForm
+                            initialValues={initialValues}
+                            onSubmit={handleSubmit}
+                        />
+                    </div>
                 </Col>
             </Row>
         </div>
