@@ -67,11 +67,6 @@ function LeftNavbar(props) {
                             <FontAwesomeIcon icon="check" /> Request
                         </NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink href="#">
-                            <FontAwesomeIcon icon="ban" /> List users banned
-                        </NavLink>
-                    </NavItem>
                 </Nav>
             </Navbar>
         </div>

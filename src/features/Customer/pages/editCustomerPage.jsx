@@ -42,7 +42,7 @@ function EditCustomerPage() {
     }
 
     return (
-        <div className='customer-form-page'>
+        <div className='customer-form-page container-fluid'>
             <Header />
 
             <Row>

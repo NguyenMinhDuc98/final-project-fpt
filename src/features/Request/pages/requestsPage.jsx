@@ -12,7 +12,7 @@ import { getListRepairer } from "../requestSlice";
 
 function RequestsPage() {
     return (
-        <div className='request-page'>
+        <div className='request-page container-fluid'>
             <Header />
 
             <Row>

@@ -8,7 +8,7 @@ import './repairersPage.scss';
 
 function RepairersPage() {
     return (
-        <div className='repairer-page'>
+        <div className='repairer-page container-fluid'>
             <Header />
 
             <Row>

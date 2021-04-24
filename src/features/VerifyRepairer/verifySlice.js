@@ -13,9 +13,10 @@ const notVerifiedList = createSlice({
             console.log('start: ', action);
         },
         verifyListReceived: (state, action) => {
-            localStorage.setItem('verifyList', action.payload);
-
-            state.list = action.payload;
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+                localStorage.setItem('verifyList', JSON.stringify(action.payload));
+            };
         },
         verifyListRequestFailed: (state, action) => {
             console.log('failed: ', action);
@@ -23,12 +24,13 @@ const notVerifiedList = createSlice({
         activeRepairerSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
+                localStorage.setItem('verifyList', JSON.stringify(action.payload));
             };
-            console.log('log: ', action.payload);
-            console.log('success: ', action);
+            alert('Active repairer successful');
+            window.location.reload(true);
         },
         activeRepairerFailed: (state, action) => {
-            console.log('failed: ', action);
+            alert('Active repairer failed')
         },
         activeRepairerStart: (state, action) => {
             console.log('start: ', action);

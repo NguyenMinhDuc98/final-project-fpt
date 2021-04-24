@@ -8,21 +8,26 @@ import '../../../assets/styles/style.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getListRepairer } from "../../../features/Request/requestSlice";
+import { getNotVerifiedList } from "../../../features/VerifyRepairer/verifySlice";
 
 function HomePage() {
     const dispatch = useDispatch();
 
     const token = localStorage.getItem('token');
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(getListRepairer(token))
-    },[token])
+    }, [token])
+
+    useEffect(() => {
+        dispatch(getNotVerifiedList(token))
+    }, [token])
 
     console.log('token: ', localStorage.getItem('token'));
     console.log('user: ', JSON.parse(localStorage.getItem('user')));
 
     return (
-        <div>
+        <div className='container-fluid'>
             <Header />
 
             <Row>

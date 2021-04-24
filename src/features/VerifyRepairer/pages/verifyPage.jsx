@@ -8,7 +8,7 @@ import ListVerifyRepairer from "../components/listVerifyRepairer";
 
 function VerifyPage() {
     return (
-        <div className='verify-page'>
+        <div className='verify-page container-fluid'>
             <Header />
 
             <Row>
