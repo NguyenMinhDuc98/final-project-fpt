@@ -2,7 +2,7 @@ import { FastField, Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
 import { Button, Spinner } from 'reactstrap';
 import * as Yup from 'yup';
-import InputField from '../../../custom-field/inputField';
+import InputField from '../../../components/Custom-field/inputField';
 import logo from '../../../assets/images/logo-fixit.png';
 
 IssueForm.propTypes = {

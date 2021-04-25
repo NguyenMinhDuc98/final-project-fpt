@@ -38,9 +38,9 @@ function ListMajor(props) {
             <th><img src={major.image} alt="logo" /></th>
             <th className="action-col">
                 <Toggle
-                    defaultChecked={major.is_active.data == 0 ? false : true}
+                    defaultChecked={major.is_active.data === 0 ? false : true}
                     onChange={() => {
-                        major.is_active.data == 0 ? handleActive(major.id, token) : handleDeActive(major.id, token)
+                        major.is_active.data === 0 ? handleActive(major.id, token) : handleDeActive(major.id, token)
                     }}
                 />
             </th>

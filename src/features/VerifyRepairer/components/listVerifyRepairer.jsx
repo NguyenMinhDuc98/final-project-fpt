@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Table } from "reactstrap";
-import { activeRepairer, getNotVerifiedList } from "../verifySlice";
+import { activeRepairer } from "../verifySlice";
 import './listVerifyRepairer.scss';
 
 function ListVerifyRepairer() {
@@ -9,11 +8,7 @@ function ListVerifyRepairer() {
     const token = localStorage.getItem('token');
     const nvRepairersList = JSON.parse(localStorage.getItem('verifyList'));
 
-    console.log({nvRepairersList});
-
-    // useEffect(() => {
-    //     // window.location.reload(true)
-    // },[nvRepairersList]);
+    console.log({ nvRepairersList });
 
     const handleApprove = (id, token) => {
         dispatch(activeRepairer({

@@ -1,6 +1,6 @@
 import { FastField, Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
-import InputField from '../../../custom-field/inputField';
+import InputField from '../../../components/Custom-field/inputField';
 
 RepairerForm.propTypes = {
     onSubmit: PropTypes.func
@@ -19,6 +19,7 @@ function RepairerForm(props) {
                 >
                     {formikProps => {
                         const { values, errors, touched } = formikProps;
+                        console.log({values, errors, touched})
 
                         return (
                             <Form>

@@ -18,7 +18,7 @@ function RepairerProfile() {
 
     useEffect(() => {
         dispatch(getListRepairer(token));
-    }, []);
+    }, [token]);
 
     const initialValues = {
         name: repairer.name,

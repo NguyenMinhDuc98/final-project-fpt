@@ -1,5 +1,5 @@
 import { FastField, Form, Formik } from "formik";
-import InputField from "../../../custom-field/inputField";
+import InputField from "../../../components/Custom-field/inputField";
 import * as Yup from 'yup';
 import { Button, Spinner } from "reactstrap";
 import PropTypes from 'prop-types';
@@ -41,7 +41,7 @@ function ChangePasswordForm(props) {
         >
             {formikProps => {
                 const { values, errors, touched, isSubmitting } = formikProps;
-                // console.log({ values, errors, touched });
+                console.log({ values, errors, touched });
 
                 return (
                     <Form>

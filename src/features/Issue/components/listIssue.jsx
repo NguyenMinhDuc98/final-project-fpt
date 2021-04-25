@@ -46,9 +46,9 @@ function ListIssue(props) {
             </th>
             <th className="action-col">
                 <Toggle
-                    defaultChecked={issue.is_active.data == 0 ? false : true}
+                    defaultChecked={issue.is_active.data === 0 ? false : true}
                     onChange={() => {
-                        issue.is_active.data == 0 ? handleActive(issue.id, token, service.id) : handleDeActive(issue.id, token, service.id)
+                        issue.is_active.data === 0 ? handleActive(issue.id, token, service.id) : handleDeActive(issue.id, token, service.id)
                     }}
                 />
             </th>

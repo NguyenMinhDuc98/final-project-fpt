@@ -53,7 +53,7 @@ function ListMajor() {
             defaultFlex: 1,
             type: 'string',
             shouldComponentUpdate,
-            render: ({ data }) => data.is_active.data == 1 ? 'Active' : 'Not active'
+            render: ({ data }) => data.is_active.data === 1 ? 'Active' : 'Not active'
         },
     ];
 
@@ -67,7 +67,7 @@ function ListMajor() {
         const newDataSource = repairerList.filter(p => {
             return visibleColumns.reduce((acc, col) => {
                 const v = (p[col.id] + '').toLowerCase() // get string value
-                return acc || v.indexOf(value.toLowerCase()) != -1 // make the search case insensitive
+                return acc || v.indexOf(value.toLowerCase()) !== -1 // make the search case insensitive
             }, false)
         });
 

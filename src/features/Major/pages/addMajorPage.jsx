@@ -1,11 +1,11 @@
 import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
-import LeftNavbar from "../../../components/Home/components/left-navbar";
+import LeftNavbar from "../../../components/Sidebar/left-navbar";
 import '../../../assets/styles/style.scss';
 import './addMajorPage.scss';
 import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createMajor } from "../majorSlice";
 import MajorForm from "../components/majorForm";
 

@@ -5,7 +5,7 @@ const admin = createSlice({
     name: 'admin',
     initialState: {
         list: [],
-
+        isLoading: false
     },
     reducers: {
         adminRequestStart: (state, action) => {

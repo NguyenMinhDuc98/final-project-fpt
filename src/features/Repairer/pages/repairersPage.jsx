@@ -2,7 +2,7 @@ import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import ListRepairer from "../components/listRepairer";
-import LeftNavbar from "../../../components/Home/components/left-navbar";
+import LeftNavbar from "../../../components/Sidebar/left-navbar";
 import '../../../assets/styles/style.scss';
 import './repairersPage.scss';
 
