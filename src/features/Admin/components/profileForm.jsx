@@ -1,5 +1,6 @@
 import { FastField, Form, Formik } from "formik";
-import InputField from "../../../custom-field/inputField";
+import InputField from "../../../components/Custom-field/inputField";
+// ../../../components/
 import * as Yup from 'yup';
 import { Button, Spinner } from "reactstrap";
 import PropTypes from 'prop-types';

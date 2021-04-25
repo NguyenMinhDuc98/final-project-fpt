@@ -5,7 +5,7 @@ const customer = createSlice({
     name: 'customer',
     initialState: {
         list: [],
-
+        isLoading: false
     },
     reducers: {
         customerRequestStart: (state, action) => {

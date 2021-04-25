@@ -2,7 +2,7 @@ import { Table } from "reactstrap";
 import './listCustomer.scss';
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteCustomer, getListCustomer } from "../customerSlice";
 import { useEffect } from "react";
 import '../../../assets/styles/style.scss';
@@ -20,7 +20,7 @@ function ListCustomer() {
     useEffect(() => {
         dispatch(getListCustomer(token));
         console.log('token: ', token);
-    }, []);
+    }, [token]);
 
     let checked = null;
 
@@ -49,7 +49,7 @@ function ListCustomer() {
             <th>{customer.email}</th>
             <th className="action-col">
             {
-                    customer.is_active.data == 0 ? checked = false : checked = true
+                    customer.is_active.data === 0 ? checked = false : checked = true
                 }
                 <Toggle
                     defaultChecked={checked}

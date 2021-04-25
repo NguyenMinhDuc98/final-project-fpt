@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
-import LeftNavbar from "../../../components/Home/components/left-navbar";
+import LeftNavbar from "../../../components/Sidebar/left-navbar";
 import { editAdmin } from "../adminSlice";
 import ProfileForm from "../components/profileForm";
 import './adminProfile.scss';

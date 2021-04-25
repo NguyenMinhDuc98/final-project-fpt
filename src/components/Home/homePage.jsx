@@ -1,14 +1,14 @@
 import { Col, Row } from "reactstrap";
-import Footer from "../../Footer";
-import Header from "../../Header";
-import LeftNavbar from "../components/left-navbar";
-import Statistics from "../components/statistic";
-import Chart from '../components/chart';
-import '../../../assets/styles/style.scss';
-import { useDispatch, useSelector } from "react-redux";
+import Footer from "../Footer";
+import Header from "../Header";
+import LeftNavbar from "../Sidebar/left-navbar";
+import Statistics from "../Statistic/statistic";
+import Chart from '../Chart/chart';
+import '../../assets/styles/style.scss';
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getListRepairer } from "../../../features/Request/requestSlice";
-import { getNotVerifiedList } from "../../../features/VerifyRepairer/verifySlice";
+import { getListRepairer } from "../../features/Request/requestSlice";
+import { getNotVerifiedList } from "../../features/VerifyRepairer/verifySlice";
 
 function HomePage() {
     const dispatch = useDispatch();

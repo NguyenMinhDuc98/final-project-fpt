@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import ChangePasswordForm from "../components/changePasswordForm";
 import { changePassword } from "../loginSlice";
 import './changePasswordPage.scss';

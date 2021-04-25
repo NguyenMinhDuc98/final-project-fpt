@@ -2,13 +2,9 @@ import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import ListRequest from "../components/requestList";
-import LeftNavbar from "../../../components/Home/components/left-navbar";
+import LeftNavbar from "../../../components/Sidebar/left-navbar";
 import '../../../assets/styles/style.scss';
 import './requestPage.scss';
-import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getListRepairer } from "../requestSlice";
 
 function RequestsPage() {
     return (

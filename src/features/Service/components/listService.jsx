@@ -2,7 +2,7 @@ import { Button, Table } from "reactstrap";
 import './listService.scss';
 import { useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { activeService, deActivateService } from "../serviceSlice";
 import '../../../assets/styles/style.scss';
 import Toggle from 'react-toggle'
@@ -42,9 +42,9 @@ function ListService(props) {
             </th>
             <th className="action-col">
                 <Toggle
-                    defaultChecked={service.is_active.data == 0 ? false : true}
+                    defaultChecked={service.is_active.data === 0 ? false : true}
                     onChange={() => {
-                        service.is_active.data == 0 ? handleActive(service.id, token, major.id) : handleDeActive(service.id, token, major.id)
+                        service.is_active.data === 0 ? handleActive(service.id, token, major.id) : handleDeActive(service.id, token, major.id)
                     }}
                 />
             </th>

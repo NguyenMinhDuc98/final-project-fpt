@@ -27,7 +27,7 @@ const login = createSlice({
             console.log('failed: ', action)
         },
         changePasswordSuccessful: (state, action) => {
-            if (action.payload == "Incorrect password") {
+            if (action.payload === "Incorrect password") {
                 alert("Incorrect old password");
                 state.error = action.payload
             } else {

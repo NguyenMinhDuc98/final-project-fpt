@@ -16,12 +16,9 @@ function ListRepairer() {
     const token = localStorage.getItem('token');
     let checked = null;
 
-    // console.log('log: ', repairer.list[0].is_active.data == 0);
-
     useEffect(() => {
         dispatch(getListRepairer(token));
-        console.log('token: ', token);
-    }, []);
+    }, [token]);
 
     const repairerList = repairer.list;
 
@@ -51,7 +48,7 @@ function ListRepairer() {
             <th>{repairer.email}</th>
             <th>
                 {
-                    repairer.is_active.data == 0 ? checked = false : checked = true
+                    repairer.is_active.data === 0 ? checked = false : checked = true
                 }
                 <Toggle
                     defaultChecked={checked}

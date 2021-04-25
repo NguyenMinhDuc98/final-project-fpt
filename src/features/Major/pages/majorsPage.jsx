@@ -2,7 +2,7 @@ import { Button, Col, Row, Spinner } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import ListMajor from "../components/listMajor";
-import LeftNavbar from "../../../components/Home/components/left-navbar";
+import LeftNavbar from "../../../components/Sidebar/left-navbar";
 import '../../../assets/styles/style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './majorsPage.scss';
@@ -22,7 +22,7 @@ function MajorsPage() {
 
     useEffect(() => {
         dispatch(getListMajor(token));
-    }, []);
+    }, [token]);
 
     const toAddMajor = () => {
         history.push('/majors/add-major')

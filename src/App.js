@@ -6,7 +6,7 @@ import './assets/fontawesome/icon';
 import PrivateRoute from './privateRoute';
 
 const Login = React.lazy(() => import('./features/Login'));
-const Home = React.lazy(() => import('./components/Home'));
+const Home = React.lazy(() => import('./components/Home/routes'));
 const Majors = React.lazy(() => import('./features/Major'));
 const Verify = React.lazy(() => import('./features/VerifyRepairer'));
 const Admin = React.lazy(() => import('./features/Admin'));

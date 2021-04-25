@@ -1,9 +1,9 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import NotFound from "../../components/NotFound";
-import HomePage from "./pages/homePage";
+import NotFound from "../NotFound";
+import HomePage from "./homePage";
 import ChangePasswordPage from "../../features/Login/pages/changePasswordPage";
 
-function Home(props) {
+function Routess(props) {
     const match = useRouteMatch();
 
     return (
@@ -16,4 +16,4 @@ function Home(props) {
     )
 }
 
-export default Home;
+export default Routess;
