@@ -1,10 +1,17 @@
 .verify-page {
-    border-radius: 10px;
-    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
-
+    
     .list-verify {
         background-color: white;
         margin-top: 20px;
         border-radius: 10px;
+        box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+
+        h3{
+            background-color: gray;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: -55px;
+        }
     }
 }

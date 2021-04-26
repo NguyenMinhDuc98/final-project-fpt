@@ -6,34 +6,33 @@ const notVerifiedList = createSlice({
     name: 'notVerifiedList',
     initialState: {
         list: [],
-
+        isLoading: false
     },
     reducers: {
         verifyListRequestStart: (state, action) => {
+            state.isLoading = true;
             console.log('start: ', action);
         },
         verifyListReceived: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                localStorage.setItem('verifyList', JSON.stringify(action.payload));
+                state.isLoading = false;
             };
         },
         verifyListRequestFailed: (state, action) => {
+            state.isLoading = false;
             console.log('failed: ', action);
         },
         activeRepairerSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                localStorage.setItem('verifyList', JSON.stringify(action.payload));
+                state.isLoading = false;
             };
             alert('Active repairer successful');
-            window.location.reload(true);
         },
         activeRepairerFailed: (state, action) => {
+            state.isLoading = false;
             alert('Active repairer failed')
-        },
-        activeRepairerStart: (state, action) => {
-            console.log('start: ', action);
         },
     }
 });
@@ -59,11 +58,11 @@ export const verifyRepairer = (props) => apiCallBegan({
     method: 'POST',
     onSuccess: activeRepairerSuccessful.type,
     onError: activeRepairerFailed.type,
-    onStart: activeRepairerStart.type
+    onStart: verifyListRequestStart.type
 });
 
 const { reducer, actions } = notVerifiedList;
 export const { verifyListReceived, verifyListRequestFailed, verifyListRequestStart,
-    activeRepairerSuccessful, activeRepairerFailed, activeRepairerStart
+    activeRepairerSuccessful, activeRepairerFailed
 } = actions;
 export default reducer;

@@ -1,6 +1,18 @@
-.nvRepairersList{
-    h2{
-        margin: 10px;
+.verify-table{
+    border-radius: 10px !important;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+
+    thead{
+        tr{
+            td{
+                background-color: gray;
+            }
+
+            th{
+                border: 1px solid white;
+                background-color: gray;
+            }
+        }
     }
 
     button{
