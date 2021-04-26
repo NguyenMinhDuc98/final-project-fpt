@@ -20,17 +20,13 @@ function AddMajorPage() {
     }
 
     const handleSubmit = (values) => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                dispatch(createMajor({
-                    token: token,
-                    name: values.name,
-                    image: values.image
-                }));
-                history.push('/majors');
-                resolve(true);
-            }, 3000);
-        });
+        dispatch(createMajor({
+            token: token,
+            name: values.name,
+            image: values.image
+        }));
+        
+        history.push('/majors');
     }
 
     return (

@@ -13,7 +13,6 @@ const service = createSlice({
         serviceReceived: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                localStorage.setItem('services', action.payload);
             };
         },
         serviceRequestFailed: (state, action) => {
@@ -55,7 +54,7 @@ export const createService = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        service_id: props.id
+        major_id: props.major_id
     },
     method: "POST",
     onSuccess: createServiceSuccessful.type,
@@ -70,7 +69,7 @@ export const editService = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        service_id: props.service_id,
+        major_id: props.major_id,
         id: props.id
     },
     method: "POST",

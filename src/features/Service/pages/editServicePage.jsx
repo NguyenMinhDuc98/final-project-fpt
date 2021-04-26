@@ -18,20 +18,23 @@ function EditServicePage() {
     const token = localStorage.getItem('token');
     const service = major.services[match.serviceId];
 
+    console.log({ major, service })
+
     const initialValues = {
         name: service.name,
     }
     console.log('log: ', match);
 
     const handleSubmit = (values) => {
+        dispatch(editService({
+            token: token,
+            name: values.name,
+            id: service.id,
+            major_id: major.id
+        }));
+
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(editService({
-                    token: token,
-                    name: values.name,
-                    id: service.id,
-                    major_id: major.id
-                }));
                 history.push(`/majors/services/${match.majorId}`);
                 resolve(true);
             }, 3000);

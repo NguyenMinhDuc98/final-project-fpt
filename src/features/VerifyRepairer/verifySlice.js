@@ -48,7 +48,7 @@ export const getNotVerifiedList = (props) => apiCallBegan({
     onStart: verifyListRequestStart.type
 });
 
-export const activeRepairer = (props) => apiCallBegan({
+export const verifyRepairer = (props) => apiCallBegan({
     url: '/api/admin/approveCV',
     headers: {
         Authorization: props.token

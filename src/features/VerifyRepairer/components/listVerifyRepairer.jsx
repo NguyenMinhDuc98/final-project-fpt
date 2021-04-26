@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Button, Table } from "reactstrap";
-import { activeRepairer } from "../verifySlice";
+import { verifyRepairer } from "../verifySlice";
 import './listVerifyRepairer.scss';
 
 function ListVerifyRepairer() {
@@ -11,7 +11,7 @@ function ListVerifyRepairer() {
     console.log({ nvRepairersList });
 
     const handleApprove = (id, token) => {
-        dispatch(activeRepairer({
+        dispatch(verifyRepairer({
             id: id,
             token: token
         }));

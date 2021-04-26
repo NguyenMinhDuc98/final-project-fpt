@@ -7,15 +7,10 @@ import '../../../assets/styles/style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './issuesPage.scss';
 import { useHistory, useRouteMatch } from "react-router";
-import { useSelector } from "react-redux";
 
 function IssuesPage() {
-    const majors = useSelector(state => state.major);
     const history = useHistory();
     const match = useRouteMatch();
-
-    const listMajor = majors.list;
-    const token = localStorage.getItem('token');
 
     const toAddIssue = () => {
         history.push(`${match.url}/add-issue`)
@@ -32,14 +27,10 @@ function IssuesPage() {
                 </Col>
                 <Col lg={9}>
                     <div className='list-issue'>
-
                         <Button onClick={toAddIssue} className="add-issue-button">
                             <FontAwesomeIcon icon="plus-circle" className="issue-add" /> Add
                         </Button>
-                        <ListIssue
-                            list={listMajor}
-                            token={token}
-                        />
+                        <ListIssue />
                     </div>
                 </Col>
             </Row>

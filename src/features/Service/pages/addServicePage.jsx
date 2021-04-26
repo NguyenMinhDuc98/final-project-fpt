@@ -4,7 +4,7 @@ import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Sidebar/left-navbar";
 import '../../../assets/styles/style.scss';
 import './addServicePage.scss';
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createService } from "../serviceSlice";
 import ServiceForm from "../components/serviceForm";
@@ -14,9 +14,12 @@ function AddServicePage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const match = useParams();
+    const path = useRouteMatch();
 
     const major = majors.list[match.id];
     const token = localStorage.getItem('token');
+
+    console.log({major})
 
     const initialValues = {
         name: '',
@@ -24,14 +27,16 @@ function AddServicePage() {
     }
 
     const handleSubmit = (values) => {
+        dispatch(createService({
+            token: token,
+            name: values.name,
+            major_id: major.id
+        }));
+
+        console.log({token, values, major});
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(createService({
-                    token: token,
-                    name: values.name,
-                    id: major.id
-                }));
-                history.push('/majors');
+                history.push(`/majors/services/${path.params.id}`);
                 resolve(true);
             }, 3000);
         });
