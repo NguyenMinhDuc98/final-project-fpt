@@ -48,7 +48,7 @@ function ListRepairer() {
             <th>{repairer.email}</th>
             <th>
                 {
-                    repairer.is_active.data === 0 ? checked = false : checked = true
+                    repairer.is_active.data == 0 ? checked = false : checked = true
                 }
                 <Toggle
                     defaultChecked={checked}

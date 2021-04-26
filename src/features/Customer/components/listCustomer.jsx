@@ -49,7 +49,7 @@ function ListCustomer() {
             <th>{customer.email}</th>
             <th className="action-col">
             {
-                    customer.is_active.data === 0 ? checked = false : checked = true
+                    customer.is_active.data == 0 ? checked = false : checked = true
                 }
                 <Toggle
                     defaultChecked={checked}
