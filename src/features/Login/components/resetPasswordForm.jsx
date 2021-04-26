@@ -20,8 +20,15 @@ function ResetPasswordForm(props) {
     }
 
     const validationSchema = Yup.object().shape({
-        new_password: Yup.string().required('This field is required!'),
-        confirm_password: Yup.string().required('This field is required!'),
+        new_password: Yup.string()
+            .required('This field is required!')
+            .matches(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+            ),
+        confirm_password: Yup.string()
+            .required('This field is required!')
+            .oneOf([Yup.ref('new_password'), null], 'Password must match'),
     })
 
     return (

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import ResetPasswordForm from "../components/resetPasswordForm";
-import { resetPasswordSuccessful } from "../loginSlice";
+import { resetPassword } from "../loginSlice";
 import './changePasswordPage.scss';
 
 ResetPasswordPage.propTypes = {};
@@ -12,17 +12,18 @@ function ResetPasswordPage() {
 
     let phoneNumber = localStorage.getItem('phoneNumber');
     phoneNumber = phoneNumber.replace('+84', '0');
-    console.log({phoneNumber})
+    console.log({ phoneNumber })
 
     const handleSubmit = (values) => {
+        dispatch(resetPassword({
+            phoneNumber: phoneNumber,
+            new_password: values.confirm_password
+        }));
+
         return new Promise(resolve => {
             console.log('Submit: ', values);
 
             setTimeout(() => {
-                dispatch(resetPasswordSuccessful({
-                    phoneNumber: phoneNumber,
-                    new_password: values.confirm_password
-                }));
                 history.push('/');
                 resolve(true);
             }, 2000);
