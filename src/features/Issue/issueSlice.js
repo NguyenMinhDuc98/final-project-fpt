@@ -19,10 +19,18 @@ const issue = createSlice({
             console.log('failed: ', action);
         },
         createIssueSuccessful: (state, action) => {
+            console.log('aaaaaaaaaaaaaa')
+            alert('Create issue successful')
             if (action.payload !== undefined) {
-                state.list = action.payload
+                state.list = action.payload;
             };
-            alert('Create issue successful');
+        },
+        createIssueSuccessful2: (state, action) => {
+            console.log('aaaaaaaaaaaaaa')
+            alert('Create issue successful')
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+            };
         },
         editIssueSuccessful: (state, action) => {
             if (action.payload !== undefined) {
@@ -54,12 +62,12 @@ export const createIssue = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        issue_id: props.id,
+        service_id: props.service_id,
         estimate_fix_duration: props.estimate_fix_duration,
         estimate_price: props.estimate_price
     },
     method: "POST",
-    onSuccess: createIssueSuccessful.type,
+    onSuccess: createIssueSuccessful2.type,
     onError: issueRequestFailed.type,
     onStart: issueRequestStart.type
 });
@@ -71,7 +79,8 @@ export const editIssue = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        issue_id: props.id,
+        id: props.id,
+        service_id: props.service_id,
         estimate_fix_duration: props.estimate_fix_duration,
         estimate_price: props.estimate_price
     },
@@ -113,6 +122,6 @@ export const deActivateIssue = (props) => apiCallBegan({
 
 const { reducer, actions } = issue;
 export const { issueReceived, issueRequestFailed, issueRequestStart, createIssueSuccessful, editIssueSuccessful,
-    activeIssueSuccessful, deActivateIssueSuccessful
+    activeIssueSuccessful, deActivateIssueSuccessful, createIssueSuccessful2
 } = actions;
 export default reducer;

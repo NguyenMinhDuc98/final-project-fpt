@@ -15,26 +15,24 @@ function MajorsPage() {
     const major = useSelector(state => state.major);
     const dispatch = useDispatch();
     const history = useHistory();
-    const token = localStorage.getItem('token');
 
-    console.log('major: ', major);
-    console.log('token: ', token);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         dispatch(getListMajor(token));
-    }, [token]);
+    }, []);
 
     const toAddMajor = () => {
         history.push('/majors/add-major')
     }
 
-    const {isLoading} = major;
+    const { isLoading } = major;
 
     return (
         <div>
             {
                 isLoading
-                    ? <div className='spinner'><Spinner size='xxl'/></div>
+                    ? <div className='spinner'><Spinner size='xxl' /></div>
                     : (<div className='major-page container-fluid'>
                         <Header />
 

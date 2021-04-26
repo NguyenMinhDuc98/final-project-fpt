@@ -1,21 +1,22 @@
-.servicesList{
+.servicesList {
     background-color: white;
     border-radius: 10px;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
 
-    h3{
+    h3 {
         padding: 10px;
     }
 
-    button{
+    button {
         width: 50%;
     }
 
-    img{
+    img {
         width: 100px;
         height: 100px;
     }
 
-    .table{
+    .table {
         margin-bottom: 0;
     }
 }

@@ -7,22 +7,17 @@ import '../../../assets/styles/style.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './servicesPage.scss';
 import { useHistory, useRouteMatch } from "react-router";
-import { useSelector } from "react-redux";
 
 function ServicesPage() {
-    const majors = useSelector(state => state.major);
     const history = useHistory();
     const match = useRouteMatch();
-
-    const token = localStorage.getItem('token');
-    const services = majors.list;
 
     const toAddService = () => {
         history.push(`${match.url}/add-service`)
     }
-    console.log('token: ', token);
+
     return (
-        <div className='service-page'>
+        <div className='service-page container-fluid'>
             <Header />
 
             <Row>
@@ -32,14 +27,10 @@ function ServicesPage() {
                 </Col>
                 <Col lg={9}>
                     <div className='list-service'>
-                        
                         <Button onClick={toAddService} className="add-service-button">
                             <FontAwesomeIcon icon="plus-circle" className="service-add" /> Add
-                        </Button>
-                        <ListService
-                            list={services}
-                            token={token}
-                        />
+                                </Button>
+                        <ListService />
                     </div>
                 </Col>
             </Row>

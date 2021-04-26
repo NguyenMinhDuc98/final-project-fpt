@@ -18,7 +18,7 @@ function MajorForm(props) {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('This field is required'),
 
-        image: Yup.string().required('This field is required')
+        // image: Yup.string().required('This field is required')
     })
 
     return (

@@ -24,7 +24,9 @@ const major = createSlice({
         },
         createMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
-                state.list = action.payload
+                state.list = action.payload;
+                state.isLoading=false;
+                alert("Create major successful");
             };
         },
         editMajorSuccessful: (state, action) => {

@@ -15,8 +15,14 @@ IssueForm.defaultProps = {
 
 function IssueForm(props) {
 
+    const existedIssueName = props.issueNameArr;
+
+    console.log({existedIssueName})
+
     const validationSchema = Yup.object().shape({
-        name: Yup.string().required('This field is required'),
+        name: Yup.string().lowercase()
+            .required('This field is required')
+            .notOneOf(existedIssueName, 'This issue is existed'),
         estimate_fix_duration: Yup.number().required('This field is required'),
         estimate_price: Yup.number().required('This field is required'),
     })

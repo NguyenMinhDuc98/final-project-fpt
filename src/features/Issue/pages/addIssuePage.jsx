@@ -8,6 +8,7 @@ import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createIssue } from "../issueSlice";
 import IssueForm from "../components/issueForm";
+import { useEffect } from "react";
 
 function AddIssuePage() {
     const majors = useSelector(state => state.major);
@@ -15,10 +16,19 @@ function AddIssuePage() {
     const dispatch = useDispatch();
     const match = useParams();
 
-
-    const major = majors.list[match.serviceId];
-    const service = major.services[match.issueId];
+    const major = majors.list[match.majorIndex];
+    const service = major.services[match.serviceIndex];
     const token = localStorage.getItem('token');
+    const issues = service.issues;
+
+    const issueNameArr = [];
+
+    let issueNameList = issues.map((issue) => {
+        return (
+            issueNameArr.push(issue.name)
+        )
+    }
+    )
 
     const initialValues = {
         name: '',
@@ -26,16 +36,17 @@ function AddIssuePage() {
     }
 
     const handleSubmit = (values) => {
+        dispatch(createIssue({
+            token: token,
+            name: values.name,
+            service_id: service.id,
+            estimate_fix_duration: values.estimate_fix_duration,
+            estimate_price: values.estimate_price
+        }));
+
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(createIssue({
-                    token: token,
-                    name: values.name,
-                    id: service.id,
-                    estimate_fix_duration: values.estimate_fix_duration,
-                    estimate_price: values.estimate_price
-                }));
-                history.push('/majors');
+                history.push(`/majors/services/${match.majorIndex}/issues/${match.serviceIndex}`);
                 resolve(true);
             }, 3000);
         });
@@ -55,6 +66,7 @@ function AddIssuePage() {
                         <IssueForm
                             initialValues={initialValues}
                             onSubmit={handleSubmit}
+                            issueNameArr={issueNameArr}
                         />
                     </div>
                 </Col>
