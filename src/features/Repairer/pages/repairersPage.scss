@@ -1,4 +1,18 @@
 .repairer-page {
+    .list-repairer {
+        background-color: white;
+        margin-top: 20px;
+        border-radius: 10px;
+
+        h3 {
+            background-color: gray;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: -55px;
+        }
+    }
+
     .repairer-info {
         background-color: white;
         margin-top: 20px;
@@ -31,10 +45,10 @@
                     font-size: 20px;
                 }
 
-                .current-balance{
+                .current-balance {
                     font-weight: bolder;
                     font-size: large;
-                    color: #197BBD;
+                    color: #197bbd;
                 }
             }
             img {
