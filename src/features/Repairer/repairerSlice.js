@@ -5,27 +5,26 @@ const repairer = createSlice({
     name: 'repairer',
     initialState: {
         list: [],
+        isLoading: false
     },
     reducers: {
         repairerRequestStart: (state, action) => {
+            state.isLoading = true;
             console.log('start: ', action);
         },
         repairerReceived: (state, action) => {
-            state.list = action.payload;
-            localStorage.setItem('repairerList', JSON.stringify(action.payload));
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+                state.isLoading = false;
+            };
         },
         repairerRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
-        createRepairerSuccessful: (state, action) => {
-            alert('Create repairer successful');
-        },
-        editRepairerSuccessful: (state, action) => {
-            alert('Edit repairer successful');
-        },
         activeRepairerSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
+                state.isLoading = false;
             };
             // alert('Active repairer successful');
             console.log('payload: ', action.payload);
@@ -79,7 +78,7 @@ export const deActivateRepairer = (props) => apiCallBegan({
 });
 
 const { reducer, actions } = repairer;
-export const { repairerReceived, repairerRequestFailed, repairerRequestStart, createRepairerSuccessful,
-    editRepairerSuccessful, activeRepairerSuccessful, deActivateRepairerSuccessful
+export const { repairerReceived, repairerRequestFailed, repairerRequestStart,
+    activeRepairerSuccessful, deActivateRepairerSuccessful
 } = actions;
 export default reducer;
