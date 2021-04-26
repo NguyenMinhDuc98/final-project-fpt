@@ -10,26 +10,26 @@ const customer = createSlice({
     reducers: {
         customerRequestStart: (state, action) => {
             console.log('start: ', action);
+            state.isLoading = true;
         },
         customerReceived: (state, action) => {
-            state.list = action.payload;
-            localStorage.setItem('customer', JSON.stringify(action.payload));
-
-            console.log('start: ', action);
-            console.log('payload: ', action.payload);
+            if (action.payload !== undefined) {
+                state.list = action.payload
+                state.isLoading = false;
+            };
         },
         customerRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
-        createCustomerSuccessful: (state, action) => {
-            alert('Create customer successful');
+        editCustomerSuccessful:(state,action)=>{
+            console.log(action)
         },
-        editCustomerSuccessful: (state, action) => {
-            alert('Edit customer successful');
-        },
-        deleteCustomerSuccessful: (state, action) => {
-            alert('Delete customer successful');
-            console.log('payload: ', action.payload);
+        activeCustomerSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload
+                state.isLoading = false;
+            };
+            alert('Active customer successful');
         },
     }
 });
@@ -62,22 +62,22 @@ export const editCustomer = (props) => apiCallBegan({
     onStart: customerRequestStart.type
 });
 
-export const deleteCustomer = (props) => apiCallBegan({
-    url: '/api/admin/deleteCustomer',
-    headers: {
-        Authorization: props.token
-    },
-    data: {
-        id: props.id
-    },
-    method: "POST",
-    onSuccess: deleteCustomerSuccessful.type,
-    onError: customerRequestFailed.type,
-    onStart: customerRequestStart.type
-})
+// export const activeCustomer = (props) => apiCallBegan({
+//     url: '/api/admin/activeCustomer',
+//     headers: {
+//         Authorization: props.token
+//     },
+//     data: {
+//         id: props.id
+//     },
+//     method: "POST",
+//     onSuccess: activeCustomerSuccessful.type,
+//     onError: serviceRequestFailed.type,
+//     onStart: customerRequestStart.type
+// });
 
 const { reducer, actions } = customer;
-export const { customerReceived, customerRequestFailed, customerRequestStart, createCustomerSuccessful,
-    editCustomerSuccessful, deleteCustomerSuccessful
+export const { customerReceived, customerRequestFailed, customerRequestStart,
+    activeCustomerSuccessful, editCustomerSuccessful
 } = actions;
 export default reducer;
