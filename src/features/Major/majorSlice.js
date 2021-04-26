@@ -38,6 +38,7 @@ const major = createSlice({
         activeMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
+                state.isLoading=false;
             };
             alert('Active major successful');
             console.log('payload: ', action.payload);
@@ -45,6 +46,7 @@ const major = createSlice({
         deActivateMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
+                state.isLoading=false;
             };
             alert('Deactivate major successful');
             console.log('payload: ', action.payload);

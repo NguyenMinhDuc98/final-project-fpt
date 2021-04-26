@@ -37,9 +37,9 @@ function ListService(props) {
                 </th>
                 <th className="action-col">
                     <Toggle
-                        defaultChecked={service.is_active.data === 0 ? false : true}
+                        defaultChecked={service.is_active.data == 0 ? false : true}
                         onChange={() => {
-                            service.is_active.data === 0 ? handleActive(service.id, token, majors.list[index].id) : handleDeActive(service.id, token, majors.list[index].id)
+                            service.is_active.data == 0 ? handleActive(service.id, token, majors.list[index].id) : handleDeActive(service.id, token, majors.list[index].id)
                         }}
                     />
                 </th>
