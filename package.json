@@ -23,6 +23,7 @@
     "react-chartjs-2": "^2.11.1",
     "react-cool-tabs": "^1.1.6",
     "react-dom": "^17.0.2",
+    "react-flexy-table": "^1.8.5",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
