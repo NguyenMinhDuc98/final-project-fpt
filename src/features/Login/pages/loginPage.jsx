@@ -10,6 +10,11 @@ function LoginPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const imgUrl = '../../../assets/images/login-background.png'
+    const divStyle = {
+        backgroundImage: 'url(' + imgUrl + ')'
+    };
+
     const handleSubmit = (values) => {
         dispatch(loginRequest(values));
 
@@ -22,7 +27,7 @@ function LoginPage() {
     }
 
     return (
-        <div className='login-form'>
+        <div className='login-form' style={divStyle}>
             <LoginForm
                 onSubmit={handleSubmit}
             />

@@ -1,26 +1,27 @@
-body{
-    // background-color: rgb(209, 209, 209);
-    // background-image: url('../../../assets/images/login-background.png');
+body {
+    background-color: rgb(209, 209, 209);
+    // background-image: url(https://thumbs.dreamstime.com/t/sky-background-white-clouds-blue-sky-realistic-texture-website-abstract-backdrop-minimalist-design-vector-sky-background-109865827.jpg);
     // background-size: cover;
-    // background-blend-mode: ;
 }
-.login-form{
-    // background-color: gray;
+
+.login-form {
     background-color: white;
-    margin: 10rem 25rem;
-    padding: 20px;
+    margin: 10% 30%;
+    padding: 30px;
     border-radius: 5px;
-    box-shadow: 3px 3px 3px 3px gray;
+    box-shadow: 1px 1px 1px 1px gray;
 
-    form{
-        margin: 2rem auto 1rem auto;
-        width: 25rem;
-    }
-
-    button{
+    button {
         width: 100%;
         margin-top: 10px;
         background-color: rgb(104, 179, 223);
-        border: none
+        border: none;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .login-form {
+        margin: 10% 10%;
+        width: 80%;
     }
 }

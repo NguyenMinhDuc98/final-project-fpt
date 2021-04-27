@@ -117,8 +117,6 @@ function ListMajor(props) {
                                 data={majorList}
                                 columns={columns}
                                 sortable
-                                filterable
-                                nonFilterCols={["active"]}
                                 pageSize={20}
                                 pageSizeOptions={[20]}
                                 globalSearch

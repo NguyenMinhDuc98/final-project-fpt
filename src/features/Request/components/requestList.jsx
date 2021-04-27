@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getListRequest } from '../requestSlice';
 import { Spinner } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function ListMajor() {
     const request = useSelector(state => state.request);
@@ -25,6 +26,10 @@ function ListMajor() {
         {
             header: 'Id',
             key: 'id',
+            td: (data) => 
+                <Link to={`/requests/detail/${data.id}`}>
+                    {data.id}
+                </Link>
         },
         {
             header: 'Customer name',
@@ -61,12 +66,10 @@ function ListMajor() {
                                 data={requestList}
                                 columns={columns}
                                 sortable
-                                filterable
                                 nonFilterCols={["active"]}
                                 pageSize={10}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
-                                caseSensitive
                             />
                         </div>
                     )

@@ -1,8 +1,10 @@
 .request-table{
     border-radius: 10px !important;
     box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    text-align: left;
 
     thead{
+        text-align: left;
         tr{
             td{
                 background-color: gray;
@@ -15,4 +17,7 @@
         }
     }
 
+    tbody{
+        text-align: left;
+    }
 }

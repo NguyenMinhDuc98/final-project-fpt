@@ -31,7 +31,7 @@ function ListRepairer() {
             //   td: (data) => <div>the id is {data.id}</div>
         },
         {
-            header: 'Fullname',
+            header: 'Full name',
             key: 'name',
             td: (data) =>
                 <div>
@@ -89,8 +89,6 @@ function ListRepairer() {
                                 data={repairerList}
                                 columns={columns}
                                 sortable
-                                filterable
-                                nonFilterCols={["active"]}
                                 pageSize={10}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
