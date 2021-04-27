@@ -18,6 +18,8 @@ function ListMajor(props) {
     const match = useRouteMatch();
     const history = useHistory();
 
+    console.log({match})
+
     const toAddMajor = () => {
         history.push('/majors/add-major')
     }
@@ -38,11 +40,11 @@ function ListMajor(props) {
             key: 'id',
         },
         {
-            header: 'Username',
+            header: 'Major name',
             key: 'name',
             td: (data) =>
                 <div>
-                    <NavLink to={`${match.url}/services/${data.id}`}>
+                    <NavLink to={`majors/services/${data.id}`}>
                         {data.name}
                     </NavLink>
                 </div>
@@ -71,6 +73,16 @@ function ListMajor(props) {
                             data.is_active.data == 0 ? handleActive(data.id, token) : handleDeActive(data.id, token)
                         }}
                     />
+                </div>
+        },
+        {
+            header: 'Action',
+            key: 'action',
+            td: (data) => 
+                <div>
+                    <Button>
+                        <NavLink to={`majors/edit/${data.id}`}>Edit</NavLink>
+                    </Button>
                 </div>
         }
     ]
@@ -107,8 +119,8 @@ function ListMajor(props) {
                                 sortable
                                 filterable
                                 nonFilterCols={["active"]}
-                                pageSize={10}
-                                pageSizeOptions={[10, 20]}
+                                pageSize={20}
+                                pageSizeOptions={[20]}
                                 globalSearch
                                 caseSensitive
                             />

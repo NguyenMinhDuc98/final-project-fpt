@@ -8,6 +8,7 @@ import '../../../assets/styles/style.scss';
 import Toggle from 'react-toggle';
 import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css"
+import { NavLink } from "react-router-dom";
 
 function ListRepairer() {
     const repairer = useSelector(state => state.repairer);
@@ -17,7 +18,7 @@ function ListRepairer() {
     const repairerList = repairer.list;
 
     const token = localStorage.getItem('token');
-    const {isLoading} = repairer;
+    const { isLoading } = repairer;
 
     useEffect(() => {
         dispatch(getListRepairer(token));
@@ -30,11 +31,13 @@ function ListRepairer() {
             //   td: (data) => <div>the id is {data.id}</div>
         },
         {
-            header: 'Username',
+            header: 'Fullname',
             key: 'name',
             td: (data) =>
                 <div>
-                    {data.name}
+                    <NavLink to={`/repairers/profile/${data.id}`}>
+                        {data.name}
+                    </NavLink>
                 </div>
         },
         {
@@ -72,30 +75,6 @@ function ListRepairer() {
     //         id: id
     //     }));
     // };
-
-    // const repairers = repairerList.map((repairer, index) =>
-    //     <tr key={repairer.id}>
-    //         <th>
-    //             <NavLink to={`${match.url}/profile/${index}`}>
-    //                 {repairer.name}
-    //                 {console.log({repairer})}
-    //             </NavLink>
-    //         </th>
-    //         <th>{repairer.phone_number}</th>
-    //         <th>{repairer.email}</th>
-    //         <th>
-    //             {
-    //                 repairer.is_active.data == 0 ? checked = false : checked = true
-    //             }
-    //             <Toggle
-    //                 defaultChecked={checked}
-    //                 onChange={() => {
-    //                     checked ? handleInActive(repairer.id, token) : handleActive(repairer.id, token)
-    //                 }}
-    //             />
-    //         </th>
-    //     </tr>
-    // )
 
     return (
         <div>

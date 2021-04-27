@@ -25,7 +25,6 @@ function ListMajor() {
         {
             header: 'Id',
             key: 'id',
-              td: (data) => <div>the id is {data.id}</div>
         },
         {
             header: 'Customer name',
@@ -47,26 +46,6 @@ function ListMajor() {
             header: 'Address',
             key: 'address',
         },
-        // {
-        //     header: 'Phone number',
-        //     // can also use with nested objects
-        //     key: 'phone_number'
-        // },
-        // {
-        //     header: 'Email',
-        //     key: 'email',
-        //     td: (data) => <div>{data.email}</div>
-        // },
-        // {
-        //     header: 'Active',
-        //     key: 'active',
-        //     td: (data) =>
-        //         <div>
-        //             <Toggle
-        //                 defaultChecked={data.is_active.data == 0 ? false : true}
-        //             />
-        //         </div>
-        // }
     ]
 
     return (

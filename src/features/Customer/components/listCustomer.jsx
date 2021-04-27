@@ -41,7 +41,7 @@ function ListCustomer() {
             //   td: (data) => <div>the id is {data.id}</div>
         },
         {
-            header: 'Username',
+            header: 'Fullname',
             key: 'name',
             td: (data) =>
                 <div>
