@@ -1,97 +1,99 @@
 import './requestList.scss';
 import '../../../assets/styles/style.scss';
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
-import { useCallback, useRef, useState } from 'react';
-import { Input } from 'reactstrap';
+import ReactFlexyTable from "react-flexy-table";
+import "react-flexy-table/dist/index.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getListRequest } from '../requestSlice';
+import { Spinner } from 'reactstrap';
 
 function ListMajor() {
-    const repairerList = JSON.parse(localStorage.getItem('repairerList'))
+    const request = useSelector(state => state.request);
+    const dispatch = useDispatch();
 
-    console.log('log: ', repairerList);
+    const token = localStorage.getItem('token');
+    const { isLoading } = request;
+    const requestList = request.list;
 
-    const gridStyle = { minHeight: 400 };
+    useEffect(() => {
+        dispatch(getListRequest(token));
+    }, []);
 
-    const [gridRef, setGridRef] = useState(null);
-    const [searchText, setSearchText] = useState('');
-    const [dataSource, setDataSource] = useState(repairerList);
+    console.log({requestList})
 
-    const searchTextRef = useRef(searchText);
-    searchTextRef.current = searchText;
-
-    const render = useCallback(({ value }) => {
-        const lowerSearchText = searchTextRef.current.toLowerCase();
-        if (!lowerSearchText) {
-            return value;
-        }
-
-        const str = value + '' // get string value
-        const v = str.toLowerCase() // our search is case insesitive
-        const index = v.indexOf(lowerSearchText);
-
-        if (index === -1) {
-            return value;
-        }
-
-        return [
-            <span key="before">{str.slice(0, index)}</span>,
-            <span key="match" style={{ background: 'yellow', fontWeight: 'bold' }}>{str.slice(index, index + lowerSearchText.length)}</span>,
-            <span key="after">{str.slice(index + lowerSearchText.length)}</span>
-        ]
-    }, [])
-
-    const shouldComponentUpdate = () => true;
-
-    const defaultColumns = [
-        { id: 'id', header: 'ID', render: ({ data }) => data.id, defaultWidth: 80, shouldComponentUpdate },
-        { name: 'name', header: 'Name', defaultFlex: 1, shouldComponentUpdate, render },
-        { name: 'phone_number', header: 'Phone number', defaultFlex: 1, shouldComponentUpdate, render },
-        { name: 'email', header: 'Email', defaultFlex: 1, shouldComponentUpdate, render },
+    const columns = [
         {
-            name: 'is_active',
-            header: 'Active',
-            defaultFlex: 1,
-            type: 'string',
-            shouldComponentUpdate,
-            render: ({ data }) => data.is_active.data === 1 ? 'Active' : 'Not active'
+            header: 'Id',
+            key: 'id',
+              td: (data) => <div>the id is {data.id}</div>
         },
-    ];
-
-    const [columns] = useState(defaultColumns);
-
-    const onSearchChange = ({ target: { value } }) => {
-        const visibleColumns = gridRef.current.visibleColumns;
-
-        setSearchText(value);
-
-        const newDataSource = repairerList.filter(p => {
-            return visibleColumns.reduce((acc, col) => {
-                const v = (p[col.id] + '').toLowerCase() // get string value
-                return acc || v.indexOf(value.toLowerCase()) !== -1 // make the search case insensitive
-            }, false)
-        });
-
-        setDataSource(newDataSource);
-    }
+        {
+            header: 'Customer name',
+            key: 'Customer.name',
+        },
+        {
+            header: 'Customer phone number',
+            key: 'Customer.phone_number',
+        },
+        {
+            header: 'Repairer name',
+            key: 'Repairer.name',
+        },
+        {
+            header: 'Repairer phone number',
+            key: 'Repairer.phone_number',
+        },
+        {
+            header: 'Address',
+            key: 'address',
+        },
+        // {
+        //     header: 'Phone number',
+        //     // can also use with nested objects
+        //     key: 'phone_number'
+        // },
+        // {
+        //     header: 'Email',
+        //     key: 'email',
+        //     td: (data) => <div>{data.email}</div>
+        // },
+        // {
+        //     header: 'Active',
+        //     key: 'active',
+        //     td: (data) =>
+        //         <div>
+        //             <Toggle
+        //                 defaultChecked={data.is_active.data == 0 ? false : true}
+        //             />
+        //         </div>
+        // }
+    ]
 
     return (
-        <div className='request-list'>
-            <div className='search'>
-                <label>Search text: <Input value={searchText} onChange={onSearchChange} /></label>
-            </div>
-            <ReactDataGrid
-                onReady={setGridRef}
-                idProperty="id"
-                style={gridStyle}
-                dataSource={dataSource}
-                columns={columns}
-                pagination
-                defaultLimit={15}
-                defaultSkip={0}
-                pageSizes={[10, 15, 30]}
-            />
+        <div>
+            {
+                isLoading
+                    ? <div className='spinner'><Spinner size='xxl' /></div>
+                    : (
+                        <div>
+                            <h3>Request</h3>
+                            <ReactFlexyTable
+                                className="request-table"
+                                data={requestList}
+                                columns={columns}
+                                sortable
+                                filterable
+                                nonFilterCols={["active"]}
+                                pageSize={10}
+                                pageSizeOptions={[10, 20]}
+                                globalSearch
+                                caseSensitive
+                            />
+                        </div>
+                    )
+            }
         </div>
-    );
+    )
 };
 
 export default ListMajor;
