@@ -24,8 +24,8 @@ function Major(props) {
             <Route exact path={`${match.url}/edit/:id`} component={EditMajorPage} />
 
             {/* Service route */}
-            <Route exact path={`${match.url}/services/:id`} component={ServicesPage} />
-            <Route exact path={`${match.url}/services/:id/add-service`} component={AddServicePage} />
+            <Route exact path={`${match.url}/services/:majorId`} component={ServicesPage} />
+            <Route exact path={`${match.url}/services/:majorId/add-service`} component={AddServicePage} />
             <Route exact path={`${match.url}/services/:majorId/edit/:serviceId`} component={EditServicePage} />
 
             {/* Issue route */}
