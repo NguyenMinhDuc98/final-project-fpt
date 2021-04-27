@@ -1,0 +1,17 @@
+.spinner {
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.request-detail-page {
+    .request-detail {
+        background-color: white;
+        margin-top: 20px;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    }
+}

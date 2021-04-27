@@ -3,6 +3,7 @@
     box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
 
     thead{
+        text-align: left;
         tr{
             td{
                 background-color: gray;
@@ -13,6 +14,9 @@
                 background-color: gray;
             }
         }
+    }
+    tbody{
+        text-align: left;
     }
 
     button{

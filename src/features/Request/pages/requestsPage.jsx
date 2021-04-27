@@ -18,8 +18,7 @@ function RequestsPage() {
                 </Col>
                 <Col lg={9}>
                     <div className='list-request'>
-                        <ListRequest
-                        />
+                        <ListRequest />
                     </div>
                 </Col>
             </Row>

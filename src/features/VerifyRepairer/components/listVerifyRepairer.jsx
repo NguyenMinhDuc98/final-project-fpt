@@ -34,7 +34,7 @@ function ListVerifyRepairer() {
             //   td: (data) => <div>the id is {data.id}</div>
         },
         {
-            header: 'Username',
+            header: 'User name',
             key: 'user.name',
             // td: (data) =>
             //     <div>
@@ -74,8 +74,6 @@ function ListVerifyRepairer() {
                                 data={nvRepairersList}
                                 columns={columns}
                                 sortable
-                                filterable
-                                nonFilterCols={["action"]}
                                 pageSize={10}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
