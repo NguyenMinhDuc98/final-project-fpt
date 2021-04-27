@@ -18,7 +18,7 @@ function ListService(props) {
     const token = localStorage.getItem('token');
     const { isLoading } = majors;
 
-    const index = match.params.id;
+    const index = match.params.majorId;
 
     let majorName = ''
     let serviceList = [];

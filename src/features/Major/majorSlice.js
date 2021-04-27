@@ -20,12 +20,11 @@ const major = createSlice({
         },
         majorRequestFailed: (state, action) => {
             state.isLoading = false;
-            console.log('failed: ', action);
         },
         createMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                state.isLoading=false;
+                state.isLoading = false;
                 alert("Create major successful");
             };
         },
@@ -38,18 +37,16 @@ const major = createSlice({
         activeMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                state.isLoading=false;
+                state.isLoading = false;
+                alert('Active major successful');
             };
-            alert('Active major successful');
-            console.log('payload: ', action.payload);
         },
         deActivateMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
-                state.isLoading=false;
+                state.isLoading = false;
+                alert('Deactivate major successful');
             };
-            alert('Deactivate major successful');
-            console.log('payload: ', action.payload);
         },
     }
 });
