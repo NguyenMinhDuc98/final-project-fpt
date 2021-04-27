@@ -8,7 +8,9 @@ function Header() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    console.log({user});
 
     const handleLogout = () => {
         dispatch(logout());
