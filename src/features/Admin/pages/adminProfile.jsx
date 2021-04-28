@@ -7,33 +7,39 @@ import { editAdmin } from "../adminSlice";
 import ProfileForm from "../components/profileForm";
 import './adminProfile.scss';
 import '../../../assets/styles/style.scss';
+import { useHistory } from "react-router";
 
 function AdminProfile() {
     const dispatch = useDispatch();
+    const history = useHistory()
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
+    const username= localStorage.getItem("username");
     const token = localStorage.getItem('token');
 
-    console.log({user})
-
     const initialValues = {
-        name: user.name,
-        phoneNumber: user.phone,
+        name: username ? username : user.name,
+        phone_number: user.phone,
         email: user.email,
     }
     const handleSubmit = (values) => {
+        const propsUpdate = {
+            token: token,
+            name: values.name,
+            email: values.email,
+            id: user.id,
+            phone_number: values.phone_number
+        };
+        dispatch(editAdmin(propsUpdate));
+
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(editAdmin({
-                    token: token,
-                    name: values.name,
-                }));
-                // history.push('/majors');
+                history.push('/');
                 resolve(true);
             }, 3000);
         });
     }
-
+    
     return (
         <div className='container-fluid'>
             <Header />

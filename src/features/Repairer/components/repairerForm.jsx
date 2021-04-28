@@ -28,6 +28,7 @@ function RepairerForm(props) {
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
+                                    disabled
                                     label="Repairer name"
                                 />
                                 <FastField
@@ -36,6 +37,7 @@ function RepairerForm(props) {
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
+                                    disabled
                                     label="Repairer phone number"
                                 />
                                 <FastField
@@ -44,7 +46,26 @@ function RepairerForm(props) {
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
+                                    disabled
                                     label="Repairer email"
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='city'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    disabled
+                                    label="City"
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='district'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    disabled
+                                    label="District"
                                 />
                                 <FastField
                                     //Props cua FastField
@@ -52,7 +73,8 @@ function RepairerForm(props) {
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
-                                    label="Repairer address"
+                                    disabled
+                                    label="Address"
                                 />
                                 <FastField
                                     //Props cua FastField
@@ -61,6 +83,7 @@ function RepairerForm(props) {
 
                                     //Props truyen vao trong InputField
                                     label="Repairer identity card number"
+                                    disabled
                                 />
                                 <FastField
                                     //Props cua FastField
@@ -69,6 +92,16 @@ function RepairerForm(props) {
 
                                     //Props truyen vao trong InputField
                                     label="Repairer's major"
+                                    disabled
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='verify'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Repairer's status"
+                                    disabled
                                 />
                             </Form>
                         )

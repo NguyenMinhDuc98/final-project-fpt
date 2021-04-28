@@ -6,6 +6,8 @@ import notVerifiedList from '../features/VerifyRepairer/verifySlice';
 import customer from '../features/Customer/customerSlice';
 import repairer from '../features/Repairer/repairerSlice';
 import request from '../features/Request/requestSlice';
+import admin from '../features/Admin/adminSlice';
+import issue from '../features/Issue/issueSlice';
 
 export default combineReducers({
     login,
@@ -14,5 +16,7 @@ export default combineReducers({
     service,
     customer,
     repairer,
-    request
+    request,
+    admin,
+    issue
 })
