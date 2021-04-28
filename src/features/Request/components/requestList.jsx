@@ -76,7 +76,7 @@ function ListMajor() {
                                 data={requestList}
                                 columns={columns}
                                 sortable
-                                pageSize={10}
+                                pageSize={20}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
                                 caseSensitive

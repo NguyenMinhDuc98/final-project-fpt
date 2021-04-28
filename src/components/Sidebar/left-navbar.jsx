@@ -29,9 +29,9 @@ function LeftNavbar(props) {
     const toRep = () => {
         history.push('/repairers');
     }
-    const toReq = () => {
-        history.push('/requests');
-    }
+    // const toReq = () => {
+    //     history.push('/requests');
+    // }
 
     return (
         <div className='left-navbar'>
@@ -62,11 +62,11 @@ function LeftNavbar(props) {
                             <FontAwesomeIcon icon="clipboard-list" /> Majors
                         </NavLink>
                     </NavItem>
-                    <NavItem>
+                    {/* <NavItem>
                         <NavLink onClick={toReq}>
                             <FontAwesomeIcon icon="check" /> Request
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                 </Nav>
             </Navbar>
         </div>
