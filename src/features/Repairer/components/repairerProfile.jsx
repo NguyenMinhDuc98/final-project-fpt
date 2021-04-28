@@ -18,9 +18,6 @@ function RepairerProfile() {
     const token = localStorage.getItem('token');
     const { isLoading } = repairers;
 
-    console.log('user:', user);
-    console.log('majors:', majors);
-
     useEffect(() => {
         dispatch(getListRepairer(token));
         dispatch(getListMajor(token))
@@ -30,14 +27,19 @@ function RepairerProfile() {
 
     let initialValues = null;
 
+    console.log({user})
+
     if (user && majors) {
         initialValues = {
             name: user.name,
             phoneNumber: user.phone_number,
             email: user.email,
+            city: user.repairer.city,
+            district: user.repairer.district,
             address: user.repairer.address,
             identity_card_number: user.repairer.identity_card_number,
-            major: repairerMajor.name
+            major: repairerMajor ? repairerMajor.name : null,
+            verify: user.repairer.is_verify.data == 1 ? 'Repairer is verified' : 'Repairer is not verified'
         }
     }
 

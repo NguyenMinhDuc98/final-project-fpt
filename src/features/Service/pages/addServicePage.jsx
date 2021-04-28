@@ -61,7 +61,7 @@ function AddServicePage() {
     }
 
     return (
-        <div className='service-form-page'>
+        <div className='service-form-page container-fluid'>
             <Header />
 
             <Row>

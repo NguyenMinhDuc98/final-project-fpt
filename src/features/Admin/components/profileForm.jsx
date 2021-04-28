@@ -16,9 +16,7 @@ ProfileForm.defaultProps = {
 
 function ProfileForm(props) {
     const validationSchema = Yup.object().shape({
-        phoneNumber: Yup.number('You must enter number').required('This field is required!'),
-
-        password: Yup.string().required('This field is required!'),
+        email: Yup.string().email().required('This field is required!'),
     })
 
     return (
@@ -29,7 +27,6 @@ function ProfileForm(props) {
         >
             {formikProps => {
                 const { values, errors, touched, isSubmitting } = formikProps;
-                console.log({ values, errors, touched });
 
                 return (
                     <Form>
@@ -46,12 +43,13 @@ function ProfileForm(props) {
                         />
                         <FastField
                             //Props cua FastField
-                            name='phoneNumber'
+                            name='phone_number'
                             component={InputField}
 
                             //Props truyen vao trong InputField
                             label="Phone Number"
                             placeholder="Enter your phone number"
+                            disabled
                         />
                         <FastField
                             //Props cua FastField

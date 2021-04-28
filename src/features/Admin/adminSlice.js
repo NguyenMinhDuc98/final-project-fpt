@@ -4,34 +4,36 @@ import { apiCallBegan } from "../../store/api";
 const admin = createSlice({
     name: 'admin',
     initialState: {
-        list: [],
+        name: '',
         isLoading: false
     },
     reducers: {
         adminRequestStart: (state, action) => {
-            console.log('start: ', action);
+            state.isLoading = true;
         },
         adminRequestFailed: (state, action) => {
-            console.log('failed: ', action);
-        },
-        createAdminSuccessful: (state, action) => {
-            alert('Create admin successful');
+            state.isLoading = false;
         },
         editAdminSuccessful: (state, action) => {
+            state.isLoading = false;
+            localStorage.setItem('username', action.payload.name);
+            console.log(action.payload);
             alert('Edit admin successful');
         }
     }
 });
 
 export const editAdmin = (props) => apiCallBegan({
-    url: '/api/admin/updateAdmin',
+    url: '/api/updateUser',
     headers: {
         Authorization: props.token
     },
     data: {
         name: props.name,
-        image: props.image,
-        id: props.id
+        email: props.email,
+        user_id: props.id,
+        phone: props.phone_number,
+        role_id: '1'
     },
     method: "POST",
     onSuccess: editAdminSuccessful.type,
@@ -40,6 +42,6 @@ export const editAdmin = (props) => apiCallBegan({
 });
 
 const { reducer, actions } = admin;
-export const { adminReceived, adminRequestFailed, adminRequestStart, editAdminSuccessful,
+export const { adminRequestFailed, adminRequestStart, editAdminSuccessful,
 } = actions;
 export default reducer;

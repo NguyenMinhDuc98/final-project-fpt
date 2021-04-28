@@ -8,9 +8,8 @@ function Header() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    console.log({user});
+    const username = localStorage.getItem('username');
+    const user = JSON.parse(localStorage.getItem('user'))
 
     const handleLogout = () => {
         dispatch(logout());
@@ -30,7 +29,7 @@ function Header() {
         <div className='header'>
             <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                    {user.name}
+                    {username ? username : user.name}
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem onClick={toProfile}>

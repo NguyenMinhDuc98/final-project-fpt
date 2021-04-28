@@ -31,6 +31,7 @@ const api = ({ dispatch }) => next => async action => {
     } catch (error) {
         dispatch(actions.apiCallFailed(error.message));
         if (onError) dispatch({ type: onError, payload: error.message });
+        console.log({error})
     }
 };
 
