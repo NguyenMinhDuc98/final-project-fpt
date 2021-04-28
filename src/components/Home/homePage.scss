@@ -1,4 +1,44 @@
-body{
+body {
     background-color: rgb(209, 209, 209);
     position: relative;
+}
+.request-table {
+    border-radius: 10px !important;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    text-align: left;
+
+    thead {
+        text-align: left;
+        tr {
+            td {
+                background-color: gray;
+                .rft-gs-input {
+                    margin-left: 10px;
+                }
+            }
+
+            th {
+                border: 1px solid white;
+                background-color: gray;
+                width: 15%;
+            }
+        }
+    }
+
+    tbody {
+        text-align: left;
+    }
+}
+.list-request {
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+
+    h3 {
+        background-color: gray;
+        color: white;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: -55px;
+    }
 }
