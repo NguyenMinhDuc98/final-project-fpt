@@ -8,18 +8,35 @@ import { useHistory, useParams, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createService } from "../serviceSlice";
 import ServiceForm from "../components/serviceForm";
+import { useEffect } from "react";
+import { getListMajor } from "../../Major/majorSlice";
 
 function AddServicePage() {
     const majors = useSelector(state => state.major);
     const history = useHistory();
     const dispatch = useDispatch();
     const match = useParams();
-    const path = useRouteMatch();
 
-    const major = majors.list[match.id];
     const token = localStorage.getItem('token');
+    let major = null;
 
-    console.log({major})
+    useEffect(() => {
+        dispatch(getListMajor(token));
+    }, [])
+
+    const serviceNameArr = [];
+    if (majors.list.length != 0) {
+        major = majors.list[match.majorId];
+
+        const services = major.services;
+
+        let serviceNameList = services.map((service) => {
+            return (
+                serviceNameArr.push(service.name.toLowerCase())
+            )
+        }
+        )
+    }
 
     const initialValues = {
         name: '',
@@ -36,7 +53,7 @@ function AddServicePage() {
         console.log({token, values, major});
         return new Promise(resolve => {
             setTimeout(() => {
-                history.push(`/majors/services/${path.params.id}`);
+                history.push(`/majors/services/${match.majorId}`);
                 resolve(true);
             }, 3000);
         });
@@ -56,6 +73,7 @@ function AddServicePage() {
                         <ServiceForm
                             initialValues={initialValues}
                             onSubmit={handleSubmit}
+                            serviceNameArr={serviceNameArr}
                         />
                     </div>
                 </Col>

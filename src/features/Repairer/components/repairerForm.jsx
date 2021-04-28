@@ -19,7 +19,6 @@ function RepairerForm(props) {
                 >
                     {formikProps => {
                         const { values, errors, touched } = formikProps;
-                        console.log({values, errors, touched})
 
                         return (
                             <Form>
@@ -30,7 +29,6 @@ function RepairerForm(props) {
 
                                     //Props truyen vao trong InputField
                                     label="Repairer name"
-                                    placeholder="Enter repairer name"
                                 />
                                 <FastField
                                     //Props cua FastField
@@ -39,7 +37,6 @@ function RepairerForm(props) {
 
                                     //Props truyen vao trong InputField
                                     label="Repairer phone number"
-                                    placeholder="Enter repairer phone number"
                                 />
                                 <FastField
                                     //Props cua FastField
@@ -48,7 +45,30 @@ function RepairerForm(props) {
 
                                     //Props truyen vao trong InputField
                                     label="Repairer email"
-                                    placeholder="Enter repairer email"
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='address'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Repairer address"
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='identity_card_number'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Repairer identity card number"
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='major'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Repairer's major"
                                 />
                             </Form>
                         )

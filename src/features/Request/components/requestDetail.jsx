@@ -104,24 +104,32 @@ function RequestDetail(props) {
                                     label="Request issue name"
                                     disabled
                                 />
-                                <FastField
-                                    //Props cua FastField
-                                    name='invoice_total_price'
-                                    component={InputField}
+                                {
+                                    props.invoice
+                                        ? (
+                                            <div>
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='invoice_total_price'
+                                                    component={InputField}
 
-                                    //Props truyen vao trong InputField
-                                    label="Invoice total price"
-                                    disabled
-                                />
-                                <FastField
-                                    //Props cua FastField
-                                    name='invoice_status'
-                                    component={InputField}
+                                                    //Props truyen vao trong InputField
+                                                    label="Invoice total price"
+                                                    disabled
+                                                />
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='invoice_status'
+                                                    component={InputField}
 
-                                    //Props truyen vao trong InputField
-                                    label="Invoice status"
-                                    disabled
-                                />
+                                                    //Props truyen vao trong InputField
+                                                    label="Invoice status"
+                                                    disabled
+                                                />
+                                            </div>
+                                        )
+                                        : (<div></div>)
+                                }
                                 <FastField
                                     //Props cua FastField
                                     name='request_status'
