@@ -1,21 +1,22 @@
-.customer-table{
+.customer-table {
     border-radius: 10px !important;
     box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
 
-    thead{
+    thead {
         text-align: left;
-        tr{
-            td{
+        tr {
+            td {
                 background-color: gray;
             }
 
-            th{
+            th {
                 border: 1px solid white;
                 background-color: gray;
+                width: 20%;
             }
         }
     }
-    tbody{
+    tbody {
         text-align: left;
     }
 }

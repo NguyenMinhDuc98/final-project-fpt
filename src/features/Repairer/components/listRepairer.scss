@@ -3,6 +3,7 @@
     box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
 
     thead{
+        text-align: left;
         tr{
             td{
                 background-color: gray;
@@ -11,7 +12,11 @@
             th{
                 border: 1px solid white;
                 background-color: gray;
+                width: 20%;
             }
         }
+    }
+    tbody {
+        text-align: left;
     }
 }

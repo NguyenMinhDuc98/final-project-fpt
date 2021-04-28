@@ -43,14 +43,12 @@ const issue = createSlice({
                 state.list = action.payload;
             };
             alert('Active issue successful');
-            console.log('payload: ', action.payload);
         },
         deActivateIssueSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
             };
             alert('Deactivate issue successful');
-            console.log('payload: ', action.payload);
         },
     }
 });

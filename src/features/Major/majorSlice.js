@@ -31,8 +31,9 @@ const major = createSlice({
         editMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
+                state.isLoading = false;
+                alert('Edit major successful');
             };
-            alert('Edit major successful');
         },
         activeMajorSuccessful: (state, action) => {
             if (action.payload !== undefined) {
@@ -87,7 +88,6 @@ export const editMajor = (props) => apiCallBegan({
     },
     data: {
         name: props.name,
-        image: props.image,
         id: props.id
     },
     method: "POST",

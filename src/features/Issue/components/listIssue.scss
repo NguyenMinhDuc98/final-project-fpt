@@ -1,22 +1,41 @@
-.issuesList{
-    background-color: white;
-    border-radius: 10px;
+.issue-table {
+    border-radius: 10px !important;
     box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
 
-    h3{
-        padding: 10px;
+    thead {
+        text-align: left;
+        tr {
+            td {
+                background-color: gray;
+                button {
+                    background-color: white;
+                }
+                .rft-gs-input{
+                    margin-left: 10px;
+                }
+            }
+
+            th {
+                border: 1px solid white;
+                background-color: gray;
+                width: 15%;
+            }
+        }
     }
 
-    button{
-        width: 100%;
-    }
-
-    img{
-        width: 100px;
-        height: 100px;
-    }
-
-    .table{
-        margin-bottom: 0;
+    tbody {
+        text-align: left;
+        tr {
+            td {
+                button {
+                    color: black;
+                    background-color: white;
+                    width: 70%;
+                }
+                button:hover{
+                    background-color: rgb(19, 231, 37);
+                }
+            }
+        }
     }
 }

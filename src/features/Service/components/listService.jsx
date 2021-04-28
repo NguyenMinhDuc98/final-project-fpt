@@ -1,55 +1,82 @@
-import { Button, Spinner, Table } from "reactstrap";
-import './listService.scss';
-import { useRouteMatch } from "react-router";
+import { Button, Spinner } from "reactstrap";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { activeService, deActivateService } from "../serviceSlice";
-import '../../../assets/styles/style.scss';
 import Toggle from 'react-toggle'
 import { useEffect } from "react";
 import { getListMajor } from "../../Major/majorSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactFlexyTable from "react-flexy-table"
+import "react-flexy-table/dist/index.css"
+import '../../../assets/styles/style.scss';
+import './listService.scss';
 
 function ListService(props) {
     const majors = useSelector(state => state.major);
     const dispatch = useDispatch();
     const match = useRouteMatch();
+    const param = useParams();
+    const history = useHistory();
 
+    console.log({match})
 
     const token = localStorage.getItem('token');
     const { isLoading } = majors;
 
-    const index = match.params.majorId;
-
-    let majorName = ''
+    let major = null;
     let serviceList = [];
-    let services = [];
 
-    if (majors.list[index]) {
-        majorName = majors.list[index].name;
-        serviceList = majors.list[index].services;
+    if(majors.list.length > 0){
+        major = majors.list.find(({id}) => id == param.majorId);
+        serviceList = major.services
+    }
 
-        services = serviceList.map((service, index) =>
-            <tr key={service.id}>
-                <th>
-                    <NavLink to={`${match.url}/issues/${index}`}>
-                        {service.name}
+    const columns = [
+        {
+            header: 'Id',
+            key: 'id',
+        },
+        {
+            header: 'Service name',
+            key: 'name',
+            td: (data) =>
+                <div>
+                    <NavLink to={`${match.url}/issues/${data.id}`}>
+                        {data.name}
                     </NavLink>
-                </th>
-                <th className="action-col">
+                </div>
+        },
+        {
+            header: 'Active',
+            key: 'active',
+            td: (data) =>
+                <div>
                     <Toggle
-                        defaultChecked={service.is_active.data == 0 ? false : true}
+                        defaultChecked={data.is_active.data == 0 ? false : true}
                         onChange={() => {
-                            service.is_active.data == 0 ? handleActive(service.id, token, majors.list[index].id) : handleDeActive(service.id, token, majors.list[index].id)
+                            data.is_active.data == 0 ? handleActive(data.id, token) : handleDeActive(data.id, token)
                         }}
                     />
-                </th>
-                <th>
-                    <Button>
-                        <NavLink to={`${match.url}/edit/${index}`}>Edit</NavLink>
+                </div>
+        },
+        {
+            header: 'Action',
+            key: 'action',
+            td: (data) =>
+                <div>
+                    <Button onClick={() => toEditService(data)}>
+                        Edit
                     </Button>
-                </th>
-            </tr>
-        )
+                </div>
+        }
+    ]
+
+    const toAddService = () => {
+        history.push(`${match.url}/add-service`)
+    }
+    const toEditService = (data) => {
+        history.push(`${match.url}/edit/${data.id}`)
     }
 
     useEffect(() => {
@@ -79,27 +106,20 @@ function ListService(props) {
                     ? <div className='spinner'><Spinner size='xxl' /></div>
                     : (
                         <div>
-                            {
-                                majors.list[index]
-                                    ? (
-                                        <div className='servicesList'>
-                                            <h3>{majorName}</h3>
-                                            <Table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Service</th>
-                                                        <th>Active</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {services}
-                                                </tbody>
-                                            </Table>
-                                        </div>
-                                    )
-                                    : (<div className='spinner'><Spinner size='xxl' /></div>)
-                            }
+                            <h3>Services</h3>
+                            <Button onClick={toAddService} className="add-service-button">
+                                <FontAwesomeIcon icon="plus-circle" className="major-add" />
+                            </Button>
+                            <ReactFlexyTable
+                                className="service-table"
+                                data={serviceList}
+                                columns={columns}
+                                sortable
+                                pageSize={20}
+                                pageSizeOptions={[20]}
+                                globalSearch
+                                caseSensitive
+                            />
                         </div>
                     )
             }

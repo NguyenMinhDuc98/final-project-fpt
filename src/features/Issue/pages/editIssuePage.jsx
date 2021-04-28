@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
-import { Col, Row } from "reactstrap";
+import { useHistory, useParams, useRouteMatch } from "react-router";
+import { Col, Row, Spinner } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Sidebar/left-navbar";
+import { getListMajor } from "../../Major/majorSlice";
 import IssueForm from "../components/issueForm";
 import { editIssue } from "../issueSlice";
 
@@ -11,30 +13,45 @@ function EditIssuePage() {
     const majors = useSelector(state => state.major);
     const history = useHistory();
     const dispatch = useDispatch();
-    const match = useParams();
+    const match = useRouteMatch();
+    const param = useParams();
 
     const token = localStorage.getItem('token');
-    const major = majors.list[match.majorIndex];
-    const service = major.services[match.serviceIndex];
-    const issues = service.issues;
-    const issue = issues[match.issueId];
+    const { isLoading } = majors;
 
-    console.log({ major, service, issues });
+    let major = null;
+    let service = null;
+    let issues = null;
+    let issue = null;
+
+    useEffect(() => {
+        dispatch(getListMajor(token))
+    }, [])
 
     const issueNameArr = [];
+    let initialValues = '';
 
-    let issueNameList = issues.map((issue) => {
-        return (
-            issueNameArr.push(issue.name)
+    if (majors.list.length > 0) {
+        major = majors.list.find(({ id }) => id == param.majorId);
+        service = major.services.find(({ id }) => id == param.serviceId);
+        issue = service.issues.find(({ id }) => id == param.issueId);
+        issues = service.issues;
+
+        let issueNameList = issues.map((issue) => {
+            return (
+                issueNameArr.push(issue.name.toLowerCase())
+            )
+        }
         )
-    }
-    )
 
-    const initialValues = {
-        name: issue.name,
-        estimate_fix_duration: issue.estimate_fix_duration,
-        estimate_price: issue.estimate_price
+        initialValues = {
+            name: issue.name,
+            estimate_fix_duration: issue.estimate_fix_duration,
+            estimate_price: issue.estimate_price.slice(0, issue.estimate_price.length - 3)
+        }
     }
+
+    console.log({ issue })
 
     const handleSubmit = (values) => {
         dispatch(editIssue({
@@ -48,14 +65,14 @@ function EditIssuePage() {
 
         return new Promise(resolve => {
             setTimeout(() => {
-                history.push(`/majors/services/11/issues/${match.serviceIndex}`);
+                history.push(`/majors/services/${param.majorId}/issues/${param.serviceId}`);
                 resolve(true);
             }, 3000);
         });
     }
 
     return (
-        <div className='major-form-page container-fluid'>
+        <div className='issue-form-page container-fluid'>
             <Header />
 
             <Row>
@@ -64,12 +81,18 @@ function EditIssuePage() {
                     <Footer />
                 </Col>
                 <Col lg={9}>
-                    <div className='major-form'>
-                        <IssueForm
-                            initialValues={initialValues}
-                            onSubmit={handleSubmit}
-                            issueNameArr={issueNameArr}
-                        />
+                    <div className='issue-form'>
+                        {
+                            isLoading
+                                ? <div className='spinner'><Spinner size='xxl' /></div>
+                                : (
+                                    <IssueForm
+                                        initialValues={initialValues}
+                                        onSubmit={handleSubmit}
+                                        issueNameArr={issueNameArr}
+                                    />
+                                )
+                        }
                     </div>
                 </Col>
             </Row>

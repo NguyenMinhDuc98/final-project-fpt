@@ -23,6 +23,9 @@ function ListMajor(props) {
     const toAddMajor = () => {
         history.push('/majors/add-major')
     }
+    const toEditMajor = (data) => {
+        history.push(`majors/edit/${data.id}`)
+    }
 
     const majorList = major.list.filter(major => major.id > 0);
     const { isLoading } = major;
@@ -80,8 +83,8 @@ function ListMajor(props) {
             key: 'action',
             td: (data) =>
                 <div>
-                    <Button>
-                        <NavLink to={`majors/edit/${data.id}`}>Edit</NavLink>
+                    <Button onClick={() => toEditMajor(data)}>
+                        Edit
                     </Button>
                 </div>
         }
