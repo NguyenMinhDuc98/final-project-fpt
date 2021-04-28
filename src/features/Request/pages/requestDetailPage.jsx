@@ -60,8 +60,8 @@ function RequestDetailPage() {
             estimate_time: requestDetail.estimate_time,
             estimate_price: estimate_price,
             request_issues_name: request_issues_name,
-            invoice_total_price: requestDetail.invoice.total_price,
-            invoice_status: requestDetail.invoice.status,
+            invoice_total_price: requestDetail.invoice ? requestDetail.invoice.total_price : null,
+            invoice_status: requestDetail.invoice ? requestDetail.invoice.status : null,
             request_status: requestDetail.request_statuses[0].status.name
         }
     }
@@ -83,6 +83,7 @@ function RequestDetailPage() {
                                 : (
                                     <RequestDetail
                                         initialValues={initialValues}
+                                        invoice={requestDetail.invoice}
                                     />
                                 )
                         }

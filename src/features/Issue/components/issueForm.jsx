@@ -20,7 +20,8 @@ function IssueForm(props) {
     console.log({existedIssueName})
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().lowercase()
+        name: Yup.string()
+            .lowercase()
             .required('This field is required')
             .notOneOf(existedIssueName, 'This issue is existed'),
         estimate_fix_duration: Yup.number().required('This field is required'),
@@ -40,7 +41,6 @@ function IssueForm(props) {
                 >
                     {formikProps => {
                         const { values, errors, touched, isSubmitting } = formikProps;
-                        console.log({ values, errors, touched });
 
                         return (
                             <Form>
@@ -52,7 +52,7 @@ function IssueForm(props) {
 
                                     //Props truyen vao trong InputField
                                     label="Issue name"
-                                    placeholder="Enter major name"
+                                    placeholder="Enter issue name"
                                 />
                                 <FastField
                                     //Props cua FastField

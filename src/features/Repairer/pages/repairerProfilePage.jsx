@@ -22,7 +22,7 @@ function RepairerProfilePage() {
                     <div className='repairer-info'>
                         <CoolTabs
                             tabKey={'1'}
-                            style={{ width: 1040, height: 600, background: 'white' }}
+                            style={{ width: 1040, height: 700, background: 'white' }}
                             activeTabStyle={{ background: 'gray', color: 'white' }}
                             unActiveTabStyle={{ background: 'silver', color: 'black' }}
                             leftTabTitle={'Profile'}

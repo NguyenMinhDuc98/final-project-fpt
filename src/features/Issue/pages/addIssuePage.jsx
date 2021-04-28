@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createIssue } from "../issueSlice";
 import IssueForm from "../components/issueForm";
 import { useEffect } from "react";
+import { getListMajor } from "../../Major/majorSlice";
 
 function AddIssuePage() {
     const majors = useSelector(state => state.major);
@@ -16,19 +17,28 @@ function AddIssuePage() {
     const dispatch = useDispatch();
     const match = useParams();
 
-    const major = majors.list[match.majorIndex];
-    const service = major.services[match.serviceIndex];
     const token = localStorage.getItem('token');
-    const issues = service.issues;
+    let service = null;
+
+    useEffect(() => {
+        dispatch(getListMajor(token));
+    }, [])
 
     const issueNameArr = [];
+    if (majors.list.length != 0) {
+        const major = majors.list[match.majorIndex];
 
-    let issueNameList = issues.map((issue) => {
-        return (
-            issueNameArr.push(issue.name)
+        service = major.services[match.serviceIndex];
+        const issues = service.issues;
+
+        let issueNameList = issues.map((issue) => {
+            return (
+                issueNameArr.push(issue.name.toLowerCase())
+            )
+        }
         )
     }
-    )
+
 
     const initialValues = {
         name: '',

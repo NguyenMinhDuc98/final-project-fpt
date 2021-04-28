@@ -18,13 +18,13 @@ function ListMajor(props) {
     const match = useRouteMatch();
     const history = useHistory();
 
-    console.log({match})
+    console.log({ match })
 
     const toAddMajor = () => {
         history.push('/majors/add-major')
     }
 
-    const majorList = major.list;
+    const majorList = major.list.filter(major => major.id > 0);
     const { isLoading } = major;
     const token = localStorage.getItem('token');
 
@@ -78,7 +78,7 @@ function ListMajor(props) {
         {
             header: 'Action',
             key: 'action',
-            td: (data) => 
+            td: (data) =>
                 <div>
                     <Button>
                         <NavLink to={`majors/edit/${data.id}`}>Edit</NavLink>

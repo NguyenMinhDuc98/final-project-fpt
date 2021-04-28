@@ -14,11 +14,14 @@ MajorForm.defaultProps = {
 }
 
 function MajorForm(props) {
+    const existedMajorName = props.majorNameArr;
+
+    console.log({existedMajorName})
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().required('This field is required'),
-
-        // image: Yup.string().required('This field is required')
+        name: Yup.string().required('This field is required')
+        .lowercase()
+        .notOneOf(existedMajorName, 'This major is existed'),
     })
 
     return (
@@ -34,7 +37,6 @@ function MajorForm(props) {
                 >
                     {formikProps => {
                         const { values, errors, touched, isSubmitting } = formikProps;
-                        console.log({ values, errors, touched });
 
                         return (
                             <Form>
