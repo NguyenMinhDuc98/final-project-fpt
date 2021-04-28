@@ -1,29 +1,51 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
-import { Col, Row } from "reactstrap";
+import { useHistory, useParams, useRouteMatch } from "react-router";
+import { Col, Row, Spinner } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import LeftNavbar from "../../../components/Sidebar/left-navbar";
-import MajorForm from "../components/serviceForm";
+import { getListMajor } from "../../Major/majorSlice";
+import ServiceForm from "../components/serviceForm";
 import { editService } from "../serviceSlice";
+import './addServicePage.scss';
 
 function EditServicePage() {
     const majors = useSelector(state => state.major);
     const history = useHistory();
     const dispatch = useDispatch();
+    const param = useParams();
 
-    const listMajor = majors.list;
-    const match = useParams();
-    const major = listMajor[match.majorId];
-    const token = localStorage.getItem('token');
-    const service = major.services[match.serviceId];
+    const token = localStorage.getItem("token");
+    const { isLoading } = majors;
+    console.log(param.majorId)
 
-    console.log({ major, service })
+    let major = null;
+    let service = null;
+    let initialValues = null;
+    let serviceNameArr = [];
 
-    const initialValues = {
-        name: service.name,
+    if (majors.list.length > 0) {
+        major = majors.list.find(({ id }) => id == param.majorId);
+        service = major.services.find(({ id }) => id == param.serviceId);
+        const services = majors.list
+
+        let serviceNameList = services.map((service) => {
+            return (
+                serviceNameArr.push(service.name.toLowerCase())
+            )
+        }
+        )
+
+        initialValues = {
+            name: service.name,
+        }
     }
-    console.log('log: ', match);
+
+    useEffect(() => {
+        dispatch(getListMajor(token))
+    }, [])
+
 
     const handleSubmit = (values) => {
         dispatch(editService({
@@ -35,14 +57,14 @@ function EditServicePage() {
 
         return new Promise(resolve => {
             setTimeout(() => {
-                history.push(`/majors/services/${match.majorId}`);
+                history.push(`/majors/services/${param.majorId}`);
                 resolve(true);
             }, 3000);
         });
     }
 
     return (
-        <div className='major-form-page'>
+        <div className='service-form-page container-fluid'>
             <Header />
 
             <Row>
@@ -51,11 +73,18 @@ function EditServicePage() {
                     <Footer />
                 </Col>
                 <Col lg={9}>
-                    <div className='major-form'>
-                        <MajorForm
-                            initialValues={initialValues}
-                            onSubmit={handleSubmit}
-                        />
+                    <div className='service-form'>
+                        {
+                            isLoading
+                                ? <div className='spinner'><Spinner size='xxl' /></div>
+                                : (
+                                    <ServiceForm
+                                        initialValues={initialValues}
+                                        onSubmit={handleSubmit}
+                                        serviceNameArr={serviceNameArr}
+                                    />
+                                )
+                        }
                     </div>
                 </Col>
             </Row>

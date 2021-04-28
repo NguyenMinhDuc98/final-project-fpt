@@ -1,7 +1,9 @@
 .major-form {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px !important;
     box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    margin-top: 20px;
+    padding: 10px;
 
     img {
         float: left;
@@ -9,10 +11,10 @@
         width: 400px;
     }
 
-    form {
+    .form {
         margin: 20px 40px 0 auto;
         width: 30rem;
-        height: 46rem;
+        height: 28rem;
 
         h2 {
             margin-bottom: 2rem;

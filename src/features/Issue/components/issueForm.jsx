@@ -60,7 +60,7 @@ function IssueForm(props) {
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
-                                    label="Estimate fix duration"
+                                    label="Estimate fix duration(minutes)"
                                     placeholder="Enter Estimate fix duration"
                                 />
                                 <FastField
@@ -69,7 +69,7 @@ function IssueForm(props) {
                                     component={InputField}
 
                                     //Props truyen vao trong InputField
-                                    label="Estimate price"
+                                    label="Estimate price(VND)"
                                     placeholder="Enter Estimate price"
                                 />
                                 <Button type="submit">

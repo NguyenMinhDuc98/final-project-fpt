@@ -8,11 +8,15 @@
         tr{
             td{
                 background-color: gray;
+                .rft-gs-input{
+                    margin-left: 10px;
+                }
             }
 
             th{
                 border: 1px solid white;
                 background-color: gray;
+                width: 15%;
             }
         }
     }

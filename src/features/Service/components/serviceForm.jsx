@@ -5,15 +5,15 @@ import * as Yup from 'yup';
 import InputField from '../../../components/Custom-field/inputField';
 import logo from '../../../assets/images/logo-fixit.png';
 
-MajorForm.propTypes = {
+ServiceForm.propTypes = {
     onSubmit: PropTypes.func
 }
 
-MajorForm.defaultProps = {
+ServiceForm.defaultProps = {
     onSubmit: null
 }
 
-function MajorForm(props) {
+function ServiceForm(props) {
     const existedServiceName = props.serviceNameArr;
 
     console.log({existedServiceName})
@@ -63,4 +63,4 @@ function MajorForm(props) {
     )
 }
 
-export default MajorForm;
+export default ServiceForm;

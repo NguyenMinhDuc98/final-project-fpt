@@ -19,16 +19,17 @@ function AddServicePage() {
 
     const token = localStorage.getItem('token');
     let major = null;
+    let services = null
 
     useEffect(() => {
         dispatch(getListMajor(token));
     }, [])
 
     const serviceNameArr = [];
-    if (majors.list.length != 0) {
-        major = majors.list[match.majorId];
+    if (majors.list.length > 0) {
+        major = majors.list.find(({ id }) => id == match.majorId);
 
-        const services = major.services;
+        services = major.services;
 
         let serviceNameList = services.map((service) => {
             return (
@@ -50,7 +51,7 @@ function AddServicePage() {
             major_id: major.id
         }));
 
-        console.log({token, values, major});
+        console.log({ token, values, major });
         return new Promise(resolve => {
             setTimeout(() => {
                 history.push(`/majors/services/${match.majorId}`);
@@ -60,7 +61,7 @@ function AddServicePage() {
     }
 
     return (
-        <div className='major-form-page'>
+        <div className='service-form-page'>
             <Header />
 
             <Row>
@@ -69,7 +70,7 @@ function AddServicePage() {
                     <Footer />
                 </Col>
                 <Col lg={9}>
-                    <div className='major-form'>
+                    <div className='service-form'>
                         <ServiceForm
                             initialValues={initialValues}
                             onSubmit={handleSubmit}

@@ -16,6 +16,8 @@ function ListMajor() {
     const { isLoading } = request;
     const requestList = request.list;
 
+    console.log({requestList})
+
     useEffect(() => {
         dispatch(getListRequest(token));
     }, []);
@@ -33,23 +35,31 @@ function ListMajor() {
         },
         {
             header: 'Customer name',
-            key: 'Customer.name',
-        },
-        {
-            header: 'Customer phone number',
-            key: 'Customer.phone_number',
+            key: 'cusName',
+            td: (data) => 
+                {return data.Customer.name}
         },
         {
             header: 'Repairer name',
-            key: 'Repairer.name',
-        },
-        {
-            header: 'Repairer phone number',
-            key: 'Repairer.phone_number',
+            key: 'repName',
+            td: (data) => 
+                {return data.Repairer.name}
         },
         {
             header: 'Address',
             key: 'address',
+            td: (data) => 
+                {return data.address}
+        },
+        {
+            header: 'Schedule time',
+            key: 'scheduletime',
+            td: (data) => data.schedule_time ? data.schedule_time.replace("T"," ").slice(0, data.schedule_time.length - 5) : null
+        },
+        {
+            header: 'Status',
+            key: 'status',
+            td: (data) => data.invoice ? data.invoice.status : null
         },
     ]
 
@@ -66,10 +76,10 @@ function ListMajor() {
                                 data={requestList}
                                 columns={columns}
                                 sortable
-                                nonFilterCols={["active"]}
                                 pageSize={10}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
+                                caseSensitive
                             />
                         </div>
                     )

@@ -50,10 +50,6 @@ function MajorForm(props) {
                                     label="Major name"
                                     placeholder="Enter major name"
                                 />
-                                {/* <div className='major-image'>
-                                    <img src={values.image} alt='major'/>
-                                    {console.log('image: ', values)}
-                                </div> */}
                                 <FastField
                                     //Props cua FastField
                                     name='image'

@@ -8,7 +8,6 @@ const service = createSlice({
     },
     reducers: {
         serviceRequestStart: (state, action) => {
-            console.log('start: ', action);
         },
         serviceReceived: (state, action) => {
             if (action.payload !== undefined) {
@@ -16,7 +15,6 @@ const service = createSlice({
             };
         },
         serviceRequestFailed: (state, action) => {
-            console.log('failed: ', action);
         },
         createServiceSuccessful: (state, action) => {
             if (action.payload !== undefined) {
@@ -35,14 +33,12 @@ const service = createSlice({
                 state.list = action.payload;
             };
             alert('Active service successful');
-            console.log('payload: ', action.payload);
         },
         deActivateServiceSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
             };
             alert('Deactivate service successful');
-            console.log('payload: ', action.payload);
         },
     }
 });
