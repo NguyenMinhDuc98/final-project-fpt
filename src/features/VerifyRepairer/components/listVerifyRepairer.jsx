@@ -5,6 +5,7 @@ import './listVerifyRepairer.scss';
 import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css"
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ListVerifyRepairer() {
     const verifyList = useSelector(state => state.notVerifiedList);
@@ -12,13 +13,13 @@ function ListVerifyRepairer() {
 
     const token = localStorage.getItem('token');
     const nvRepairersList = verifyList.list;
-    const {isLoading} = verifyList;
+    const { isLoading } = verifyList;
 
     console.log({ verifyList });
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getNotVerifiedList(token))
-    },[]);
+    }, []);
 
     const handleApprove = (id, token) => {
         dispatch(verifyRepairer({
@@ -31,15 +32,15 @@ function ListVerifyRepairer() {
         {
             header: 'Id',
             key: 'id',
-            //   td: (data) => <div>the id is {data.id}</div>
+            td: (data) => <div>
+                <Link to={`verify/profile/${data.id}`}>
+                    {data.id}
+                </Link>
+            </div>
         },
         {
             header: 'User name',
             key: 'user.name',
-            // td: (data) =>
-            //     <div>
-            //         {data.name}
-            //     </div>
         },
         {
             header: 'Phone number',
