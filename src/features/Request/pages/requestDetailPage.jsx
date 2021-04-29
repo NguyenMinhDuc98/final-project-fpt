@@ -6,14 +6,16 @@ import '../../../assets/styles/style.scss';
 import './requestDetailPage.scss';
 import RequestDetail from "../components/requestDetail";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getListRequest } from "../requestSlice";
 import { useParams } from "react-router";
+import cityOfVN from '../../../assets/cityOfVietNam';
 
 function RequestDetailPage() {
     const request = useSelector(state => state.request);
     const dispatch = useDispatch();
     const param = useParams();
+    const [cityOfVn, setCityOfVn] = useState(cityOfVN);
 
     console.log({ request })
     console.log(param.requestId)
@@ -32,7 +34,6 @@ function RequestDetailPage() {
 
     let initialValues = {}
 
-
     if (requestDetail) {
         let anyString = requestDetail.estimate_price;
         let estimate_price = anyString.substring(anyString.length - 3, 0);
@@ -50,12 +51,22 @@ function RequestDetailPage() {
         }
         )
 
+        let city;
+        let district;
+
+        if (cityOfVn) {
+            city = cityOfVn.find((x) => x.Id == requestDetail.city);
+            district = city.Districts.find((x) => x.Id == requestDetail.district);
+        }
+
         initialValues = {
             customerName: requestDetail.Customer.name,
             customerPhone: requestDetail.Customer.phone_number,
             repairerName: requestDetail.Repairer.name,
             repairerPhone: requestDetail.Repairer.phone_number,
             service: requestDetail.service.name,
+            city: city.Name,
+            district: district.Name,
             address: requestDetail.address,
             estimate_time: requestDetail.estimate_time,
             estimate_price: estimate_price,
@@ -83,7 +94,7 @@ function RequestDetailPage() {
                                 : (
                                     <RequestDetail
                                         initialValues={initialValues}
-                                        invoice={requestDetail.invoice}
+                                        invoice={requestDetail ? requestDetail.invoice : null}
                                     />
                                 )
                         }

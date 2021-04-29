@@ -7,12 +7,12 @@ Approve.propTypes = {};
 
 function Approve(props) {
     const match = useRouteMatch();
-    console.log('match: ', match);
+    const flag = true;
 
     return (
         <Switch>
             <Route exact path={match.url} component={VerifyPage} />
-            <Route exact path={`${match.url}/profile/:id`} component={() => RepairerProfilePage(match)} />
+            <Route exact path={`${match.url}/profile/:id`} component={() => RepairerProfilePage(flag)} />
 
             <Route component={NotFound} />
         </Switch>
