@@ -13,7 +13,7 @@ function RepairerProfile() {
     const major = useSelector(state => state.major);
     const dispatch = useDispatch();
 
-    const user = repairers.list[match.id];
+    const user = repairers.list.find(({ id }) => id == match.id);
     const majors = major.list;
     const token = localStorage.getItem('token');
     const { isLoading } = repairers;
@@ -23,23 +23,28 @@ function RepairerProfile() {
         dispatch(getListMajor(token))
     }, []);
 
-    const repairerMajor = majors.find(({ id }) => id == user.repairer.major_id);
+    let repairerMajor = null;
+    if(user && user.repairer) repairerMajor = majors.find(({ id }) => id == user.repairer.major_id);
 
     let initialValues = null;
 
-    console.log({user})
+    console.log({ user })
+
+    const verified = (repairer) => {
+        return repairer.is_verify.data == 1 ? 'Repairer is verified' : 'Repairer is not verified'
+    }
 
     if (user && majors) {
         initialValues = {
             name: user.name,
             phoneNumber: user.phone_number,
             email: user.email,
-            city: user.repairer.city,
-            district: user.repairer.district,
-            address: user.repairer.address,
-            identity_card_number: user.repairer.identity_card_number,
+            city: user.repairer ? user.repairer.city : null,
+            district: user.repairer ? user.repairer.district : null,
+            address: user.repairer ? user.repairer.address : null,
+            identity_card_number: user.repairer ? user.repairer.identity_card_number : null,
             major: repairerMajor ? repairerMajor.name : null,
-            verify: user.repairer.is_verify.data == 1 ? 'Repairer is verified' : 'Repairer is not verified'
+            verify: user.repairer ? verified(user.repairer) : null
         }
     }
 

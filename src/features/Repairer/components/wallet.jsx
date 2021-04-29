@@ -26,16 +26,6 @@ function Wallet() {
                                 <Col md={4} className='right-wallet'>
                                     <p className='current-balance'>$ 2850</p>
                                     <p>Current balance</p>
-                                    <p>1500$</p>
-                                    <p><Button>+</Button></p>
-                                    <p>350$</p>
-                                    <p><Button>-</Button></p>
-                                    <p>
-                                        <Toggle
-                                            defaultChecked={true}
-                                        />
-                                    </p>
-                                    <p>Active Card</p>
                                 </Col>
                             </Row>
                         </CardBody>
