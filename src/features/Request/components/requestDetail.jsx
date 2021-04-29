@@ -59,6 +59,25 @@ function RequestDetail(props) {
                                     label="Repairer phone number"
                                     disabled
                                 />
+                                
+                                <FastField
+                                    //Props cua FastField
+                                    name='city'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="City"
+                                    disabled
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='district'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="District"
+                                    disabled
+                                />
                                 <FastField
                                     //Props cua FastField
                                     name='address'

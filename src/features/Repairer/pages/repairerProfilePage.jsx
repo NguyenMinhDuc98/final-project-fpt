@@ -7,8 +7,12 @@ import './repairersPage.scss';
 import RepairerProfile from "../components/repairerProfile";
 import CoolTabs from 'react-cool-tabs';
 import Wallet from "../components/wallet";
+import { useRouteMatch } from "react-router";
 
-function RepairerProfilePage(props) {
+function RepairerProfilePage() {
+    const match = useRouteMatch();
+    console.log({match})
+
     return (
         <div className='repairer-page container-fluid'>
             <Header />
@@ -21,7 +25,7 @@ function RepairerProfilePage(props) {
                 <Col lg={9}>
                     <div className='repairer-info'>
                         {
-                            props 
+                            match.url === `/verify/profile/${match.params.id}`
                             ? <RepairerProfile />
                             : <CoolTabs
                             tabKey={'1'}

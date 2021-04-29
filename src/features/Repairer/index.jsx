@@ -7,13 +7,14 @@ Major.propTypes = {};
 
 function Major(props) {
     const match = useRouteMatch();
+    const flag = false;
 
     return (
         <Switch>
             <Route exact path={match.url} component={RepairersPage} />
 
             {/* Major route */}
-            <Route exact path={`${match.url}/profile/:id`} component={RepairerProfilePage} />
+            <Route exact path={`${match.url}/profile/:id`} component={() => RepairerProfilePage(flag)} />
 
             <Route component={NotFound} />
         </Switch>
