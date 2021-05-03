@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useHistory } from "react-router";
 import { apiCallBegan } from "../../store/api";
 
 const login = createSlice({
@@ -6,12 +7,17 @@ const login = createSlice({
     initialState: {
         user: [],
         loading: false,
-        error: null
+        error: null,
+        message: null,
+        changePassMessage: null,
+        resetPassMessage: null,
+        message: null,
     },
     reducers: {
         logout: (state, action) => {
-            state.user = []
-            localStorage.setItem('token', '');
+            state.user = [];
+            state.message = null;
+            localStorage.clear();
         },
         loginSuccess: (state, action) => {
             localStorage.setItem('token', action.payload.token);
@@ -19,28 +25,31 @@ const login = createSlice({
 
             state.user = action.payload;
             state.loading = false;
+            state.message = 'is_logged_in';
         },
         loginFailed: (state, action) => {
             state.loading = false;
-            alert('Phone number or password incorrect')
-            console.log('failed: ', action)
+            state.message = 'login_failed';
+            return
         },
         changePasswordSuccessful: (state, action) => {
             if (action.payload === "Incorrect password") {
                 alert("Incorrect old password");
-                state.error = action.payload
+                state.loading = false;
+                state.error = action.payload;
+                state.changePassMessage = 'failed';
             } else {
+                state.changePassMessage = 'success';
                 alert('Change password successful');
             }
         },
-        changePasswordFailed: (state, action) => {
-            alert('Change password failed');
-        },
         resetPasswordSuccessful: (state, action) => {
+            state.resetPassMessage = 'success';
             alert('Reset password successful');
         },
         actionStart: (state, action) => {
             state.error = null;
+            state.loading = true;
             console.log({ action })
         }
     }
@@ -72,8 +81,7 @@ export const changePassword = (props) => apiCallBegan({
     },
     method: 'POST',
     onStart: actionStart.type,
-    onSuccess: changePasswordSuccessful.type,
-    onError: changePasswordFailed.type
+    onSuccess: changePasswordSuccessful.type
 })
 export const resetPassword = (props) => apiCallBegan({
     url: '/resetPassword',

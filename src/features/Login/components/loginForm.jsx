@@ -36,7 +36,6 @@ function LoginForm(props) {
         >
             {formikProps => {
                 const { values, errors, touched, isSubmitting } = formikProps;
-                console.log({ values, errors, touched });
 
                 return (
                     <Form>
@@ -63,6 +62,11 @@ function LoginForm(props) {
                             label="Password"
                             placeholder="Enter your password"
                         />
+                        {
+                            props.error 
+                            ? <p>{props.error}</p>
+                            : <div></div>
+                        }
                         <a href='/login/getVerifyCode'>Forgot password</a>
                         <Button type="submit">
                             {isSubmitting && <Spinner size='sm' />}
