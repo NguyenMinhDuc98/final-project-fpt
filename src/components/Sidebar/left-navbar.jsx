@@ -39,7 +39,7 @@ function LeftNavbar(props) {
                 <Nav className="flex-column nav-pills" navbar tabs>
                     <NavItem>
                         <NavLink onClick={toHome}>
-                            <FontAwesomeIcon icon='chart-line' /> Requests
+                            <FontAwesomeIcon icon='check' /> Requests
                         </NavLink>
                     </NavItem>
                     <NavItem>
