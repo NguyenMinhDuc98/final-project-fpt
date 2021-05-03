@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { Redirect, Route, Switch, useHistory, useLocation } from "react-router";
 import ChangePasswordForm from "../components/changePasswordForm";
 import { changePassword } from "../loginSlice";
 import './changePasswordPage.scss';
@@ -13,6 +14,11 @@ function ResetPasswordPage() {
 
     const user = JSON.parse(localStorage.getItem('user'));
     const token = localStorage.getItem('token');
+    let { changePassMessage } = login;
+    let error = null;
+    let location = useLocation();
+
+    console.log({location});
 
     const handleSubmit = (values) => {
         dispatch(changePassword({
@@ -21,27 +27,26 @@ function ResetPasswordPage() {
             old_password: values.old_password,
             new_password: values.confirm_password
         }));
-
-        return new Promise(resolve => {
-            console.log('Submit: ', values);
-
-            setTimeout(() => {
-                if (login.error == null) {
-                    history.push('/');
-                    console.log('success')
-                } else {
-                    history.push('/login/changePassword');
-                    console.log('failed')
-                }
-                resolve(true);
-            }, 3000);
-        });
     };
+
+    console.log({changePassMessage});
+
+    useEffect(() => {
+        if (changePassMessage === 'success') {
+            window.location.replace('/');
+        }
+        else if (changePassMessage === 'failed') {
+            error = 'Old password incorrect';
+            window.location.reload();
+        }
+        
+    }, [changePassMessage])
 
     return (
         <div className='change-password-form'>
             <ChangePasswordForm
                 onSubmit={handleSubmit}
+                error={error}
             />
         </div>
     )

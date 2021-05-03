@@ -22,12 +22,12 @@ function ChangePasswordForm(props) {
 
     const validationSchema = Yup.object().shape({
         old_password: Yup.string().required('This field is required!'),
-        new_password: Yup.string()
-            .required('This field is required!')
-            .matches(
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-            ),
+        // new_password: Yup.string()
+        //     .required('This field is required!')
+        //     .matches(
+        //         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        //         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+        //     ),
         confirm_password: Yup.string()
             .required('This field is required!')
             .oneOf([Yup.ref('new_password'), null], 'Password must match'),
@@ -41,7 +41,6 @@ function ChangePasswordForm(props) {
         >
             {formikProps => {
                 const { values, errors, touched, isSubmitting } = formikProps;
-                console.log({ values, errors, touched });
 
                 return (
                     <Form>
@@ -56,6 +55,11 @@ function ChangePasswordForm(props) {
                             type="password"
                             placeholder="Enter your old password"
                         />
+                        {
+                            props.error 
+                            ? <p>{props.error}</p>
+                            : <div></div>
+                        }
                         <FastField
                             //Props cua FastField
                             name='new_password'

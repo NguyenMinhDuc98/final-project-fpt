@@ -60,7 +60,7 @@ function EditIssuePage() {
             setTimeout(() => {
                 history.push(`/majors/services/${param.majorId}/issues/${param.serviceId}`);
                 resolve(true);
-            }, 3000);
+            }, 4000);
         });
     }
 
