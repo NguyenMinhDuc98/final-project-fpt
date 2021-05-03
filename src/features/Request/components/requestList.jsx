@@ -3,10 +3,11 @@ import '../../../assets/styles/style.scss';
 import ReactFlexyTable from "react-flexy-table";
 import "react-flexy-table/dist/index.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getListRequest } from '../requestSlice';
 import { Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import cityOfVN from '../../../assets/cityOfVietNam';
 
 function ListMajor() {
     const request = useSelector(state => state.request);
@@ -16,19 +17,22 @@ function ListMajor() {
     const { isLoading } = request;
     const requestList = request.list;
 
-    console.log({requestList})
+    let city;
+    let district;
+
+    console.log({ requestList })
 
     useEffect(() => {
         dispatch(getListRequest(token));
     }, []);
 
-    console.log({requestList})
+    console.log({ requestList })
 
     const columns = [
         {
             header: 'Id',
             key: 'id',
-            td: (data) => 
+            td: (data) =>
                 <Link to={`/requests/detail/${data.id}`}>
                     {data.id}
                 </Link>
@@ -36,30 +40,35 @@ function ListMajor() {
         {
             header: 'Customer name',
             key: 'cusName',
-            td: (data) => 
-                {return data.Customer.name}
+            td: (data) => { return data.Customer.name }
         },
         {
             header: 'Repairer name',
             key: 'repName',
-            td: (data) => 
-                {return data.Repairer.name}
+            td: (data) => { return data.Repairer.name }
         },
         {
             header: 'Address',
             key: 'address',
-            td: (data) => 
-                {return data.address}
+            td: (data) => {
+                let address = '';
+                if (cityOfVN) {
+                    city = cityOfVN.find((x) => x.Id == data.city);
+                    district = city.Districts.find((x) => x.Id == data.district);
+                    address =  district.Name + ", " + city.Name;
+                }
+                return address
+            }
         },
         {
             header: 'Schedule time',
             key: 'scheduletime',
-            td: (data) => data.schedule_time ? data.schedule_time.replace("T"," ").slice(0, data.schedule_time.length - 5) : null
+            td: (data) => data.schedule_time ? data.schedule_time.replace("T", " ").slice(0, data.schedule_time.length - 5) : null
         },
         {
             header: 'Status',
             key: 'status',
-            td: (data) => data.invoice ? data.invoice.status : null
+            td: (data) => data.request_statuses[0] ? data.request_statuses[0].status.name : null
         },
     ]
 

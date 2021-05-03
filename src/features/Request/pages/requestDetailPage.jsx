@@ -65,15 +65,16 @@ function RequestDetailPage() {
             repairerName: requestDetail.Repairer.name,
             repairerPhone: requestDetail.Repairer.phone_number,
             service: requestDetail.service.name,
-            city: city.Name,
-            district: district.Name,
-            address: requestDetail.address,
+            address: requestDetail.address + ', ' + district.Name + ', ' + city.Name,
             estimate_time: requestDetail.estimate_time,
             estimate_price: estimate_price,
             request_issues_name: request_issues_name,
+            cost_of_supplies: requestDetail.invoice ? requestDetail.invoice.cost_of_supplies : null,
+            other_cost: requestDetail.invoice ? requestDetail.invoice.other_cost : null,
             invoice_total_price: requestDetail.invoice ? requestDetail.invoice.total_price : null,
             invoice_status: requestDetail.invoice ? requestDetail.invoice.status : null,
-            request_status: requestDetail.request_statuses[0].status.name
+            request_status: requestDetail.request_statuses[0].status.name,
+            description: requestDetail.description,
         }
     }
 
@@ -95,6 +96,7 @@ function RequestDetailPage() {
                                     <RequestDetail
                                         initialValues={initialValues}
                                         invoice={requestDetail ? requestDetail.invoice : null}
+                                        request_statuses={requestDetail ? requestDetail.request_statuses : null}
                                     />
                                 )
                         }

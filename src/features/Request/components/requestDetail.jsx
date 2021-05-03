@@ -25,6 +25,24 @@ function RequestDetail(props) {
                                 <h3>Request detail</h3>
                                 <FastField
                                     //Props cua FastField
+                                    name='service'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Service"
+                                    disabled
+                                />
+                                <FastField
+                                    //Props cua FastField
+                                    name='request_status'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Request status"
+                                    disabled
+                                />
+                                <FastField
+                                    //Props cua FastField
                                     name='customerName'
                                     component={InputField}
 
@@ -43,43 +61,6 @@ function RequestDetail(props) {
                                 />
                                 <FastField
                                     //Props cua FastField
-                                    name='repairerName'
-                                    component={InputField}
-
-                                    //Props truyen vao trong InputField
-                                    label="Repairer name"
-                                    disabled
-                                />
-                                <FastField
-                                    //Props cua FastField
-                                    name='repairerPhone'
-                                    component={InputField}
-
-                                    //Props truyen vao trong InputField
-                                    label="Repairer phone number"
-                                    disabled
-                                />
-                                
-                                <FastField
-                                    //Props cua FastField
-                                    name='city'
-                                    component={InputField}
-
-                                    //Props truyen vao trong InputField
-                                    label="City"
-                                    disabled
-                                />
-                                <FastField
-                                    //Props cua FastField
-                                    name='district'
-                                    component={InputField}
-
-                                    //Props truyen vao trong InputField
-                                    label="District"
-                                    disabled
-                                />
-                                <FastField
-                                    //Props cua FastField
                                     name='address'
                                     component={InputField}
 
@@ -87,33 +68,34 @@ function RequestDetail(props) {
                                     label="Address"
                                     disabled
                                 />
-                                <FastField
-                                    //Props cua FastField
-                                    name='service'
-                                    component={InputField}
+                                {
+                                    props.request_statuses && props.request_statuses[0].status_id != 1
+                                        ? (
+                                            <div>
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='repairerName'
+                                                    component={InputField}
 
-                                    //Props truyen vao trong InputField
-                                    label="Service"
-                                    disabled
-                                />
-                                <FastField
-                                    //Props cua FastField
-                                    name='estimate_time'
-                                    component={InputField}
+                                                    //Props truyen vao trong InputField
+                                                    label="Repairer name"
+                                                    disabled
+                                                />
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='repairerPhone'
+                                                    component={InputField}
 
-                                    //Props truyen vao trong InputField
-                                    label="Estimate time (minutes)"
-                                    disabled
-                                />
-                                <FastField
-                                    //Props cua FastField
-                                    name='estimate_price'
-                                    component={InputField}
-
-                                    //Props truyen vao trong InputField
-                                    label="Estimate price (VND)"
-                                    disabled
-                                />
+                                                    //Props truyen vao trong InputField
+                                                    label="Repairer phone number"
+                                                    disabled
+                                                />
+                                            </div>
+                                        )
+                                        : (
+                                            <div></div>
+                                        )
+                                }
                                 <FastField
                                     //Props cua FastField
                                     name='request_issues_name'
@@ -123,10 +105,38 @@ function RequestDetail(props) {
                                     label="Request issue name"
                                     disabled
                                 />
+                                <FastField
+                                    //Props cua FastField
+                                    name='description'
+                                    component={InputField}
+
+                                    //Props truyen vao trong InputField
+                                    label="Description"
+                                    disabled
+                                />
+
                                 {
                                     props.invoice
                                         ? (
                                             <div>
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='cost_of_supplies'
+                                                    component={InputField}
+
+                                                    //Props truyen vao trong InputField
+                                                    label="Cost of supplies"
+                                                    disabled
+                                                />
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='other_cost'
+                                                    component={InputField}
+
+                                                    //Props truyen vao trong InputField
+                                                    label="Other cost"
+                                                    disabled
+                                                />
                                                 <FastField
                                                     //Props cua FastField
                                                     name='invoice_total_price'
@@ -147,17 +157,30 @@ function RequestDetail(props) {
                                                 />
                                             </div>
                                         )
-                                        : (<div></div>)
-                                }
-                                <FastField
-                                    //Props cua FastField
-                                    name='request_status'
-                                    component={InputField}
+                                        : (
+                                            <div>
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='estimate_time'
+                                                    component={InputField}
 
-                                    //Props truyen vao trong InputField
-                                    label="Request status"
-                                    disabled
-                                />
+                                                    //Props truyen vao trong InputField
+                                                    label="Estimate time (minutes)"
+                                                    disabled
+                                                />
+                                                <FastField
+                                                    //Props cua FastField
+                                                    name='estimate_price'
+                                                    component={InputField}
+
+                                                    //Props truyen vao trong InputField
+                                                    label="Estimate price (VND)"
+                                                    disabled
+                                                />
+                                            </div>
+                                        )
+                                }
+
                             </Form>
                         )
                     }}
