@@ -57,7 +57,7 @@ function ChangePasswordForm(props) {
                         />
                         {
                             props.error 
-                            ? <p>{props.error}</p>
+                            ? <p style={{ color: 'red' }}>{props.error}</p>
                             : <div></div>
                         }
                         <FastField
@@ -81,7 +81,7 @@ function ChangePasswordForm(props) {
                             placeholder="Confirm your password"
                         />
                         <Button type="submit">
-                            {isSubmitting && <Spinner size='sm' />}
+                            {props.loading && <Spinner size='sm' />}
                             Change Password
                         </Button>
                     </Form>

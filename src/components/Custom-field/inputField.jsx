@@ -34,10 +34,6 @@ function InputField(props) {
             {label && <Label for={name}>{label}</Label>}
             <Input
                 id={name}
-                // name={name}
-                // value={value}
-                // onChange={onChange}
-                // onBlur={onBlur}
                 {...field} // Tương ứng với phần comment trên
 
                 type={type}

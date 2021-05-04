@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import './assets/fontawesome/icon';
 import PrivateRoute from './privateRoute';
+import { Spinner } from 'reactstrap';
+import './assets/styles/style.scss';
 
 const Login = React.lazy(() => import('./features/Login'));
 const Home = React.lazy(() => import('./components/Home/routes'));
@@ -16,7 +18,7 @@ const Request = React.lazy(() => import('./features/Request'));
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading ...</div>}>
+    <Suspense fallback={<Spinner size='sm' />}>
       <BrowserRouter>
         <Switch>
           <Route path='/login' component={Login} />

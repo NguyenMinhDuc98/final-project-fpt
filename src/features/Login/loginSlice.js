@@ -22,7 +22,6 @@ const login = createSlice({
         loginSuccess: (state, action) => {
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('user', JSON.stringify(action.payload));
-
             state.user = action.payload;
             state.loading = false;
             state.message = 'is_logged_in';
@@ -30,11 +29,9 @@ const login = createSlice({
         loginFailed: (state, action) => {
             state.loading = false;
             state.message = 'login_failed';
-            return
         },
         changePasswordSuccessful: (state, action) => {
             if (action.payload === "Incorrect password") {
-                alert("Incorrect old password");
                 state.loading = false;
                 state.error = action.payload;
                 state.changePassMessage = 'failed';
