@@ -88,7 +88,6 @@ function ListMajor() {
                                 pageSize={20}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
-                                caseSensitive
                             />
                         </div>
                     )

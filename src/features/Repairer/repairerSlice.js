@@ -26,14 +26,14 @@ const repairer = createSlice({
                 state.list = action.payload;
                 state.isLoading = false;
             };
-            // alert('Active repairer successful');
+            alert('Active repairer successful');
             console.log('payload: ', action.payload);
         },
         deActivateRepairerSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
             };
-            // alert('Deactivate repairer successful');
+            alert('Deactivate repairer successful');
             console.log('payload: ', action.payload);
         },
     }
@@ -50,31 +50,31 @@ export const getListRepairer = (props) => apiCallBegan({
 });
 
 export const activeRepairer = (props) => apiCallBegan({
-    url: '/api/admin/activeRepairer',
+    url: '/api/admin/activeUser',
     headers: {
         Authorization: props.token
     },
     data: {
-        id: props.id
+        user_id: props.id,
+        role_id: 3
     },
     method: "POST",
     onSuccess: activeRepairerSuccessful.type,
-    onError: repairerRequestFailed.type,
-    onStart: repairerRequestStart.type
+    onError: repairerRequestFailed.type
 });
 
 export const deActivateRepairer = (props) => apiCallBegan({
-    url: '/api/admin/deactivateRepairer',
+    url: '/api/admin/deactiveUser',
     headers: {
         Authorization: props.token
     },
     data: {
-        id: props.id
+        user_id: props.id,
+        role_id: 3
     },
     method: "POST",
     onSuccess: deActivateRepairerSuccessful.type,
-    onError: repairerRequestFailed.type,
-    onStart: repairerRequestStart.type
+    onError: repairerRequestFailed.type
 });
 
 const { reducer, actions } = repairer;
