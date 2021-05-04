@@ -78,7 +78,6 @@ function ListVerifyRepairer() {
                                 pageSize={10}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
-                                caseSensitive
                             />
                         </div>
                     )

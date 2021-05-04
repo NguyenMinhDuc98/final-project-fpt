@@ -56,25 +56,28 @@ function ListRepairer() {
             td: (data) =>
                 <div>
                     <Toggle
-                        defaultChecked={data.is_active.data == 0 ? false : true}
+                        defaultChecked={data.is_active}
+                        onChange={() => {
+                            !data.is_active ? handleActive(data.id, token) : handleDeactivate(data.id, token)
+                        }}
                     />
                 </div>
         }
     ]
 
-    // const handleActive = (id, token) => {
-    //     dispatch(activeRepairer({
-    //         token: token,
-    //         id: id
-    //     }));
-    // };
+    const handleActive = (id) => {
+        dispatch(activeRepairer({
+            token: token,
+            user_id: id
+        }));
+    };
 
-    // const handleInActive = (id, token) => {
-    //     dispatch(deActivateRepairer({
-    //         token: token,
-    //         id: id
-    //     }));
-    // };
+    const handleDeactivate = (id) => {
+        dispatch(deActivateRepairer({
+            token: token,
+            user_id: id
+        }));
+    };
 
     return (
         <div>
@@ -92,7 +95,6 @@ function ListRepairer() {
                                 pageSize={10}
                                 pageSizeOptions={[10, 20]}
                                 globalSearch
-                                caseSensitive
                             />
                         </div>
                     )

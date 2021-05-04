@@ -11,7 +11,7 @@ import { useRouteMatch } from "react-router";
 
 function RepairerProfilePage() {
     const match = useRouteMatch();
-    console.log({match})
+    console.log({ match })
 
     return (
         <div className='repairer-page container-fluid'>
@@ -26,19 +26,19 @@ function RepairerProfilePage() {
                     <div className='repairer-info'>
                         {
                             match.url === `/verify/profile/${match.params.id}`
-                            ? <RepairerProfile />
-                            : <CoolTabs
-                            tabKey={'1'}
-                            style={{ width: 1040, height: 1000, background: 'white' }}
-                            activeTabStyle={{ background: 'gray', color: 'white' }}
-                            unActiveTabStyle={{ background: 'silver', color: 'black' }}
-                            leftTabTitle={'Profile'}
-                            rightTabTitle={'Wallet'}
-                            leftContent={<RepairerProfile />}
-                            rightContent={<Wallet />}
-                            contentTransitionStyle={'transform 0.6s ease-in'}
-                            borderTransitionStyle={'all 0.6s ease-in'}
-                        />
+                                ? <RepairerProfile />
+                                : <CoolTabs
+                                    tabKey={'1'}
+                                    style={{ width: 1020, height: 1000, background: 'white', borderRadius: 10 }}
+                                    activeTabStyle={{ background: 'gray', color: 'white' }}
+                                    unActiveTabStyle={{ background: 'silver', color: 'black' }}
+                                    leftTabTitle={'Profile'}
+                                    rightTabTitle={'Wallet'}
+                                    leftContent={<RepairerProfile />}
+                                    rightContent={<Wallet />}
+                                    contentTransitionStyle={'transform 0.6s ease-in'}
+                                    borderTransitionStyle={'all 0.6s ease-in'}
+                                />
                         }
                     </div>
                 </Col>

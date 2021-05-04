@@ -21,16 +21,19 @@ const customer = createSlice({
         customerRequestFailed: (state, action) => {
             console.log('failed: ', action);
         },
-        editCustomerSuccessful:(state,action)=>{
-            state.message = 'success';
-            state.isLoading = false;
-        },
         activeCustomerSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload
                 state.isLoading = false;
             };
             alert('Active customer successful');
+        },
+        deactivateCustomerSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload
+                state.isLoading = false;
+            };
+            alert('Deactivate customer successful');
         },
     }
 });
@@ -45,40 +48,36 @@ export const getListCustomer = (props) => apiCallBegan({
     onStart: customerRequestStart.type
 });
 
-export const editCustomer = (props) => apiCallBegan({
-    url: '/api/admin/updateCustomer',
+export const activeCustomer = (props) => apiCallBegan({
+    url: '/api/admin/activeUser',
     headers: {
-        Authorization: props
+        Authorization: props.token
     },
     data: {
-        name: props.name,
-        phone_number: props.phoneNumber,
-        email: props.email,
-        id: props.id,
-        role_id: props.role_id
+        user_id: props.id,
+        role_id: 3
     },
     method: "POST",
-    onSuccess: editCustomerSuccessful.type,
+    onSuccess: activeCustomerSuccessful.type,
     onError: customerRequestFailed.type,
-    onStart: customerRequestStart.type
 });
 
-// export const activeCustomer = (props) => apiCallBegan({
-//     url: '/api/admin/activeCustomer',
-//     headers: {
-//         Authorization: props.token
-//     },
-//     data: {
-//         id: props.id
-//     },
-//     method: "POST",
-//     onSuccess: activeCustomerSuccessful.type,
-//     onError: serviceRequestFailed.type,
-//     onStart: customerRequestStart.type
-// });
+export const deactivateCustomer = (props) => apiCallBegan({
+    url: '/api/admin/deactiveUser',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        user_id: props.id,
+        role_id: 3
+    },
+    method: "POST",
+    onSuccess: activeCustomerSuccessful.type,
+    onError: customerRequestFailed.type,
+});
 
 const { reducer, actions } = customer;
 export const { customerReceived, customerRequestFailed, customerRequestStart,
-    activeCustomerSuccessful, editCustomerSuccessful
+    activeCustomerSuccessful, deactivateCustomerSuccessful
 } = actions;
 export default reducer;

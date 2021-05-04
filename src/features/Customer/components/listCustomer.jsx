@@ -1,7 +1,7 @@
 import { Spinner } from "reactstrap";
 import './listCustomer.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { getListCustomer } from "../customerSlice";
+import { activeCustomer, deactivateCustomer, getListCustomer } from "../customerSlice";
 import { useEffect } from "react";
 import '../../../assets/styles/style.scss';
 import Toggle from 'react-toggle';
@@ -20,25 +20,24 @@ function ListCustomer() {
         dispatch(getListCustomer(token));
     }, []);
 
-    // const handleActive = (id) => {
-    //     dispatch(deleteCustomer({
-    //         token: token,
-    //         id: id
-    //     }));
-    // };
+    const handleActive = (id) => {
+        dispatch(activeCustomer({
+            token: token,
+            user_id: id
+        }));
+    };
 
-    // const handleInActive = (id) => {
-    //     dispatch(deleteCustomer({
-    //         token: token,
-    //         id: id
-    //     }));
-    // };
+    const handleDeactivate = (id) => {
+        dispatch(deactivateCustomer({
+            token: token,
+            user_id: id
+        }));
+    };
 
     const columns = [
         {
             header: 'Id',
             key: 'id',
-            //   td: (data) => <div>the id is {data.id}</div>
         },
         {
             header: 'Full name',
@@ -50,7 +49,6 @@ function ListCustomer() {
         },
         {
             header: 'Phone number',
-            // can also use with nested objects
             key: 'phone_number'
         },
         {
@@ -64,8 +62,12 @@ function ListCustomer() {
             td: (data) =>
                 <div>
                     <Toggle
-                        defaultChecked={data.is_active.data == 0 ? false : true}
+                        defaultChecked={data.is_active}
+                        onChange={() => {
+                            !data.is_active ? handleActive(data.id, token) : handleDeactivate(data.id, token)
+                        }}
                     />
+                    {console.log(data.role_id)}
                 </div>
         }
     ]

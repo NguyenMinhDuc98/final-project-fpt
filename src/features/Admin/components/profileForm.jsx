@@ -39,7 +39,7 @@ function ProfileForm(props) {
 
                             //Props truyen vao trong InputField
                             label="Name"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your name"
                         />
                         <FastField
                             //Props cua FastField
@@ -58,7 +58,7 @@ function ProfileForm(props) {
 
                             //Props truyen vao trong InputField
                             label="Email"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your email"
                         />
                         <Button type="submit">
                             {props.isLoading && <Spinner size='sm' />}

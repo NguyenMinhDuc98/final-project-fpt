@@ -122,7 +122,6 @@ function ListIssue(props) {
                                 pageSize={20}
                                 pageSizeOptions={[20]}
                                 globalSearch
-                                caseSensitive
                             />
                         </div>
                     )
