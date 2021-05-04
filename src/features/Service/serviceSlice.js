@@ -5,6 +5,8 @@ const service = createSlice({
     name: 'service',
     initialState: {
         list: [],
+        editMessage: null,
+        addMessage: null
     },
     reducers: {
         serviceRequestStart: (state, action) => {
@@ -18,13 +20,15 @@ const service = createSlice({
         },
         createServiceSuccessful: (state, action) => {
             if (action.payload !== undefined) {
-                state.list = action.payload
+                state.list = action.payload;
+                state.addMessage = 'success';
             };
             alert('Create service successful');
         },
         editServiceSuccessful: (state, action) => {
             if (action.payload !== undefined) {
-                state.list = action.payload
+                state.list = action.payload;
+                state.editMessage = 'success';
             };
             alert('Edit service successful');
         },

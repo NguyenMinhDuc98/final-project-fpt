@@ -11,6 +11,7 @@ import { editIssue } from "../issueSlice";
 
 function EditIssuePage() {
     const majors = useSelector(state => state.major);
+    const iss = useSelector(state => state.issue);
     const history = useHistory();
     const dispatch = useDispatch();
     const match = useRouteMatch();
@@ -18,6 +19,7 @@ function EditIssuePage() {
 
     const token = localStorage.getItem('token');
     const { isLoading } = majors;
+    const { editMessage } = iss;
 
     let major = null;
     let service = null;
@@ -49,9 +51,7 @@ function EditIssuePage() {
             estimate_fix_duration: issue.estimate_fix_duration,
             estimate_price: issue.estimate_price.slice(0, issue.estimate_price.length - 3)
         }
-    }
-
-    console.log({ issue })
+    };
 
     const handleSubmit = (values) => {
         dispatch(editIssue({
@@ -62,14 +62,11 @@ function EditIssuePage() {
             estimate_fix_duration: values.estimate_fix_duration,
             estimate_price: values.estimate_price
         }));
+    };
 
-        return new Promise(resolve => {
-            setTimeout(() => {
-                history.push(`/majors/services/${param.majorId}/issues/${param.serviceId}`);
-                resolve(true);
-            }, 3000);
-        });
-    }
+    useEffect(() => {
+        if (editMessage == 'success') window.location.replace(`/majors/services/${param.majorId}/issues/${param.serviceId}`)
+    }, [editMessage]);
 
     return (
         <div className='issue-form-page container-fluid'>

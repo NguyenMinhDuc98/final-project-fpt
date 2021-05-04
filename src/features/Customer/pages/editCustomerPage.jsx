@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Col, Row } from "reactstrap";
@@ -17,6 +18,7 @@ function EditCustomerPage() {
     const token = localStorage.getItem('token');
 
     console.log('customer: ', customer);
+    console.log(localStorage.getItem('customer'));
 
     const initialValues = {
         name: customer.name,
@@ -25,21 +27,25 @@ function EditCustomerPage() {
     }
 
     const handleSubmit = (values) => {
+        dispatch(editCustomer({
+            token: token,
+            name: values.name,
+            phoneNumber: values.phoneNumber,
+            email: values.email,
+            id: customer.id,
+            role_id: customer.role_id
+        }));
         return new Promise(resolve => {
             setTimeout(() => {
-                dispatch(editCustomer({
-                    token: token,
-                    name: values.name,
-                    phoneNumber: values.phoneNumber,
-                    email: values.email,
-                    id: customer.id,
-                    role_id: customer.role_id
-                }));
                 history.push('/customers');
                 resolve(true);
             }, 3000);
         });
     }
+
+    useEffect(()=>{
+
+    },[])
 
     return (
         <div className='customer-form-page container-fluid'>

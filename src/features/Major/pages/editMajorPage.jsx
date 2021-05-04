@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Col, Row, Spinner } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
@@ -10,12 +10,11 @@ import { editMajor, getListMajor } from "../majorSlice";
 
 function EditMajorPage() {
     const majors = useSelector(state => state.major);
-    const history = useHistory();
     const dispatch = useDispatch();
     const param = useParams();
 
     const token = localStorage.getItem('token');
-    const { isLoading } = majors;
+    const { isLoading, editMessage } = majors;
 
     let initialValues = '';
 
@@ -30,7 +29,7 @@ function EditMajorPage() {
         const majorList = majors.list
         major = majors.list.find(({ id }) => id == param.id);
 
-        console.log({major})
+        console.log({ major })
 
         let majorNameList = majorList.map((major) => {
             return (
@@ -39,7 +38,7 @@ function EditMajorPage() {
         }
         );
 
-        initialValues={
+        initialValues = {
             name: major.name
         }
     }
@@ -50,14 +49,11 @@ function EditMajorPage() {
             name: values.name,
             id: major.id
         }));
+    };
 
-        return new Promise(resolve => {
-            setTimeout(() => {
-                history.push('/majors');
-                resolve(true);
-            }, 3000);
-        });
-    }
+    useEffect(() => {
+        if (editMessage == 'success') window.location.replace('/majors')
+    }, [editMessage]);
 
     return (
         <div className='major-form-page container-fluid'>

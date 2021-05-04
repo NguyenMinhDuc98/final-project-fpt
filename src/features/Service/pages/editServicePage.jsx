@@ -12,20 +12,20 @@ import './addServicePage.scss';
 
 function EditServicePage() {
     const majors = useSelector(state => state.major);
-    const history = useHistory();
+    const services = useSelector(state => state.service);
     const dispatch = useDispatch();
     const param = useParams();
 
     const token = localStorage.getItem("token");
     const { isLoading } = majors;
-    console.log(param.majorId)
+    const { editMessage } = services;
 
     let major = null;
     let service = null;
     let initialValues = null;
     let serviceNameArr = [];
 
-    if (majors.list.length > 0) {
+    if (majors && majors.list.length > 0) {
         major = majors.list.find(({ id }) => id == param.majorId);
         service = major.services.find(({ id }) => id == param.serviceId);
         const services = majors.list
@@ -54,14 +54,11 @@ function EditServicePage() {
             id: service.id,
             major_id: major.id
         }));
-
-        return new Promise(resolve => {
-            setTimeout(() => {
-                history.push(`/majors/services/${param.majorId}`);
-                resolve(true);
-            }, 3000);
-        });
     }
+
+    useEffect(() => {
+        if (editMessage == 'success') window.location.replace(`/majors/services/${param.majorId}`)
+    }, [editMessage]);
 
     return (
         <div className='service-form-page container-fluid'>

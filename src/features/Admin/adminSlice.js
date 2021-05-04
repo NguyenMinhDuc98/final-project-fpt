@@ -5,7 +5,8 @@ const admin = createSlice({
     name: 'admin',
     initialState: {
         name: '',
-        isLoading: false
+        isLoading: false,
+        message: null,
     },
     reducers: {
         adminRequestStart: (state, action) => {
@@ -17,7 +18,8 @@ const admin = createSlice({
         editAdminSuccessful: (state, action) => {
             state.isLoading = false;
             localStorage.setItem('username', action.payload.name);
-            console.log(action.payload);
+            localStorage.setItem('email', action.payload.email);
+            state.message = 'success';
             alert('Edit admin successful');
         }
     }
