@@ -13,13 +13,15 @@ import { getListMajor } from "../../Major/majorSlice";
 
 function AddServicePage() {
     const majors = useSelector(state => state.major);
+    const services = useSelector(state => state.service);
     const history = useHistory();
     const dispatch = useDispatch();
     const match = useParams();
 
     const token = localStorage.getItem('token');
+    const { addMessage } = services;
     let major = null;
-    let services = null
+    let Service = null
 
     useEffect(() => {
         dispatch(getListMajor(token));
@@ -29,9 +31,9 @@ function AddServicePage() {
     if (majors.list.length > 0) {
         major = majors.list.find(({ id }) => id == match.majorId);
 
-        services = major.services;
+        Service = major.services;
 
-        let serviceNameList = services.map((service) => {
+        let serviceNameList = Service.map((service) => {
             return (
                 serviceNameArr.push(service.name.toLowerCase())
             )
@@ -50,15 +52,11 @@ function AddServicePage() {
             name: values.name,
             major_id: major.id
         }));
+    };
 
-        console.log({ token, values, major });
-        return new Promise(resolve => {
-            setTimeout(() => {
-                history.push(`/majors/services/${match.majorId}`);
-                resolve(true);
-            }, 3000);
-        });
-    }
+    useEffect(() => {
+        if (addMessage == 'success') window.location.replace(`/majors/services/${match.majorId}`)
+    }, [addMessage]);
 
     return (
         <div className='service-form-page container-fluid'>

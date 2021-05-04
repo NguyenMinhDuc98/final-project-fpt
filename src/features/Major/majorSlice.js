@@ -5,12 +5,13 @@ const major = createSlice({
     name: 'major',
     initialState: {
         list: [],
-        isLoading: false
+        isLoading: false,
+        editMessage: null,
+        addMessage: null
     },
     reducers: {
         majorRequestStart: (state, action) => {
             state.isLoading = true;
-            console.log('start: ', action);
         },
         majorReceived: (state, action) => {
             if (action.payload !== undefined) {
@@ -25,6 +26,7 @@ const major = createSlice({
             if (action.payload !== undefined) {
                 state.list = action.payload;
                 state.isLoading = false;
+                state.addMessage = 'success';
                 alert("Create major successful");
             };
         },
@@ -32,6 +34,7 @@ const major = createSlice({
             if (action.payload !== undefined) {
                 state.list = action.payload;
                 state.isLoading = false;
+                state.editMessage = 'success';
                 alert('Edit major successful');
             };
         },
@@ -78,7 +81,7 @@ export const createMajor = (props) => apiCallBegan({
     method: "POST",
     onSuccess: createMajorSuccessful.type,
     onError: majorRequestFailed.type,
-    onStart: majorRequestStart.type
+    // onStart: majorRequestStart.type
 });
 
 export const editMajor = (props) => apiCallBegan({
@@ -93,7 +96,7 @@ export const editMajor = (props) => apiCallBegan({
     method: "POST",
     onSuccess: editMajorSuccessful.type,
     onError: majorRequestFailed.type,
-    onStart: majorRequestStart.type
+    // onStart: majorRequestStart.type
 });
 
 export const activeMajor = (props) => apiCallBegan({
@@ -107,7 +110,7 @@ export const activeMajor = (props) => apiCallBegan({
     method: "POST",
     onSuccess: activeMajorSuccessful.type,
     onError: majorRequestFailed.type,
-    onStart: majorRequestStart.type
+    // onStart: majorRequestStart.type
 });
 
 export const deActivateMajor = (props) => apiCallBegan({
@@ -121,7 +124,7 @@ export const deActivateMajor = (props) => apiCallBegan({
     method: "POST",
     onSuccess: deActivateMajorSuccessful.type,
     onError: majorRequestFailed.type,
-    onStart: majorRequestStart.type
+    // onStart: majorRequestStart.type
 });
 
 const { reducer, actions } = major;

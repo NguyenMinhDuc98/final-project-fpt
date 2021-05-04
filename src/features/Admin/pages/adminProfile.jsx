@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "reactstrap";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
@@ -8,20 +8,26 @@ import ProfileForm from "../components/profileForm";
 import './adminProfile.scss';
 import '../../../assets/styles/style.scss';
 import { useHistory } from "react-router";
+import { useEffect } from "react";
 
 function AdminProfile() {
+    const admin = useSelector(state => state.admin);
     const dispatch = useDispatch();
     const history = useHistory()
 
     const user = JSON.parse(localStorage.getItem('user'));
-    const username= localStorage.getItem("username");
+    const username = localStorage.getItem("username");
+    const email = localStorage.getItem('email');
     const token = localStorage.getItem('token');
+
+    const { isLoading, message } = admin;
 
     const initialValues = {
         name: username ? username : user.name,
         phone_number: user.phone,
-        email: user.email,
+        email: email ? email : user.email,
     }
+
     const handleSubmit = (values) => {
         const propsUpdate = {
             token: token,
@@ -30,16 +36,14 @@ function AdminProfile() {
             id: user.id,
             phone_number: values.phone_number
         };
-        dispatch(editAdmin(propsUpdate));
 
-        return new Promise(resolve => {
-            setTimeout(() => {
-                history.push('/');
-                resolve(true);
-            }, 3000);
-        });
-    }
-    
+        dispatch(editAdmin(propsUpdate));
+    };
+
+    useEffect(() => {
+        if (message == 'success') history.push('/');
+    }, [message])
+
     return (
         <div className='container-fluid'>
             <Header />
@@ -54,6 +58,7 @@ function AdminProfile() {
                         <ProfileForm
                             initialValues={initialValues}
                             onSubmit={handleSubmit}
+                            isLoading={isLoading}
                         />
                     </div>
                 </Col>

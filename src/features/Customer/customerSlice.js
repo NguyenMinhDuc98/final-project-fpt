@@ -5,11 +5,11 @@ const customer = createSlice({
     name: 'customer',
     initialState: {
         list: [],
-        isLoading: false
+        isLoading: false,
+        message: null,
     },
     reducers: {
         customerRequestStart: (state, action) => {
-            console.log('start: ', action);
             state.isLoading = true;
         },
         customerReceived: (state, action) => {
@@ -22,7 +22,8 @@ const customer = createSlice({
             console.log('failed: ', action);
         },
         editCustomerSuccessful:(state,action)=>{
-            console.log(action)
+            state.message = 'success';
+            state.isLoading = false;
         },
         activeCustomerSuccessful: (state, action) => {
             if (action.payload !== undefined) {

@@ -26,7 +26,7 @@ function ProfileForm(props) {
             onSubmit={props.onSubmit}
         >
             {formikProps => {
-                const { values, errors, touched, isSubmitting } = formikProps;
+                const { values, errors, touched } = formikProps;
 
                 return (
                     <Form>
@@ -61,7 +61,7 @@ function ProfileForm(props) {
                             placeholder="Enter your phone number"
                         />
                         <Button type="submit">
-                            {isSubmitting && <Spinner size='sm' />}
+                            {props.isLoading && <Spinner size='sm' />}
                             Edit
                         </Button>
                     </Form>

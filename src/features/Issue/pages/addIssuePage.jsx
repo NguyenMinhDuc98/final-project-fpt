@@ -12,12 +12,14 @@ import './addIssuePage.scss';
 
 function EditIssuePage() {
     const majors = useSelector(state => state.major);
+    const iss = useSelector(state => state.issue);
     const history = useHistory();
     const dispatch = useDispatch();
     const param = useParams();
 
     const token = localStorage.getItem('token');
     const { isLoading } = majors;
+    const { addMessage } = iss;
 
     let major = null;
     let service = null;
@@ -55,14 +57,11 @@ function EditIssuePage() {
             estimate_fix_duration: values.estimate_fix_duration,
             estimate_price: values.estimate_price
         }));
+    };
 
-        return new Promise(resolve => {
-            setTimeout(() => {
-                history.push(`/majors/services/${param.majorId}/issues/${param.serviceId}`);
-                resolve(true);
-            }, 4000);
-        });
-    }
+    useEffect(() => {
+        if (addMessage == 'success') window.location.replace(`/majors/services/${param.majorId}/issues/${param.serviceId}`)
+    }, [addMessage]);
 
     return (
         <div className='issue-form-page container-fluid'>

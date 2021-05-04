@@ -16,6 +16,7 @@ function AddMajorPage() {
     const dispatch = useDispatch();
 
     const token = localStorage.getItem('token');
+    const { addMessage } = major;
 
     const initialValues = {
         name: '',
@@ -45,9 +46,11 @@ function AddMajorPage() {
             name: values.name,
             image: values.image
         }));
+    };
 
-        history.push('/majors');
-    }
+    useEffect(() => {
+        if (addMessage == 'success') history.push('/majors')
+    }, [addMessage]);
 
     return (
         <div className='major-form-page container-fluid'>

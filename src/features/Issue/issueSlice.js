@@ -5,6 +5,8 @@ const issue = createSlice({
     name: 'issue',
     initialState: {
         list: [],
+        editMessage: null,
+        addMessage: null
     },
     reducers: {
         issueRequestStart: (state, action) => {
@@ -19,22 +21,16 @@ const issue = createSlice({
             console.log('failed: ', action);
         },
         createIssueSuccessful: (state, action) => {
-            console.log('aaaaaaaaaaaaaa')
             alert('Create issue successful')
             if (action.payload !== undefined) {
                 state.list = action.payload;
-            };
-        },
-        createIssueSuccessful2: (state, action) => {
-            console.log('aaaaaaaaaaaaaa')
-            alert('Create issue successful')
-            if (action.payload !== undefined) {
-                state.list = action.payload;
+                state.addMessage = 'success';
             };
         },
         editIssueSuccessful: (state, action) => {
             if (action.payload !== undefined) {
-                state.list = action.payload
+                state.list = action.payload;
+                state.editMessage = 'success';
             };
             alert('Edit issue successful');
         },
@@ -65,7 +61,7 @@ export const createIssue = (props) => apiCallBegan({
         estimate_price: props.estimate_price
     },
     method: "POST",
-    onSuccess: createIssueSuccessful2.type,
+    onSuccess: createIssueSuccessful.type,
     onError: issueRequestFailed.type,
     onStart: issueRequestStart.type
 });
@@ -120,6 +116,6 @@ export const deActivateIssue = (props) => apiCallBegan({
 
 const { reducer, actions } = issue;
 export const { issueReceived, issueRequestFailed, issueRequestStart, createIssueSuccessful, editIssueSuccessful,
-    activeIssueSuccessful, deActivateIssueSuccessful, createIssueSuccessful2
+    activeIssueSuccessful, deActivateIssueSuccessful
 } = actions;
 export default reducer;
