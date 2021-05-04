@@ -35,14 +35,11 @@ function LoginForm(props) {
             onSubmit={props.onSubmit}
         >
             {formikProps => {
-                const { values, errors, touched, isSubmitting } = formikProps;
+                const { values, errors, touched, isSubmitting, setSubmitting } = formikProps;
 
                 return (
                     <Form>
                         <h2>Login to your account</h2>
-                        {/* <p>{
-                            errors ? errors : ''
-                        }</p> */}
                         <FastField
                             //Props cua FastField
                             name='phoneNumber'
@@ -63,13 +60,13 @@ function LoginForm(props) {
                             placeholder="Enter your password"
                         />
                         {
-                            props.error 
-                            ? <p>{props.error}</p>
-                            : <div></div>
+                            props.error
+                                ? <p style={{ color: 'red' }}>{props.error}</p>
+                                : <div></div>
                         }
                         <a href='/login/getVerifyCode'>Forgot password</a>
                         <Button type="submit">
-                            {isSubmitting && <Spinner size='sm' />}
+                            {props.loading && <Spinner size='sm' />}
                             Login
                         </Button>
                     </Form>
