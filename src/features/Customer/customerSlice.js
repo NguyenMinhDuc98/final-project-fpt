@@ -54,7 +54,7 @@ export const activeCustomer = (props) => apiCallBegan({
         Authorization: props.token
     },
     data: {
-        user_id: props.id,
+        user_id: props.user_id,
         role_id: 3
     },
     method: "POST",
@@ -68,7 +68,7 @@ export const deactivateCustomer = (props) => apiCallBegan({
         Authorization: props.token
     },
     data: {
-        user_id: props.id,
+        user_id: props.user_id,
         role_id: 3
     },
     method: "POST",
