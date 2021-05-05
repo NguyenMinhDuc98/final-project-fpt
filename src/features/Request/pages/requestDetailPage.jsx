@@ -73,7 +73,7 @@ function RequestDetailPage() {
             other_cost: requestDetail.invoice ? requestDetail.invoice.other_cost : null,
             invoice_total_price: requestDetail.invoice ? requestDetail.invoice.total_price : null,
             invoice_status: requestDetail.invoice ? requestDetail.invoice.status : null,
-            request_status: requestDetail.request_statuses[0].status.name,
+            request_status: requestDetail.request_statuses[0] ? requestDetail.request_statuses[0].status.name : null,
             description: requestDetail.description,
         }
     }

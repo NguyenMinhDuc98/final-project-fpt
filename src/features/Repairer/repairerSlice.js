@@ -56,7 +56,7 @@ export const activeRepairer = (props) => apiCallBegan({
     },
     data: {
         user_id: props.user_id,
-        role_id: 3
+        role_id: 2
     },
     method: "POST",
     onSuccess: activeRepairerSuccessful.type,
@@ -70,7 +70,7 @@ export const deActivateRepairer = (props) => apiCallBegan({
     },
     data: {
         user_id: props.user_id,
-        role_id: 3
+        role_id: 2
     },
     method: "POST",
     onSuccess: deActivateRepairerSuccessful.type,

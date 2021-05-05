@@ -69,7 +69,7 @@ function RequestDetail(props) {
                                     disabled
                                 />
                                 {
-                                    props.request_statuses && props.request_statuses[0].status_id != 1
+                                    props.request_statuses[0] && props.request_statuses[0].status_id != 1
                                         ? (
                                             <div>
                                                 <FastField
