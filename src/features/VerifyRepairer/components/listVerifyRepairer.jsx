@@ -27,6 +27,12 @@ function ListVerifyRepairer() {
             token: token
         }));
     };
+    const handleReject = (id, token) => {
+        dispatch(verifyRepairer({
+            id: id,
+            token: token
+        }));
+    };
 
     const columns = [
         {
@@ -57,7 +63,7 @@ function ListVerifyRepairer() {
             td: (data) =>
                 <div>
                     <Button type='button' onClick={() => handleApprove(data.id, token)}>Approve </Button>
-                    <Button>Reject</Button>
+                    <Button type='button' onClick={() => handleReject(data.id, token)}>Reject </Button>
                 </div>
         }
     ];
