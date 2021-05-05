@@ -72,7 +72,7 @@ export const deactivateCustomer = (props) => apiCallBegan({
         role_id: 3
     },
     method: "POST",
-    onSuccess: activeCustomerSuccessful.type,
+    onSuccess: deactivateCustomerSuccessful.type,
     onError: customerRequestFailed.type,
 });
 
