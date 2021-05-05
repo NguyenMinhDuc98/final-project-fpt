@@ -66,7 +66,7 @@ function RepairerProfile() {
                     : (
                         <div className='repairer-profile'>
                             <Row>
-                                <Col md={8}>
+                                <Col md={8} style={{padding:'20px'}}>
                                     <Card>
                                         <CardHeader>
                                             Repairer Profile

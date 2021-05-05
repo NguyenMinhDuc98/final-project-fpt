@@ -12,9 +12,7 @@ import { editIssue } from "../issueSlice";
 function EditIssuePage() {
     const majors = useSelector(state => state.major);
     const iss = useSelector(state => state.issue);
-    const history = useHistory();
     const dispatch = useDispatch();
-    const match = useRouteMatch();
     const param = useParams();
 
     const token = localStorage.getItem('token');
@@ -40,9 +38,11 @@ function EditIssuePage() {
         issues = service.issues;
 
         let issueNameList = issues.map((issue) => {
-            return (
+            console.log({issue});
+            if(issue.id != param.issueId){
                 issueNameArr.push(issue.name.toLowerCase())
-            )
+
+            }
         }
         )
 

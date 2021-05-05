@@ -20,13 +20,9 @@ function ListMajor() {
     let city;
     let district;
 
-    console.log({ requestList })
-
     useEffect(() => {
         dispatch(getListRequest(token));
     }, []);
-
-    console.log({ requestList })
 
     const columns = [
         {
@@ -63,7 +59,7 @@ function ListMajor() {
         {
             header: 'Schedule time',
             key: 'scheduletime',
-            td: (data) => data.schedule_time ? data.schedule_time.replace("T", " ").slice(0, data.schedule_time.length - 5) : null
+            td: (data) => data.schedule_time ? data.schedule_time : null
         },
         {
             header: 'Status',

@@ -37,12 +37,14 @@ const service = createSlice({
                 state.list = action.payload;
             };
             alert('Active service successful');
+            window.location.reload();
         },
         deActivateServiceSuccessful: (state, action) => {
             if (action.payload !== undefined) {
                 state.list = action.payload;
             };
             alert('Deactivate service successful');
+            window.location.reload();
         },
     }
 });
@@ -84,7 +86,8 @@ export const activeService = (props) => apiCallBegan({
         Authorization: props.token
     },
     data: {
-        id: props.id
+        id: props.id,
+        major_id: props.major_id
     },
     method: "POST",
     onSuccess: activeServiceSuccessful.type,

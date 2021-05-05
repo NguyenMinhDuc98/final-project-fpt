@@ -37,16 +37,16 @@ function ListVerifyRepairer() {
     const columns = [
         {
             header: 'Id',
-            key: 'id',
-            td: (data) => <div>
-                <Link to={`verify/profile/${data.id}`}>
-                    {data.id}
-                </Link>
-            </div>
+            key: 'id'
         },
         {
             header: 'User name',
             key: 'user.name',
+            td: (data) => <div>
+                <Link to={`verify/profile/${data.id}`}>
+                    {data.user.name}
+                </Link>
+            </div>
         },
         {
             header: 'Phone number',
