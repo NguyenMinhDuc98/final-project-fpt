@@ -41,7 +41,7 @@ function AdminProfile() {
     };
 
     useEffect(() => {
-        if (message == 'success') history.push('/');
+        if (message == 'success') window.location.replace('/');
     }, [message])
 
     return (

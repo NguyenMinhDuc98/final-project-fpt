@@ -19,7 +19,7 @@ function ListService(props) {
     const param = useParams();
     const history = useHistory();
 
-    console.log({match})
+    console.log({ match })
 
     const token = localStorage.getItem('token');
     const { isLoading } = majors;
@@ -27,9 +27,9 @@ function ListService(props) {
     let major = null;
     let serviceList = [];
 
-    if(majors.list.length > 0){
-        major = majors.list.find(({id}) => id == param.majorId);
-        serviceList = major.services
+    if (majors.list.length > 0) {
+        major = majors.list.find(({ id }) => id == param.majorId);
+        serviceList = major.services;
     }
 
     const columns = [
@@ -55,7 +55,7 @@ function ListService(props) {
                     <Toggle
                         defaultChecked={data.is_active.data == 0 ? false : true}
                         onChange={() => {
-                            data.is_active.data == 0 ? handleActive(data.id, token) : handleDeActive(data.id, token)
+                            data.is_active.data == 0 ? handleActive(data.id, token, major.id) : handleDeActive(data.id, token, major.id)
                         }}
                     />
                 </div>

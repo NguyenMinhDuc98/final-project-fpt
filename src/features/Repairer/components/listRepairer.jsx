@@ -16,6 +16,11 @@ function ListRepairer() {
     const match = useRouteMatch();
 
     const repairerList = repairer.list;
+    const VRList = []
+
+    const verifiedRepairerList = repairerList.map((x)=>{
+        if(x.repairer.is_verify.data == 1) VRList.push(x);
+    })
 
     const token = localStorage.getItem('token');
     const { isLoading } = repairer;
@@ -89,7 +94,7 @@ function ListRepairer() {
                             <h3>Repairer</h3>
                             <ReactFlexyTable
                                 className="repairer-table"
-                                data={repairerList}
+                                data={VRList}
                                 columns={columns}
                                 sortable
                                 pageSize={10}
