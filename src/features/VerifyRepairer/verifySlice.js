@@ -58,22 +58,20 @@ export const verifyRepairer = (props) => apiCallBegan({
     method: 'POST',
     onSuccess: activeRepairerSuccessful.type,
     onError: activeRepairerFailed.type,
-    onStart: verifyListRequestStart.type
 });
 
-// export const rejectRepairer = (props) => apiCallBegan({
-//     url: '/api/admin/approveCV',
-//     headers: {
-//         Authorization: props.token
-//     },
-//     data: {
-//         repairer_id: props.id
-//     },
-//     method: 'POST',
-//     onSuccess: activeRepairerSuccessful.type,
-//     onError: activeRepairerFailed.type,
-//     onStart: verifyListRequestStart.type
-// });
+export const rejectRepairer = (props) => apiCallBegan({
+    url: '/api/admin/approveCV',
+    headers: {
+        Authorization: props.token
+    },
+    data: {
+        repairer_id: props.id
+    },
+    method: 'POST',
+    onSuccess: activeRepairerSuccessful.type,
+    onError: activeRepairerFailed.type,
+});
 
 const { reducer, actions } = notVerifiedList;
 export const { verifyListReceived, verifyListRequestFailed, verifyListRequestStart,
