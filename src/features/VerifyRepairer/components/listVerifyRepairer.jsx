@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Spinner } from "reactstrap";
-import { getNotVerifiedList, verifyRepairer } from "../verifySlice";
+import { getNotVerifiedList, rejectRepairer, verifyRepairer } from "../verifySlice";
 import './listVerifyRepairer.scss';
 import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css"
@@ -28,7 +28,7 @@ function ListVerifyRepairer() {
         }));
     };
     const handleReject = (id, token) => {
-        dispatch(verifyRepairer({
+        dispatch(rejectRepairer({
             id: id,
             token: token
         }));

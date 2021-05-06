@@ -61,9 +61,8 @@ function RepairerProfile() {
     return (
         <div>
             {
-                isLoading
-                    ? <div className='spinner'><Spinner size='xxl' /></div>
-                    : (
+                isLoading == false && major.isLoading == false
+                    ? (
                         <div className='repairer-profile'>
                             <Row>
                                 <Col md={8} style={{padding:'20px'}}>
@@ -84,6 +83,7 @@ function RepairerProfile() {
                             </Row>
                         </div>
                     )
+                    : <div className='spinner'><Spinner size='xxl' /></div>
             }
         </div>
     )

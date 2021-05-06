@@ -1,21 +1,24 @@
-import './requestList.scss';
+import '../../Request/components/requestList.scss';
 import '../../../assets/styles/style.scss';
 import ReactFlexyTable from "react-flexy-table";
 import "react-flexy-table/dist/index.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getListRequest } from '../requestSlice';
+import { getListRequest } from '../../Request/requestSlice';
 import { Spinner } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import cityOfVN from '../../../assets/cityOfVietNam';
 
-function ListMajor() {
+function RepairerRequest() {
     const request = useSelector(state => state.request);
     const dispatch = useDispatch();
+    const param = useParams();
 
     const token = localStorage.getItem('token');
     const { isLoading } = request;
     const requestList = request.list;
+
+    console.log(requestList[0]);
 
     let city;
     let district;
@@ -23,6 +26,12 @@ function ListMajor() {
     useEffect(() => {
         dispatch(getListRequest(token));
     }, []);
+
+    const repairerRequestList = []
+
+    const verifiedRepairerList = requestList.map((x)=>{
+        if(x.Repairer.id == param.id) repairerRequestList.push(x);
+    })
 
     const columns = [
         {
@@ -41,12 +50,7 @@ function ListMajor() {
         {
             header: 'Repairer name',
             key: 'repName',
-            // td: (data) => { return data.Repairer.name }
-            td: (data) =>
-                <Link to={`/repairers/profile/${data.Repairer.id}`}>
-                    {data.Repairer.name == 'Đức' ? null : data.Repairer.name}
-                    {console.log(data.Repairer.name == 'Đức')}
-                </Link>
+            td: (data) => { return data.Repairer.name }
         },
         {
             header: 'Address',
@@ -80,10 +84,9 @@ function ListMajor() {
                     ? <div className='spinner'><Spinner size='xxl' /></div>
                     : (
                         <div>
-                            <h3>Request</h3>
                             <ReactFlexyTable
                                 className="request-table"
-                                data={requestList}
+                                data={repairerRequestList}
                                 columns={columns}
                                 sortable
                                 pageSize={20}
@@ -97,4 +100,4 @@ function ListMajor() {
     )
 };
 
-export default ListMajor;
+export default RepairerRequest;

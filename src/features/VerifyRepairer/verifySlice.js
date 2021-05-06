@@ -28,7 +28,14 @@ const notVerifiedList = createSlice({
                 state.list = action.payload;
                 state.isLoading = false;
             };
-            alert('Active repairer successful');
+            alert('Approve repairer successful');
+        },
+        rejectRepairerSuccessful: (state, action) => {
+            if (action.payload !== undefined) {
+                state.list = action.payload;
+                state.isLoading = false;
+            };
+            alert('Reject repairer successful');
         },
         activeRepairerFailed: (state, action) => {
             state.isLoading = false;
@@ -61,7 +68,7 @@ export const verifyRepairer = (props) => apiCallBegan({
 });
 
 export const rejectRepairer = (props) => apiCallBegan({
-    url: '/api/admin/approveCV',
+    url: '/api/admin/rejectCV',
     headers: {
         Authorization: props.token
     },
@@ -69,12 +76,12 @@ export const rejectRepairer = (props) => apiCallBegan({
         repairer_id: props.id
     },
     method: 'POST',
-    onSuccess: activeRepairerSuccessful.type,
+    onSuccess: rejectRepairerSuccessful.type,
     onError: activeRepairerFailed.type,
 });
 
 const { reducer, actions } = notVerifiedList;
 export const { verifyListReceived, verifyListRequestFailed, verifyListRequestStart,
-    activeRepairerSuccessful, activeRepairerFailed
+    activeRepairerSuccessful, activeRepairerFailed, rejectRepairerSuccessful
 } = actions;
 export default reducer;
