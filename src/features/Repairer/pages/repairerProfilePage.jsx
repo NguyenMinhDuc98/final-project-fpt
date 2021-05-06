@@ -6,12 +6,19 @@ import '../../../assets/styles/style.scss';
 import './repairersPage.scss';
 import RepairerProfile from "../components/repairerProfile";
 import CoolTabs from 'react-cool-tabs';
-import Wallet from "../components/wallet";
+import RepairerRequest from '../components/repairer-request';
 import { useRouteMatch } from "react-router";
 
 function RepairerProfilePage() {
     const match = useRouteMatch();
-    console.log({ match })
+
+    const defaulStyle = {
+        height: '1000px',
+        width: '1019px',
+        borderRadius: '10px',
+        display: 'block',
+        // overflow: 'auto',
+    }
 
     return (
         <div className='repairer-page container-fluid'>
@@ -29,13 +36,13 @@ function RepairerProfilePage() {
                                 ? <RepairerProfile />
                                 : <CoolTabs
                                     tabKey={'1'}
-                                    style={{ width: 1020, height: 1000, background: 'white', borderRadius: 10 }}
+                                    style={defaulStyle}
                                     activeTabStyle={{ background: 'gray', color: 'white' }}
                                     unActiveTabStyle={{ background: 'silver', color: 'black' }}
                                     leftTabTitle={'Profile'}
-                                    rightTabTitle={'Wallet'}
+                                    rightTabTitle={'Request'}
                                     leftContent={<RepairerProfile />}
-                                    rightContent={<Wallet />}
+                                    rightContent={<RepairerRequest />}
                                     contentTransitionStyle={'transform 0.6s ease-in'}
                                     borderTransitionStyle={'all 0.6s ease-in'}
                                 />

@@ -16,10 +16,13 @@ function ListRepairer() {
     const match = useRouteMatch();
 
     const repairerList = repairer.list;
-    const VRList = []
 
-    const verifiedRepairerList = repairerList.map((x)=>{
-        if(x.repairer.is_verify.data == 1) VRList.push(x);
+    let VRList = [];
+
+    repairerList.map((x)=>{
+        if(x.repairer && x.repairer.is_verify == 1){
+            VRList.push(x);
+        }
     })
 
     const token = localStorage.getItem('token');

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "../../store/api";
+import { requestRequestStart } from "../Request/requestSlice";
 
 const repairer = createSlice({
     name: 'repairer',
@@ -22,17 +23,16 @@ const repairer = createSlice({
             console.log('failed: ', action);
         },
         activeRepairerSuccessful: (state, action) => {
-            if (action.payload !== undefined) {
-                state.list = action.payload;
-                state.isLoading = false;
-            };
+            state.list = action.payload;
+            state.isLoading = false;
+            console.log(state.list);
             alert('Active repairer successful');
             console.log('payload: ', action.payload);
         },
         deActivateRepairerSuccessful: (state, action) => {
-            if (action.payload !== undefined) {
-                state.list = action.payload;
-            };
+            state.list = action.payload;
+            state.isLoading = false;
+            console.log('aaaa', state.list);
             alert('Deactivate repairer successful');
             console.log('payload: ', action.payload);
         },
